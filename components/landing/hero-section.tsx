@@ -58,7 +58,7 @@ export function HeroSection() {
         </div>
       </div>
 
-      <div className="relative z-10 mx-auto mt-14 grid max-w-5xl gap-5 lg:grid-cols-[1fr_1.25fr_1fr] hidden md:block">
+      <div className="relative z-10 mx-auto mt-14 grid max-w-5xl gap-5 lg:grid-cols-[1fr_1.25fr_1fr] hidden md:grid">
         <div className="mesh-card rounded-[1.6rem] p-5 hidden md:block">
           <p className="text-xs uppercase tracking-[0.25em] text-slate-400">
             Raw Files
