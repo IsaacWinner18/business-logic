@@ -144,12 +144,10 @@ export function ProjectsSection() {
           return (
             <article
               key={project.title}
-              className="grid gap-3 rounded-[1.5rem] border border-white/6 bg-white/[0.025] p-3 sm:gap-4 sm:p-4 lg:grid-cols-2 lg:items-center lg:gap-8 lg:p-6"
+              className="grid gap-3 rounded-[1.5rem] border border-white/6 bg-white/[0.025] p-3 sm:gap-4 sm:p-4 lg:grid-cols-2 lg:items-center lg:gap-8 lg:p-6 mb-8 md:mb-4"
             >
               <div className={reversed ? "lg:order-2" : ""}>
-                <div className="pill inline-flex rounded-full px-3 py-1 text-[10px] uppercase tracking-[0.22em] text-sky-100">
-                  {project.tag}
-                </div>
+              
                 <h3 className="font-display mt-3 text-2xl leading-tight text-black sm:text-3xl">
                   {project.title}
                 </h3>
@@ -160,7 +158,7 @@ export function ProjectsSection() {
                   {project.metrics.map((metric) => (
                     <span
                       key={metric}
-                      className="rounded-full border border-white/6 bg-black/50 px-3 py-1 text-xs text-slate-100"
+                      className=" border border-white/6 bg-black/50 px-3 py-1 text-xs text-slate-100"
                     >
                       {metric}
                     </span>
@@ -169,17 +167,24 @@ export function ProjectsSection() {
               </div>
 
               <div className={reversed ? "lg:order-1" : ""}>
-                <div className="mesh-card overflow-hidden rounded-[1.5rem] p-2 sm:p-3">
+                {/* <div className="mesh-card overflow-hidden rounded-[1.5rem] p-2 sm:p-3">
                   <div className="overflow-hidden rounded-[1.15rem] border border-white/6 bg-black/20">
                     <Image
                       src={project.image}
                       alt={`${project.title} preview placeholder`}
-                      width={1200}
-                      height={900}
-                      className="h-auto w-full object-cover"
+                      width={600}
+                      height={450}
+                      className="object-contain"
                     />
                   </div>
-                </div>
+                </div> */}
+                  <Image
+                      src={project.image}
+                      alt={`${project.title} preview placeholder`}
+                      width={600}
+                      height={450}
+                      className="object-contain"
+                    />
               </div>
             </article>
           );
