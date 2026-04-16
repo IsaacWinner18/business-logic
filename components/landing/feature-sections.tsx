@@ -62,7 +62,7 @@ export function ServicesSection() {
   return (
     <section
       id="features"
-      className="section-shell relative rounded-[1.5rem] px-3 py-10 sm:rounded-[2rem] sm:px-5 sm:py-14 lg:px-10 lg:py-18 bg-[#f7f4ed]"
+      className="section-shell relative rounded-[1.5rem] px-3 py-10 sm:rounded-[2rem] sm:px-5 sm:py-14 lg:px-10 lg:py-18 bg-[#c6ddf7]/10"
     >
       <SectionHeading
         badge="Services"
