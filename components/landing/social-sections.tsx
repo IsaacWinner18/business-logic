@@ -1,3 +1,4 @@
+// import Image from "next/image";
 import { Quote } from "lucide-react";
 import { SectionHeading } from "@/components/landing/shared";
 
@@ -32,36 +33,28 @@ const reviews = [
   },
 ];
 
-const screenshotTestimonials = [
-  {
-    source: "WhatsApp Feedback",
-    name: "Adanna O.",
-    excerpt:
-      "This new site finally feels like a real business. I have already sent it to two prospects this morning.",
-    time: "9:14 AM",
-  },
-  {
-    source: "Client Email",
-    name: "Tunde A.",
-    excerpt:
-      "Thank you for making the process simple. The site looks clean and serious, exactly what I needed.",
-    time: "11:32 AM",
-  },
-  {
-    source: "Voice Note Summary",
-    name: "David C.",
-    excerpt:
-      "The redesign made a huge difference. People now understand the service before they even call us.",
-    time: "2:08 PM",
-  },
-  {
-    source: "Follow-up Message",
-    name: "Maya L.",
-    excerpt:
-      "I was nervous about tech stuff, but your team handled everything and kept me updated all through.",
-    time: "4:26 PM",
-  },
-];
+// const screenshotTestimonials = [
+//   {
+//     id: "whatsapp-feedback",
+//     src: "/images/testimonials/whatsapp-feedback.jpg",
+//     alt: "WhatsApp testimonial screenshot from a client",
+//   },
+//   {
+//     id: "client-email",
+//     src: "/images/testimonials/client-email.jpg",
+//     alt: "Client email testimonial screenshot",
+//   },
+//   {
+//     id: "voice-note-summary",
+//     src: "/images/testimonials/voice-note-summary.jpg",
+//     alt: "Voice note testimonial screenshot summary",
+//   },
+//   {
+//     id: "follow-up-message",
+//     src: "/images/testimonials/follow-up-message.jpg",
+//     alt: "Follow-up testimonial message screenshot",
+//   },
+// ];
 
 const faqItems = [
   {
@@ -85,11 +78,6 @@ const faqItems = [
       "We can improve it instead of starting from scratch. Many clients come to us just to fix what they already have.",
   },
   {
-    question: "Will I be able to update it myself after?",
-    answer:
-      "Yes. We will show you how to make basic updates, and we are available if you ever need help.",
-  },
-  {
     question: "What if I am not happy with the result?",
     answer:
       "We work with you until it is right. You review the site before it goes live and give feedback, so we do not launch anything you are not satisfied with.",
@@ -98,7 +86,7 @@ const faqItems = [
 
 export function TestimonialsSection() {
   const items = [...reviews, ...reviews];
-  const proofItems = [...screenshotTestimonials, ...screenshotTestimonials];
+  // const proofItems = [...screenshotTestimonials, ...screenshotTestimonials];
 
   return (
     <section
@@ -129,38 +117,24 @@ export function TestimonialsSection() {
       </div>
 
       <div className="testimonial-fade relative mt-8 overflow-hidden sm:mt-10">
-        <div className="testimonial-track mb-4 flex w-max gap-3 sm:mb-5 sm:gap-4">
+        {/* <div className="testimonial-track mb-4 flex w-max gap-3 sm:mb-5 sm:gap-4">
           {proofItems.map((item, index) => (
             <article
-              key={`${item.name}-${item.source}-${index}`}
-              className="w-[280px] shrink-0 rounded-[1.45rem] border border-slate-200/80 bg-white/80 p-3 shadow-[0_18px_45px_rgba(15,23,42,0.08)] backdrop-blur-sm sm:w-[340px]"
+              key={`${item.id}-${index}`}
+              className="w-[280px] shrink-0 rounded-[1.45rem] border border-slate-200/80 bg-white/80 p-2 shadow-[0_18px_45px_rgba(15,23,42,0.08)] backdrop-blur-sm sm:w-[340px]"
             >
-              <div className="rounded-[1.2rem] border border-slate-200/70 bg-slate-950 p-3 text-white">
-                <div className="flex items-center justify-between text-[10px] uppercase tracking-[0.22em] text-slate-400">
-                  <span>{item.source}</span>
-                  <span>{item.time}</span>
-                </div>
-                <div className="mt-3 rounded-[1rem] bg-white/[0.08] p-4">
-                  <div className="flex items-center gap-3">
-                    <div className="grid h-9 w-9 place-items-center rounded-full bg-sky-500/20 text-xs font-bold text-sky-200">
-                      {item.name
-                        .split(" ")
-                        .map((part) => part[0])
-                        .join("")}
-                    </div>
-                    <div>
-                      <p className="text-sm font-medium text-white">{item.name}</p>
-                      <p className="text-xs text-slate-400">Client feedback</p>
-                    </div>
-                  </div>
-                  <p className="mt-4 text-sm leading-6 text-slate-200">
-                    {item.excerpt}
-                  </p>
-                </div>
+              <div className="relative aspect-[4/5] overflow-hidden rounded-[1.2rem] border border-slate-200/70 bg-slate-100">
+                <Image
+                  src={item.src}
+                  alt={item.alt}
+                  fill
+                  sizes="(max-width: 640px) 280px, 340px"
+                  className="object-cover"
+                />
               </div>
             </article>
           ))}
-        </div>
+        </div> */}
 
         <div className="testimonial-track flex w-max gap-3 sm:gap-4">
           {items.map((review, index) => (
@@ -203,7 +177,7 @@ export function FaqSection() {
   return (
     <section
       id="community"
-      className="section-shell relative rounded-[1.5rem] px-3 py-10 sm:rounded-[2rem] sm:px-5 sm:py-14 lg:px-10 lg:py-18 bg-sky-300/50"
+      className="section-shell relative rounded-[1.5rem] px-3 py-10 sm:rounded-[2rem] sm:px-5 sm:py-14 lg:px-10 lg:py-18 bg-sky-300/10"
     >
       <SectionHeading
         badge="FAQ"

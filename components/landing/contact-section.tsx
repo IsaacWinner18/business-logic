@@ -81,18 +81,16 @@ export function ContactSection() {
               Free call
             </div>
             <h2 className="font-display mt-3 text-[2rem] leading-tight text-white sm:text-4xl lg:text-[3.4rem]">
-              Ready to Get a Website That Works as Hard as You Do?
+              Ready to Get a Website That Works for your Business?
             </h2>
             <p className="mt-3 max-w-xl text-sm leading-6 text-slate-300 sm:leading-7">
               Tell us about your business. We will review it and tell you
-              exactly what we would recommend with no pressure, no tech jargon,
-              and no confusing quotes. It starts with a free 20-minute call.
+              exactly what we would recommend, and how we can help. It starts with a free 15-minute call.
             </p>
 
             <div className="mt-6 grid gap-2 sm:gap-3">
               {[
-                "We reply within 1 business day",
-                "No spam and no pressure",
+                "We reply within 24 hours",
                 "We explain everything in plain language",
               ].map((item) => (
                 <div
@@ -203,14 +201,14 @@ export function ContactSection() {
 
             <div className="mt-4 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
               <p className="text-xs leading-5 text-slate-500">
-                Or fill the form below and we will reach out within 24 hours.
+                Fill the form above and we will reach out within 24 hours.
               </p>
               <button
                 type="submit"
                 disabled={isSubmitting}
                 className="primary-button rounded-full px-5 py-3 text-sm font-medium text-white disabled:opacity-70"
               >
-                {isSubmitting ? "Sending..." : "Book Your Free Call Now"}
+                {isSubmitting ? "Sending..." : "Submit"}
               </button>
             </div>
 

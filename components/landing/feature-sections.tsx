@@ -1,5 +1,5 @@
 import Image from "next/image";
-import { ArrowUpRight, CircleAlert } from "lucide-react";
+import { CircleAlert } from "lucide-react";
 import { SectionHeading } from "@/components/landing/shared";
 
 const problemPoints = [
@@ -18,7 +18,7 @@ const services = [
   {
     title: "Online Platforms & Business Tools",
     copy:
-      "Need more than a simple website? We build customer portals, booking systems, dashboards, and online platforms that help your team work better and your customers get served faster.",
+      "Need more than a simple website? We build customer portals, booking systems, dashboards, and online platforms that help your business be better and your customers get served faster.",
   },
   {
     title: "Website Fixes & Improvements",
@@ -28,12 +28,12 @@ const services = [
 ];
 
 const clientTypes = [
+  "SME's",
   "Service businesses",
   "New companies",
   "Founders who need trust online",
-  "Teams with weak current websites",
+  "Businesses with weak current websites",
   "Businesses ready to grow",
-  "Owners tired of cheap developers",
 ];
 
 const processSteps = [
@@ -99,11 +99,11 @@ export function ProblemSection() {
       id="problem"
       className="section-shell relative overflow-hidden rounded-[1.5rem] bg-white px-3 py-10 sm:rounded-[2rem] sm:px-5 sm:py-14 lg:px-10 lg:py-18"
     >
-      <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_top_left,rgba(14,165,233,0.08),transparent_28%),radial-gradient(circle_at_bottom_right,rgba(15,23,42,0.06),transparent_28%)]" />
+      <div className="pointer-events-none absolute inset-0" />
       <SectionHeading
         badge="The Problem"
         title="Does Any of This Sound Familiar?"
-        description="You have a website, or you are thinking of getting one, but something feels off. Most websites are built to look nice, not to actually win business. That is the problem we fix."
+        description="Most website are not special advantages to businesses. That is the problem we fix."
       />
 
       <div className="relative mt-8 grid gap-4 sm:mt-10 lg:grid-cols-[1.05fr_0.95fr] lg:items-start">
@@ -111,13 +111,13 @@ export function ProblemSection() {
           {problemPoints.map((point, index) => (
             <article
               key={point}
-              className="group rounded-[1.35rem] border border-slate-200/70 bg-slate-950/[0.045] p-5 shadow-[0_18px_50px_rgba(15,23,42,0.04)] backdrop-blur-sm transition-transform duration-300 hover:-translate-y-1"
+              className="group rounded-[1.35rem] border border-slate-200/70 bg-slate-950/[0.065] p-5 shadow-[0_18px_50px_rgba(15,23,42,0.04)] backdrop-blur-lg transition-transform duration-300 hover:-translate-y-1"
             >
               <div className="flex items-center justify-between gap-4">
-                <div className="grid h-11 w-11 place-items-center rounded-2xl border border-slate-300/70 bg-white/70 text-slate-800">
+                <div className="grid h-11 w-11 place-items-center rounded-2xl border border-slate-300/70 bg-red-500/70 text-slate-50">
                   <CircleAlert size={18} />
                 </div>
-                <span className="text-[10px] uppercase tracking-[0.24em] text-slate-400">
+                <span className="text-[15px] uppercase tracking-[0.24em] text-slate-400">
                   0{index + 1}
                 </span>
               </div>
@@ -132,7 +132,7 @@ export function ProblemSection() {
               What is going wrong
             </p>
             <h3 className="font-display mt-3 text-3xl leading-tight text-slate-950">
-              A pretty website is not enough if nobody understands what to do
+              Having a website is not enough if nobody understands what to do
               next.
             </h3>
             <p className="mt-4 text-sm leading-7 text-slate-600">
@@ -140,19 +140,6 @@ export function ProblemSection() {
               professional, and worth contacting. If the site is confusing, you
               lose trust before the conversation even starts.
             </p>
-            <div className="mt-6 flex items-center justify-between rounded-[1.2rem] border border-slate-200/80 bg-white/70 px-4 py-4">
-              <div>
-                <p className="text-[10px] uppercase tracking-[0.22em] text-slate-400">
-                  What we fix
-                </p>
-                <p className="mt-1 text-sm font-medium text-slate-900">
-                  Clarity, trust, and conversion flow
-                </p>
-              </div>
-              <div className="grid h-10 w-10 place-items-center rounded-full bg-sky-500 text-white shadow-[0_10px_25px_rgba(14,165,233,0.35)]">
-                <ArrowUpRight size={18} />
-              </div>
-            </div>
           </div>
         </aside>
       </div>
@@ -164,7 +151,7 @@ export function ServicesSection() {
   return (
     <section
       id="features"
-      className="section-shell relative rounded-[1.5rem] px-3 py-10 sm:rounded-[2rem] sm:px-5 sm:py-14 lg:px-10 lg:py-18 bg-slate-400/10"
+      className="section-shell relative px-3 py-10 sm:rounded-[2rem] sm:px-5 sm:py-14 lg:px-10 lg:py-18 bg-slate-100/10"
     >
       <SectionHeading
         badge="Services"
@@ -198,7 +185,7 @@ export function ServicesSection() {
               Who it is for
             </p>
             <h3 className="font-display mt-2 text-2xl text-black sm:text-3xl">
-              We work best with business owners who are{" "}
+              We work best with business owner&#39;s who are{" "}
               <span className="text-sky-400">serious about growth</span>
             </h3>
             <p className="text-gray-600 mt-3 max-w-xl text-sm leading-6 sm:leading-7">
@@ -208,11 +195,11 @@ export function ServicesSection() {
             </p>
           </div>
 
-          <div className="grid grid-cols-2 gap-2 sm:grid-cols-3 sm:gap-3">
+          <div className="grid  gap-2 sm:grid-cols-3 sm:gap-3 ">
             {clientTypes.map((item) => (
               <div
                 key={item}
-                className="rounded-[1.1rem] border border-white/6 bg-white/[0.025] px-3 py-4 text-center text-xs text-slate-800 sm:text-sm font-extrabold uppercase"
+                className="rounded-[1.1rem] border border-white/6 bg-white/[0.025] px-3 py-4 text-xs text-slate-800 sm:text-sm font-extrabold uppercase"
               >
                 {item}
               </div>
@@ -233,7 +220,7 @@ export function ProcessSection() {
       <SectionHeading
         badge="How It Works"
         title="How We Build Your Website - Step by Step"
-        description="You do not need to know anything about tech. We keep the process simple, clear, and easy to follow from the first call to launch."
+        description="We keep the process simple, clear, and easy to follow from the first call to launch."
       />
 
       <div className="mt-8 grid gap-4 sm:mt-10 lg:grid-cols-4">
@@ -260,7 +247,7 @@ export function ProjectsSection() {
   return (
     <section
       id="solution"
-      className="section-shell relative rounded-[1.5rem] px-3 py-10 sm:rounded-[2rem] sm:px-5 sm:py-14 lg:px-10 lg:py-18 bg-red-400/10"
+      className="section-shell relative rounded-[1.5rem] px-3 py-10 sm:rounded-[2rem] sm:px-5 sm:py-14 lg:px-10 lg:py-18 bg-red-100/10"
     >
       <SectionHeading
         badge="Recent Work"

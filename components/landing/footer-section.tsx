@@ -3,13 +3,12 @@ import Link from "next/link";
 export function FooterCtaSection() {
   return (
     <section className="section-shell relative overflow-hidden rounded-tl-[1.5rem] rounded-tr-[1.5rem] sm:rounded-tl-[2rem] sm:rounded-tr-[2rem] ">
-      <div className="mx-auto max-w-6xl text-center bg-sky-400/20 backdrop-blur-sm md:px-8 md:py-4 px-4 py-6 border-1 border-black/30">
+      <div className="mx-auto max-w-6xl text-center bg-sky-400/20 backdrop-blur-sm md:px-8 md:py-4 px-4 py-6 border-1 border-black/20">
         <h2 className="font-display text-[2rem] leading-tight text-black sm:text-5xl lg:text-[4.5rem]">
-          Ready to Get a Website That Works as Hard as You Do?
+          Ready to Get a Website for your Business?
         </h2>
         <p className="mx-auto mt-3 max-w-2xl text-sm leading-6 text-slate-700 sm:mt-5 sm:leading-7">
-          Tell us about your business and we will recommend the clearest next
-          step. No pressure, no tech jargon, no confusing quotes.
+          Tell us about your business and we will build you a professional website.
         </p>
         <div className="mt-6 flex flex-wrap items-center justify-center gap-2 sm:mt-8 sm:gap-3">
           <Link
@@ -22,7 +21,7 @@ export function FooterCtaSection() {
             href="#contact"
             className="secondary-button rounded-full px-5 py-3 text-sm text-white sm:px-6"
           >
-            Fill the Form Below
+            Contact Us
           </Link>
         </div>
       </div>

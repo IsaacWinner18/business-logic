@@ -1,3 +1,4 @@
+import { nohemi } from "@/lib/font";
 import { CheckCircle } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
@@ -21,7 +22,7 @@ export function HeroSection() {
           </div>
         </div>
 
-        <div className="items-center gap-3 ">
+        <div className="flex items-center gap-3 ">
           <Link
             href="#contact"
             className="secondary-button rounded-full px-5 py-2 text-sm text-white hidden md:flex"
@@ -46,15 +47,16 @@ export function HeroSection() {
           </div>
         </div>
 
-        <h1 className="font-display mx-auto mt-6 max-w-4xl text-5xl leading-[0.95] text-white text-[2rem] md:text-[3.5rem]">
+        <h1
+          className={`${nohemi.className} font-display mx-auto mt-6 max-w-4xl text-5xl leading-[0.95] text-white text-[2rem] md:text-[3.5rem]`}
+        >
           Your Business Deserves a Website That Actually{" "}
           <span className="text-sky-400">Brings In Customers</span>
         </h1>
         <p className="muted mx-auto mt-6 max-w-2xl text-sm leading-7 md:text-base">
-          We build websites
-          that explain what you do clearly, look professional, and turn visitors
-          into paying customers whether you sell services, products, or run a
-          company.
+          We build websites that explain what you do clearly, look professional,
+          and turn visitors into paying customers whether you sell services,
+          products, or run a company.
         </p>
 
         <div className="mt-8 flex flex-wrap items-center justify-center gap-3">
@@ -152,12 +154,10 @@ export function HeroSection() {
         <p className="text-xs uppercase tracking-[0.26em] text-slate-500">
           Businesses using Business Logic to improve how they show up online
         </p>
-        <div className="mt-5 flex items-center justify-center gap-x-10 gap-y-4 text-lg text-slate-400 sm:text-2xl">
+        <div className="mt-5 flex items-center justify-center text-base text-slate-400 sm:text-2xl">
           {["Dben Real Estate", "Farmergiant", "Earnstak", "IGiftways"].map(
             (brand) => (
-              <span key={brand} className="font-display opacity-80">
-                <Marquee>{brand}</Marquee>
-              </span>
+              <Marquee key={brand}>{brand}</Marquee>
             ),
           )}
         </div>

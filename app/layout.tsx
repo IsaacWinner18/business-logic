@@ -10,7 +10,7 @@ const nohemi = localFont({
 
 export const metadata: Metadata = {
   title: "Business Logic",
-  description: "AI-powered product landing page",
+  description: "Website Development Agency",
 };
 
 export default function RootLayout({
