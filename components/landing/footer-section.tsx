@@ -5,19 +5,25 @@ export function FooterCtaSection() {
     <section className="section-shell relative overflow-hidden rounded-tl-[1.5rem] rounded-tr-[1.5rem] sm:rounded-tl-[2rem] sm:rounded-tr-[2rem] ">
       <div className="mx-auto max-w-6xl text-center bg-sky-400/20 backdrop-blur-sm md:px-8 md:py-4 px-4 py-6 border-1 border-black/30">
         <h2 className="font-display text-[2rem] leading-tight text-black sm:text-5xl lg:text-[4.5rem]">
-          Built to help serious brands look the part online
+          Ready to Get a Website That Works as Hard as You Do?
         </h2>
         <p className="mx-auto mt-3 max-w-2xl text-sm leading-6 text-slate-700 sm:mt-5 sm:leading-7">
-          We create websites with the polish, structure, and performance needed
-          to earn trust from premium clients, partners, and investors.
+          Tell us about your business and we will recommend the clearest next
+          step. No pressure, no tech jargon, no confusing quotes.
         </p>
         <div className="mt-6 flex flex-wrap items-center justify-center gap-2 sm:mt-8 sm:gap-3">
-          <button className="primary-button rounded-full px-5 py-3 text-sm font-medium text-white sm:px-6">
-            Start Now
-          </button>
-          <button className="secondary-button rounded-full px-5 py-3 text-sm text-white sm:px-6">
-            Book a free Call
-          </button>
+          <Link
+            href="#contact"
+            className="primary-button rounded-full px-5 py-3 text-sm font-medium text-white sm:px-6"
+          >
+            Book Your Free Call Now
+          </Link>
+          <Link
+            href="#contact"
+            className="secondary-button rounded-full px-5 py-3 text-sm text-white sm:px-6"
+          >
+            Fill the Form Below
+          </Link>
         </div>
       </div>
 
@@ -38,7 +44,8 @@ export function FooterCtaSection() {
               </div>
             </div>
             <h3 className="font-display mt-5 max-w-md text-xl leading-tight text-black sm:mt-6 sm:text-xl">
-              Refined websites for ambitious companies
+              Websites that explain your business clearly and help you win more
+              customers
             </h3>
             <p className="mt-5 text-sm text-slate-900 sm:mt-6">
               Copyright 2026. All rights reserved.
@@ -51,12 +58,12 @@ export function FooterCtaSection() {
                 Services
               </p>
               <div className="mt-4 text-sm text-slate-700 ">
-                <Link href="/">Marketing Websites</Link> <br />
-                <Link href="/">Product Interfaces</Link>
+                <Link href="/">Business Websites</Link> <br />
+                <Link href="/">Customer Portals</Link>
                 <br />
-                <Link href="/">Frontend Systems</Link>
+                <Link href="/">Booking Systems</Link>
                 <br />
-                <Link href="/">Site Optimization</Link>
+                <Link href="/">Website Improvements</Link>
                 <br />
               </div>
             </div>
@@ -65,9 +72,9 @@ export function FooterCtaSection() {
                 Company
               </p>
               <div className="mt-4 space-y-3 text-sm text-slate-700">
-                <Link href="/">Recent Work</Link>
+                <Link href="/">How It Works</Link>
                 <br />
-                <Link href="/">LinkedIn</Link> <br />
+                <Link href="/">Recent Work</Link> <br />
                 <Link href="/">Contact</Link>
               </div>
             </div>
@@ -78,7 +85,7 @@ export function FooterCtaSection() {
               <div className="mt-4 space-y-3 text-sm text-slate-700">
                 <Link href="/">Privacy Policy</Link> <br />
                 <Link href="/">Terms of Service</Link> <br />
-                <Link href="/">Partnership</Link> <br />
+                <Link href="/">Support</Link> <br />
               </div>
             </div>
           </div>

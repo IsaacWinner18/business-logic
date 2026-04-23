@@ -1,21 +1,72 @@
 "use client";
 
+import Link from "next/link";
 import { FormEvent, useState } from "react";
+
+function mapBudgetRange(value: string) {
+  switch (value) {
+    case "200k-500k":
+      return "Under $500";
+    case "500k-1m":
+      return "$500-$1,500";
+    case "1m+":
+      return "$1,500-$5,000";
+    default:
+      return undefined;
+  }
+}
 
 export function ContactSection() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSuccessOpen, setIsSuccessOpen] = useState(false);
+  const [errorMessage, setErrorMessage] = useState<string | null>(null);
 
-  function handleSubmit(event: FormEvent<HTMLFormElement>) {
+  async function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
-    setIsSubmitting(true);
     const form = event.currentTarget;
+    const formData = new FormData(form);
 
-    window.setTimeout(() => {
+    setIsSubmitting(true);
+    setErrorMessage(null);
+
+    const payload = {
+      fullName: formData.get("name")?.toString().trim(),
+      businessName: formData.get("businessName")?.toString().trim(),
+      emailAddress: formData.get("email")?.toString().trim(),
+      contactChannel: "Website form",
+      contactHandleOrNumber: formData.get("phone")?.toString().trim(),
+      whatTheyNeed: formData.get("whatTheyNeed")?.toString().trim(),
+      budgetRange: mapBudgetRange(formData.get("budget")?.toString() ?? ""),
+      pipelineStatus: "New",
+      yourNotes: formData.get("business")?.toString().trim() || undefined,
+    };
+
+    try {
+      const response = await fetch("/api/notion/leads", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(payload),
+      });
+
+      const result = (await response.json()) as { error?: string };
+
+      if (!response.ok) {
+        throw new Error(result.error || "We could not send your message right now.");
+      }
+
       setIsSubmitting(false);
       setIsSuccessOpen(true);
       form.reset();
-    }, 700);
+    } catch (error) {
+      setIsSubmitting(false);
+      setErrorMessage(
+        error instanceof Error
+          ? error.message
+          : "We could not send your message right now.",
+      );
+    }
   }
 
   return (
@@ -27,22 +78,22 @@ export function ContactSection() {
         <div className="relative z-10 grid gap-6 lg:grid-cols-[0.9fr_1.1fr] lg:items-start">
           <div>
             <div className="pill inline-flex rounded-full px-3 py-1 text-[10px] uppercase tracking-[0.22em] text-sky-100">
-              Start a project
+              Free call
             </div>
             <h2 className="font-display mt-3 text-[2rem] leading-tight text-white sm:text-4xl lg:text-[3.4rem]">
-              Ready for a website that feels more credible?
+              Ready to Get a Website That Works as Hard as You Do?
             </h2>
             <p className="mt-3 max-w-xl text-sm leading-6 text-slate-300 sm:leading-7">
-              Tell us what you are building, who you need to impress, and where
-              the current site is falling short. We will follow up with the next
-              best step.
+              Tell us about your business. We will review it and tell you
+              exactly what we would recommend with no pressure, no tech jargon,
+              and no confusing quotes. It starts with a free 20-minute call.
             </p>
 
             <div className="mt-6 grid gap-2 sm:gap-3">
               {[
-                "Strategy-led design and development",
-                "Senior-level execution from concept to launch",
-                "Refined responsive frontend with premium presentation",
+                "We reply within 1 business day",
+                "No spam and no pressure",
+                "We explain everything in plain language",
               ].map((item) => (
                 <div
                   key={item}
@@ -60,7 +111,7 @@ export function ContactSection() {
           >
             <div className="grid gap-3 sm:grid-cols-2">
               <label className="grid gap-2 text-sm text-slate-200">
-                <span>Name</span>
+                <span>Your Name</span>
                 <input
                   required
                   name="name"
@@ -69,66 +120,103 @@ export function ContactSection() {
                 />
               </label>
               <label className="grid gap-2 text-sm text-slate-200">
-                <span>Email</span>
+                <span>Business Name</span>
                 <input
                   required
-                  type="email"
-                  name="email"
+                  name="businessName"
                   className="rounded-xl border border-white/6 bg-white/[0.03] px-3 py-3 text-sm text-white outline-none placeholder:text-slate-500 focus:border-sky-400/30"
-                  placeholder="name@company.com"
+                  placeholder="Your business or brand name"
                 />
               </label>
             </div>
 
             <div className="mt-3 grid gap-3 sm:grid-cols-2">
               <label className="grid gap-2 text-sm text-slate-200">
-                <span>Company</span>
+                <span>Your Email</span>
                 <input
-                  name="company"
+                  required
+                  type="email"
+                  name="email"
                   className="rounded-xl border border-white/6 bg-white/[0.03] px-3 py-3 text-sm text-white outline-none placeholder:text-slate-500 focus:border-sky-400/30"
-                  placeholder="Company name"
+                  placeholder="name@email.com"
                 />
               </label>
               <label className="grid gap-2 text-sm text-slate-200">
-                <span>Budget range</span>
+                <span>Your Phone Number</span>
+                <input
+                  required
+                  type="tel"
+                  name="phone"
+                  className="rounded-xl border border-white/6 bg-white/[0.03] px-3 py-3 text-sm text-white outline-none placeholder:text-slate-500 focus:border-sky-400/30"
+                  placeholder="0800 000 0000"
+                />
+              </label>
+            </div>
+
+            <div className="mt-3 grid gap-3 sm:grid-cols-2">
+              <label className="grid gap-2 text-sm text-slate-200">
+                <span>What Do You Need Help With?</span>
                 <select
-                  name="budget"
-                  className="rounded-xl border border-white/6 bg-white/[0.03] px-3 py-3 text-sm text-white outline-none focus:border-sky-400/30"
+                  required
+                  name="whatTheyNeed"
+                  className="rounded-xl border border-white/6 bg-black px-3 py-3 text-sm text-white outline-none focus:border-sky-400/30"
                   defaultValue=""
                 >
                   <option value="" disabled>
-                    Select range
+                    Select what you need
                   </option>
-                  <option value="5k-10k">5k - 10k</option>
-                  <option value="10k-25k">10k - 25k</option>
-                  <option value="25k+">25k+</option>
+                  <option value="New website">New website</option>
+                  <option value="Redesign">Redesign</option>
+                  <option value="Landing page">Landing page</option>
+                  <option value="E-commerce store">E-commerce store</option>
+                  <option value="Web app">Web app</option>
+                  <option value="Not sure yet">Not sure yet</option>
+                </select>
+              </label>
+              <label className="grid gap-2 text-sm text-slate-200">
+                <span>What is Your Budget?</span>
+                <select
+                  name="budget"
+                  className="rounded-xl border border-white/6 bg-black px-3 py-3 text-sm text-white outline-none focus:border-sky-400/30"
+                  defaultValue=""
+                >
+                  <option value="" disabled>
+                    Select budget
+                  </option>
+                  <option value="200k-500k">N200k - N500k</option>
+                  <option value="500k-1m">N500k - N1M</option>
+                  <option value="1m+">N1M+</option>
                 </select>
               </label>
             </div>
 
             <label className="mt-3 grid gap-2 text-sm text-slate-200">
-              <span>Project details</span>
+              <span>What Does Your Business Do?</span>
               <textarea
                 required
-                name="details"
+                name="business"
                 rows={5}
                 className="rounded-xl border border-white/6 bg-white/[0.03] px-3 py-3 text-sm text-white outline-none placeholder:text-slate-500 focus:border-sky-400/30"
-                placeholder="Tell us what you need, timeline, and the kind of clients you want the site to attract."
+                placeholder="Tell us what your business does."
               />
             </label>
 
             <div className="mt-4 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
               <p className="text-xs leading-5 text-slate-500">
-                We typically reply within 1 to 2 business days.
+                Or fill the form below and we will reach out within 24 hours.
               </p>
               <button
                 type="submit"
                 disabled={isSubmitting}
                 className="primary-button rounded-full px-5 py-3 text-sm font-medium text-white disabled:opacity-70"
               >
-                {isSubmitting ? "Sending..." : "Submit Inquiry"}
+                {isSubmitting ? "Sending..." : "Book Your Free Call Now"}
               </button>
             </div>
+
+            {errorMessage ? (
+              <p className="mt-3 text-sm text-rose-300">{errorMessage}</p>
+            ) : null}
           </form>
         </div>
       </section>
@@ -142,7 +230,7 @@ export function ContactSection() {
                   Success
                 </div>
                 <h3 className="font-display mt-3 text-2xl text-white">
-                  Inquiry received
+                  Message received
                 </h3>
               </div>
               <button
@@ -154,16 +242,18 @@ export function ContactSection() {
               </button>
             </div>
             <p className="mt-4 text-sm leading-6 text-slate-300">
-              Thanks for reaching out. We have your details and will follow up
-              with the next steps shortly.
+              Thanks for reaching out. We have your details and will contact you
+              as soon as possible.
             </p>
-            <button
-              type="button"
-              onClick={() => setIsSuccessOpen(false)}
-              className="primary-button mt-6 rounded-full px-5 py-3 text-sm font-medium text-white"
-            >
-              Close
-            </button>
+            <Link href="http://wa.me/2348119188295">
+              <button
+                type="button"
+                onClick={() => setIsSuccessOpen(false)}
+                className="primary-button mt-6 rounded-full px-5 py-3 text-sm font-medium text-white"
+              >
+                Message me on Whatsapp
+              </button>
+            </Link>
           </div>
         </div>
       ) : null}

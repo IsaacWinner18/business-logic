@@ -1,70 +1,91 @@
 import { CheckCircle } from "lucide-react";
 import Image from "next/image";
+import Link from "next/link";
+import Marquee from "react-fast-marquee";
 
 export function HeroSection() {
   return (
-    <section className="section-shell hero-panel relative overflow-hidden px-4 pb-10 pt-5 lg:px-10 lg:pb-14 rounded-bl-4xl">
-      <header className="relative z-10 flex flex-col gap-4 lg:flex-row lg:items-center lg:justify-between">
+    <section className="section-shell hero-panel relative overflow-hidden px-4 pb-10 pt-5 lg:px-10 lg:pb-14 ">
+      <header className="relative z-10 flex  gap-4 lg:flex-row items-center justify-between">
         <div className="flex items-center gap-3">
-          <div className="grid h-11 w-11 place-items-center  border border-sky-400/30 bg-sky-500/10 text-lg text-white shadow-[0_0_35px_rgba(58,130,246,0.35)]">
+          <div className="grid h-8 h-8 md:h-11 md:w-11 place-items-center  border border-sky-400/30 bg-sky-500/10 text-[10px] md:text-lg text-white shadow-[0_0_35px_rgba(58,130,246,0.35)]">
             [BL]
           </div>
           <div>
-            <div className="font-display text-xl text-white">
+            <div className="font-display text-[14px] md:text-xl text-white">
               Business Logic
             </div>
-            <p className="text-xs uppercase tracking-[0.28em] text-slate-400">
+            <p className="text-[8px] md:text-xs uppercase tracking-[0.28em] text-slate-400">
               Ideas To Business
             </p>
           </div>
         </div>
 
-        <div className="items-center gap-3 hidden md:flex">
-          <button className="secondary-button rounded-full px-5 py-2 text-sm text-white">
+        <div className="items-center gap-3 ">
+          <Link
+            href="#contact"
+            className="secondary-button rounded-full px-5 py-2 text-sm text-white hidden md:flex"
+          >
             Contact
-          </button>
-          <button className="primary-button rounded-full px-5 py-2 text-sm font-medium text-white">
+          </Link>
+          <Link
+            href="#contact"
+            className="primary-button rounded-full px-5 py-2 text-sm font-medium text-white"
+          >
             Book a Free Call
-          </button>
+          </Link>
         </div>
       </header>
 
       <div className="relative z-10 mx-auto mt-14 max-w-5xl text-center">
         <div className="pill inline-flex rounded-full px-4 py-1 text-xs text-sky-100">
           <div className="flex items-center">
-            <p>Ideas To website Copilot </p>
+            <p>Simple websites that win customers</p>
 
             <Image src="/arrow.png" alt="Rocket" width={20} height={20} />
           </div>
         </div>
 
-        <h1 className="font-display mx-auto mt-6 max-w-4xl text-5xl leading-[0.95] text-white text-2xl md:text-[3.5rem]">
-          A clean & functional Website is what you need{" "}
-          <span className="text-sky-400">Right Now</span>
+        <h1 className="font-display mx-auto mt-6 max-w-4xl text-5xl leading-[0.95] text-white text-[2rem] md:text-[3.5rem]">
+          Your Business Deserves a Website That Actually{" "}
+          <span className="text-sky-400">Brings In Customers</span>
         </h1>
         <p className="muted mx-auto mt-6 max-w-2xl text-sm leading-7 md:text-base">
-          Production-ready E-commerce, SaaS, Real Estate, Portfolio,
-          Business/Corporate websites. With screenshots, and product notes as
-          your guide.
+          We build websites
+          that explain what you do clearly, look professional, and turn visitors
+          into paying customers whether you sell services, products, or run a
+          company.
         </p>
 
         <div className="mt-8 flex flex-wrap items-center justify-center gap-3">
-          <button className="primary-button rounded-full px-6 py-3 text-sm font-medium text-white">
-            Get Started
-          </button>
-          <button className="secondary-button rounded-full px-6 py-3 text-sm text-white">
-            Book a free Call
-          </button>
+          <Link
+            href="#process"
+            className="primary-button rounded-full px-6 py-3 text-sm font-medium text-white"
+          >
+            See How It Works
+          </Link>
+          <Link
+            href="#contact"
+            className="secondary-button rounded-full px-6 py-3 text-sm text-white"
+          >
+            Book a Free Call
+          </Link>
         </div>
       </div>
 
       <div className="relative z-10 mx-auto mt-14 grid max-w-5xl gap-5 lg:grid-cols-[1fr_1.25fr_1fr] hidden md:grid">
         <div className="mesh-card rounded-[1.6rem] p-5 hidden md:block">
           <p className="text-xs uppercase tracking-[0.25em] text-slate-400">
-            Raw Files
+            We build for
           </p>
           <div className="mt-5 space-y-3">
-            {["Name-files.fig", "Landing.jpg", "Brief.md"].map((item) => (
+            {[
+              "Service businesses",
+              "Real estate firms",
+              "Consultants",
+              "Private practices",
+              "Growing companies",
+            ].map((item) => (
               <div
                 key={item}
                 className="rounded-2xl border border-white/6 bg-black/30 px-4 py-3 text-sm text-slate-200"
@@ -78,9 +99,9 @@ export function HeroSection() {
         <div className="mesh-card grid-line rounded-[1.8rem] border border-sky-400/20 p-5">
           <div className="mx-auto flex h-full w-full max-w-md flex-col rounded-[1.3rem] border border-white/8 bg-black/35 p-5">
             <div className="flex items-center justify-between text-xs text-slate-400">
-              <span>Your Website is ready! </span>
+              <span>Your website is taking shape</span>
               <span className="rounded-full bg-emerald-400/15 px-2 py-1 text-emerald-300">
-                Scanning
+                In Progress
               </span>
             </div>
             <div className="mt-6 flex-1 rounded-[1.1rem] border border-white/7 bg-gradient-to-b from-slate-900/80 to-black/40 p-4">
@@ -101,37 +122,41 @@ export function HeroSection() {
 
         <div className="mesh-card rounded-[1.6rem] p-4 hidden md:block">
           <p className="text-xs uppercase tracking-[0.25em] text-slate-400">
-            Your site is now live
+            What your site should do
           </p>
           <ul className="mt-5 space-y-3 text-sm text-slate-200">
-            {["Online", "SEO", "Responsiveness", "Secure", "Makes Money"].map(
-              (item) => (
-                <li
-                  key={item}
-                  className="flex items-center justify-between rounded-2xl border border-white/6 bg-black/30 px-4 py-3"
-                >
-                  <span>{item}</span>
-                  {/* <span className="h-2.5 w-2.5 rounded-full bg-sky-400 shadow-[0_0_16px_rgba(56,189,248,0.85)]" /> */}
-                  <span>
-                    {" "}
-                    <CheckCircle />{" "}
-                  </span>
-                </li>
-              ),
-            )}
+            {[
+              "Explain your offer clearly",
+              "Build trust fast",
+              "Work on every screen",
+              "Load quickly",
+              "Bring in better leads",
+            ].map((item) => (
+              <li
+                key={item}
+                className="flex items-center justify-between rounded-2xl border border-white/6 bg-black/30 px-4 py-3"
+              >
+                <span>{item}</span>
+                {/* <span className="h-2.5 w-2.5 rounded-full bg-sky-400 shadow-[0_0_16px_rgba(56,189,248,0.85)]" /> */}
+                <span>
+                  {" "}
+                  <CheckCircle />{" "}
+                </span>
+              </li>
+            ))}
           </ul>
         </div>
       </div>
 
       <div className="relative z-10 mx-auto mt-10 max-w-5xl text-center ">
         <p className="text-xs uppercase tracking-[0.26em] text-slate-500">
-          Top Businesses use Business Logic for cleaner sites
+          Businesses using Business Logic to improve how they show up online
         </p>
-        <div className="mt-5 flex flex-wrap items-center justify-center gap-x-10 gap-y-4 text-lg text-slate-400 sm:text-2xl">
+        <div className="mt-5 flex items-center justify-center gap-x-10 gap-y-4 text-lg text-slate-400 sm:text-2xl">
           {["Dben Real Estate", "Farmergiant", "Earnstak", "IGiftways"].map(
             (brand) => (
               <span key={brand} className="font-display opacity-80">
-                {brand}
+                <Marquee>{brand}</Marquee>
               </span>
             ),
           )}

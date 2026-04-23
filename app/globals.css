@@ -24,13 +24,9 @@ html {
 }
 
 body {
-  background: var(--background);
+  background-color: white;
   color: var(--foreground);
   font-family: var(--font-sans);
-  background-image:
-    radial-gradient(circle at top, rgba(251, 253, 255, 0.75), transparent 26%),
-    radial-gradient(circle at bottom, rgba(255, 255, 255, 0.75), transparent 24%),
-    linear-gradient(180deg, #fafbff 0%, #fafbff 45%, #ffffff 100%);
 }
 
 a {

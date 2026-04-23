@@ -1,74 +1,175 @@
 import Image from "next/image";
+import { ArrowUpRight, CircleAlert } from "lucide-react";
 import { SectionHeading } from "@/components/landing/shared";
+
+const problemPoints = [
+  "Customers visit but never call or message",
+  "Your site looks cheap compared to your competitors",
+  "People cannot figure out what you do just from looking at it",
+  "You are not sure if your website is helping your business at all",
+];
 
 const services = [
   {
-    title: "High-converting marketing sites",
+    title: "A Website That Sells For You",
     copy:
-      "Launch brand-first websites built to win enterprise trust, explain complex offers, and move decision-makers faster.",
+      "We build your business a clean, fast website that explains what you offer, who it is for, and why people should choose you in a way that feels easy to understand and easy to trust.",
   },
   {
-    title: "Product and dashboard interfaces",
+    title: "Online Platforms & Business Tools",
     copy:
-      "Design and ship premium internal tools, SaaS platforms, and customer portals with a clean, credible visual system.",
+      "Need more than a simple website? We build customer portals, booking systems, dashboards, and online platforms that help your team work better and your customers get served faster.",
   },
   {
-    title: "Ongoing design-engineering support",
+    title: "Website Fixes & Improvements",
     copy:
-      "Work with a senior web team that can refine, extend, and optimize your site after launch without losing quality.",
+      "Already have a website that is not performing? We will clean it up, improve how it looks, make it faster, and make sure it is doing its job by bringing you more business.",
   },
 ];
 
 const clientTypes = [
-  "Private equity backed teams",
-  "High-growth SaaS brands",
-  "Luxury and premium services",
-  "Venture-funded startups",
-  "Global professional firms",
-  "Executive personal brands",
+  "Service businesses",
+  "New companies",
+  "Founders who need trust online",
+  "Teams with weak current websites",
+  "Businesses ready to grow",
+  "Owners tired of cheap developers",
+];
+
+const processSteps = [
+  {
+    step: "Step 1",
+    title: "We Talk",
+    copy:
+      "You book a free call and tell us what your business does, who your customers are, and what you need. That is it.",
+  },
+  {
+    step: "Step 2",
+    title: "We Plan",
+    copy:
+      "We send you a clear plan showing what your website will include, how long it will take, and what it will cost. No surprises.",
+  },
+  {
+    step: "Step 3",
+    title: "We Build",
+    copy:
+      "Our team designs and builds your website. You see it before it goes live and you give feedback along the way.",
+  },
+  {
+    step: "Step 4",
+    title: "You Go Live",
+    copy:
+      "Your website launches fully working, fast, and ready to help bring in business.",
+  },
 ];
 
 const projects = [
   {
     tag: "Recent Project",
-    title: "Executive advisory firm relaunch",
+    title: "Real Estate Company - Full Website Overhaul",
     copy:
-      "We redesigned a dated consultancy site into a high-trust digital presence with clearer positioning, sharper service pages, and faster conversion paths for qualified leads.",
-    metrics: ["6 weeks delivery", "3x stronger lead quality", "Premium repositioning"],
+      "Their old site was confusing and slow. We rebuilt it from scratch so their properties look premium, clients can browse easily, and the team gets more serious inquiries every week.",
+    metrics: ["More qualified leads", "Fewer time-wasters", "Clearer browsing"],
     align: "left",
     image: "/project-placeholder-01.svg",
   },
   {
     tag: "Recent Project",
-    title: "SaaS demand generation website",
+    title: "Business Consulting Firm - New Website Launch",
     copy:
-      "For a B2B software company, we built a modular marketing site with product storytelling, proof layers, and flexible landing page sections for sales campaigns.",
-    metrics: ["Reusable page system", "Mobile-first rollout", "Sales-ready messaging"],
+      "They had no website, just a phone number and word of mouth. We built them a professional online presence that helped them look as credible as the bigger firms they compete with.",
+    metrics: ["Strong first impression", "Corporate-ready presence", "First corporate client in 2 weeks"],
     align: "right",
     image: "/project-placeholder-02.svg",
   },
   {
     tag: "Recent Project",
-    title: "Private client service brand refresh",
+    title: "Premium Service Brand - Redesign",
     copy:
-      "We elevated the digital experience for a premium service business with restrained visuals, deliberate motion, and content structure designed for high-intent buyers.",
-    metrics: ["Luxury-style direction", "Faster load times", "Clearer conversion flow"],
+      "Their website was losing customers before anyone made contact. We redesigned it to be clean, clear, and convincing so sales conversations became much easier.",
+    metrics: ["3x better lead quality", "Cleaner message", "Easier sales conversations"],
     align: "left",
     image: "/project-placeholder-03.svg",
   },
 ];
 
+export function ProblemSection() {
+  return (
+    <section
+      id="problem"
+      className="section-shell relative overflow-hidden rounded-[1.5rem] bg-white px-3 py-10 sm:rounded-[2rem] sm:px-5 sm:py-14 lg:px-10 lg:py-18"
+    >
+      <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_top_left,rgba(14,165,233,0.08),transparent_28%),radial-gradient(circle_at_bottom_right,rgba(15,23,42,0.06),transparent_28%)]" />
+      <SectionHeading
+        badge="The Problem"
+        title="Does Any of This Sound Familiar?"
+        description="You have a website, or you are thinking of getting one, but something feels off. Most websites are built to look nice, not to actually win business. That is the problem we fix."
+      />
+
+      <div className="relative mt-8 grid gap-4 sm:mt-10 lg:grid-cols-[1.05fr_0.95fr] lg:items-start">
+        <div className="grid gap-3 md:grid-cols-2">
+          {problemPoints.map((point, index) => (
+            <article
+              key={point}
+              className="group rounded-[1.35rem] border border-slate-200/70 bg-slate-950/[0.045] p-5 shadow-[0_18px_50px_rgba(15,23,42,0.04)] backdrop-blur-sm transition-transform duration-300 hover:-translate-y-1"
+            >
+              <div className="flex items-center justify-between gap-4">
+                <div className="grid h-11 w-11 place-items-center rounded-2xl border border-slate-300/70 bg-white/70 text-slate-800">
+                  <CircleAlert size={18} />
+                </div>
+                <span className="text-[10px] uppercase tracking-[0.24em] text-slate-400">
+                  0{index + 1}
+                </span>
+              </div>
+              <p className="mt-5 text-base leading-7 text-slate-900">{point}</p>
+            </article>
+          ))}
+        </div>
+
+        <aside className="rounded-[1.6rem] border border-slate-200/80 bg-slate-950/[0.04] p-3 shadow-[0_25px_70px_rgba(15,23,42,0.06)]">
+          <div className="rounded-[1.35rem] border border-white/70 bg-[linear-gradient(180deg,rgba(255,255,255,0.82),rgba(248,250,252,0.92))] p-6">
+            <p className="text-[10px] uppercase tracking-[0.24em] text-slate-500">
+              What is going wrong
+            </p>
+            <h3 className="font-display mt-3 text-3xl leading-tight text-slate-950">
+              A pretty website is not enough if nobody understands what to do
+              next.
+            </h3>
+            <p className="mt-4 text-sm leading-7 text-slate-600">
+              Most visitors decide in seconds whether your business feels clear,
+              professional, and worth contacting. If the site is confusing, you
+              lose trust before the conversation even starts.
+            </p>
+            <div className="mt-6 flex items-center justify-between rounded-[1.2rem] border border-slate-200/80 bg-white/70 px-4 py-4">
+              <div>
+                <p className="text-[10px] uppercase tracking-[0.22em] text-slate-400">
+                  What we fix
+                </p>
+                <p className="mt-1 text-sm font-medium text-slate-900">
+                  Clarity, trust, and conversion flow
+                </p>
+              </div>
+              <div className="grid h-10 w-10 place-items-center rounded-full bg-sky-500 text-white shadow-[0_10px_25px_rgba(14,165,233,0.35)]">
+                <ArrowUpRight size={18} />
+              </div>
+            </div>
+          </div>
+        </aside>
+      </div>
+    </section>
+  );
+}
+
 export function ServicesSection() {
   return (
     <section
       id="features"
-      className="section-shell relative rounded-[1.5rem] px-3 py-10 sm:rounded-[2rem] sm:px-5 sm:py-14 lg:px-10 lg:py-18 bg-[#c6ddf7]/10"
+      className="section-shell relative rounded-[1.5rem] px-3 py-10 sm:rounded-[2rem] sm:px-5 sm:py-14 lg:px-10 lg:py-18 bg-slate-400/10"
     >
       <SectionHeading
         badge="Services"
-        title="Web development built for"
-        highlight=" premium brands"
-        description="We design and develop polished websites for companies that need credibility, clarity, and execution that holds up under close scrutiny."
+        title="Here is Exactly What We Build For You"
+        description="Simple, clear websites and business tools that help people understand what you do, trust your business, and take the next step."
       />
 
       <div className="mt-8 grid sm:mt-10  lg:grid-cols-3 bg-white">
@@ -94,17 +195,16 @@ export function ServicesSection() {
         <div className="grid gap-4 lg:grid-cols-[0.9fr_1.1fr] lg:items-center">
           <div>
             <p className="text-[10px] uppercase tracking-[0.22em] text-slate-900">
-              Ideal clients
+              Who it is for
             </p>
             <h3 className="font-display mt-2 text-2xl text-black sm:text-3xl">
-              We <span className="text-sky-400"> partner</span> with teams that
-              expect a sharper digital{" "}
-              <span className="text-sky-400"> standard</span>
+              We work best with business owners who are{" "}
+              <span className="text-sky-400">serious about growth</span>
             </h3>
             <p className="text-gray-600 mt-3 max-w-xl text-sm leading-6 sm:leading-7">
-              The visual language, spacing, and structure are intentionally
-              restrained so the work feels credible for high-value buyers and
-              top-tier brands.
+              If your business needs a stronger first impression, clearer
+              messaging, and a website you feel proud to share, we are a strong
+              fit.
             </p>
           </div>
 
@@ -124,6 +224,38 @@ export function ServicesSection() {
   );
 }
 
+export function ProcessSection() {
+  return (
+    <section
+      id="process"
+      className="section-shell relative rounded-[1.5rem] bg-emerald-100/40 px-3 py-10 sm:rounded-[2rem] sm:px-5 sm:py-14 lg:px-10 lg:py-18"
+    >
+      <SectionHeading
+        badge="How It Works"
+        title="How We Build Your Website - Step by Step"
+        description="You do not need to know anything about tech. We keep the process simple, clear, and easy to follow from the first call to launch."
+      />
+
+      <div className="mt-8 grid gap-4 sm:mt-10 lg:grid-cols-4">
+        {processSteps.map((item) => (
+          <article
+            key={item.step}
+            className="rounded-[1.3rem] border border-black/8 bg-white/80 p-5"
+          >
+            <p className="text-[10px] uppercase tracking-[0.24em] text-slate-500">
+              {item.step}
+            </p>
+            <h3 className="font-display mt-3 text-2xl text-black">
+              {item.title}
+            </h3>
+            <p className="mt-3 text-sm leading-6 text-slate-700">{item.copy}</p>
+          </article>
+        ))}
+      </div>
+    </section>
+  );
+}
+
 export function ProjectsSection() {
   return (
     <section
@@ -132,9 +264,8 @@ export function ProjectsSection() {
     >
       <SectionHeading
         badge="Recent Work"
-        title="Recent projects for"
-        highlight=" clients"
-        description="A few examples of the kind of web experiences we build for ambitious brands that care about detail, speed, and presentation."
+        title="Businesses We Have Helped Look Better and Grow Faster"
+        description="A few examples of what happens when the website becomes clearer, more professional, and easier for customers to trust."
       />
 
       <div className="mt-8 space-y-4 sm:mt-10 sm:space-y-5">

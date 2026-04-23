@@ -1,63 +1,104 @@
+import { Quote } from "lucide-react";
 import { SectionHeading } from "@/components/landing/shared";
 
 const reviews = [
   {
-    name: "Adanna Okoro",
-    role: "Managing Partner, Advisory Brand",
+    name: "Adanna O.",
+    role: "Business Consultant",
+    avatar: "AO",
     text:
-      "They translated our positioning into a website that finally feels aligned with the level of client we serve.",
+      "Before Business Logic, I was embarrassed to share my website link. Now I send it to every potential client with confidence.",
   },
   {
-    name: "David Cole",
-    role: "Growth Lead, B2B SaaS",
+    name: "Tunde A.",
+    role: "Company Founder",
+    avatar: "TA",
     text:
-      "The team moved quickly, but never at the expense of taste. The finished site feels premium and intentional.",
+      "They built exactly what I described, finished on time, and explained everything in plain language. No tech confusion at all.",
   },
   {
-    name: "Maya Laurent",
-    role: "Founder, Private Client Studio",
+    name: "David C.",
+    role: "Service Business Owner",
+    avatar: "DC",
     text:
-      "From structure to polish, every section felt thoughtfully engineered. We looked more established overnight.",
+      "My old website was just a page. Now it actually brings in customers. I have already gotten 3 new clients from it.",
   },
   {
-    name: "Tunde Alabi",
-    role: "CMO, Venture-backed Startup",
+    name: "Maya L.",
+    role: "Private Practice Owner",
+    avatar: "ML",
     text:
-      "They gave us a sharper narrative, cleaner design system, and a site our sales team is proud to send prospects to.",
+      "I did not know where to start. They handled everything and showed me what to expect at every step.",
+  },
+];
+
+const screenshotTestimonials = [
+  {
+    source: "WhatsApp Feedback",
+    name: "Adanna O.",
+    excerpt:
+      "This new site finally feels like a real business. I have already sent it to two prospects this morning.",
+    time: "9:14 AM",
   },
   {
-    name: "Rachel Hart",
-    role: "Director, Executive Services",
-    text:
-      "The responsiveness, pacing, and final presentation all reflected the kind of detail senior buyers notice.",
+    source: "Client Email",
+    name: "Tunde A.",
+    excerpt:
+      "Thank you for making the process simple. The site looks clean and serious, exactly what I needed.",
+    time: "11:32 AM",
+  },
+  {
+    source: "Voice Note Summary",
+    name: "David C.",
+    excerpt:
+      "The redesign made a huge difference. People now understand the service before they even call us.",
+    time: "2:08 PM",
+  },
+  {
+    source: "Follow-up Message",
+    name: "Maya L.",
+    excerpt:
+      "I was nervous about tech stuff, but your team handled everything and kept me updated all through.",
+    time: "4:26 PM",
   },
 ];
 
 const faqItems = [
   {
-    question: "What type of clients do you work best with?",
+    question: "How much does a website cost?",
     answer:
-      "We are best suited to premium service firms, funded startups, SaaS teams, and brands that need a more credible digital presence.",
+      "Our projects start from N200,000 depending on what you need. We will give you a clear price before any work begins with no hidden charges.",
   },
   {
-    question: "Do you handle both design and development?",
+    question: "How long does it take?",
     answer:
-      "Yes. We can work from an existing direction or handle the design-engineering process end to end depending on the engagement.",
+      "Most websites are done in 2 to 6 weeks. We will give you a timeline when we review your project.",
   },
   {
-    question: "Can you improve an existing website instead of rebuilding it?",
+    question: "Do I need to know anything about websites or tech?",
     answer:
-      "Absolutely. Many projects begin with selective redesigns, page restructuring, or frontend refinement before expanding further.",
+      "Not at all. We handle everything. You just tell us about your business and what you want customers to know, and we take it from there.",
   },
   {
-    question: "How quickly can a project start?",
+    question: "What if I already have a website?",
     answer:
-      "Smaller engagements can start quickly. Larger projects usually begin with a short discovery and planning phase.",
+      "We can improve it instead of starting from scratch. Many clients come to us just to fix what they already have.",
+  },
+  {
+    question: "Will I be able to update it myself after?",
+    answer:
+      "Yes. We will show you how to make basic updates, and we are available if you ever need help.",
+  },
+  {
+    question: "What if I am not happy with the result?",
+    answer:
+      "We work with you until it is right. You review the site before it goes live and give feedback, so we do not launch anything you are not satisfied with.",
   },
 ];
 
 export function TestimonialsSection() {
   const items = [...reviews, ...reviews];
+  const proofItems = [...screenshotTestimonials, ...screenshotTestimonials];
 
   return (
     <section
@@ -70,42 +111,85 @@ export function TestimonialsSection() {
             Testimonials
           </div>
           <h2 className="font-display mt-3 text-[1.9rem] leading-tight text-black sm:text-4xl lg:text-[3.2rem]">
-            Trusted by teams that care about how they show up
+            What Our Clients Say After Working With Us
           </h2>
           <p className="text-gray-700 mt-3 max-w-xl text-sm leading-6 sm:leading-7">
-            The work is designed to feel sharp on first impression and
-            dependable under closer review, which is exactly what premium buyers
-            expect.
+            Real feedback from business owners who wanted a website they could
+            finally feel confident sharing with serious customers.
           </p>
         </div>
 
         <div className="text-left lg:text-right">
           <p className="font-display text-5xl text-sky-600 sm:text-6xl">94%</p>
           <p className="text-sm text-slate-700">
-            of clients say the new site better reflects their market position
+            of our clients say their new website helped them win better
+            customers faster
           </p>
         </div>
       </div>
 
       <div className="testimonial-fade relative mt-8 overflow-hidden sm:mt-10">
+        <div className="testimonial-track mb-4 flex w-max gap-3 sm:mb-5 sm:gap-4">
+          {proofItems.map((item, index) => (
+            <article
+              key={`${item.name}-${item.source}-${index}`}
+              className="w-[280px] shrink-0 rounded-[1.45rem] border border-slate-200/80 bg-white/80 p-3 shadow-[0_18px_45px_rgba(15,23,42,0.08)] backdrop-blur-sm sm:w-[340px]"
+            >
+              <div className="rounded-[1.2rem] border border-slate-200/70 bg-slate-950 p-3 text-white">
+                <div className="flex items-center justify-between text-[10px] uppercase tracking-[0.22em] text-slate-400">
+                  <span>{item.source}</span>
+                  <span>{item.time}</span>
+                </div>
+                <div className="mt-3 rounded-[1rem] bg-white/[0.08] p-4">
+                  <div className="flex items-center gap-3">
+                    <div className="grid h-9 w-9 place-items-center rounded-full bg-sky-500/20 text-xs font-bold text-sky-200">
+                      {item.name
+                        .split(" ")
+                        .map((part) => part[0])
+                        .join("")}
+                    </div>
+                    <div>
+                      <p className="text-sm font-medium text-white">{item.name}</p>
+                      <p className="text-xs text-slate-400">Client feedback</p>
+                    </div>
+                  </div>
+                  <p className="mt-4 text-sm leading-6 text-slate-200">
+                    {item.excerpt}
+                  </p>
+                </div>
+              </div>
+            </article>
+          ))}
+        </div>
+
         <div className="testimonial-track flex w-max gap-3 sm:gap-4">
           {items.map((review, index) => (
             <article
               key={`${review.name}-${index}`}
-              className="w-[260px] shrink-0 rounded-[1.35rem] border border-white/6 bg-black/[0.03] backdrop-blur-sm p-4 sm:w-[320px] sm:rounded-[1.6rem] sm:p-5"
+              className="w-[260px] shrink-0 rounded-[1.35rem] border border-white/6 bg-black/[0.03] p-4 shadow-[0_18px_48px_rgba(15,23,42,0.08)] backdrop-blur-sm sm:w-[320px] sm:rounded-[1.6rem] sm:p-5"
             >
-              <div className="p-2 bg-white/30 rounded-[1.35rem]">
-                <p className="text-sm leading-6 text-slate-900 sm:leading-7">
+              <div className="rounded-[1.35rem] bg-white/45 p-3">
+                <div className="flex items-start justify-between gap-3">
+                  <div className="flex items-center gap-3">
+                    <div className="grid h-11 w-11 place-items-center rounded-full bg-slate-900 text-sm font-bold text-white shadow-[0_10px_22px_rgba(15,23,42,0.18)]">
+                      {review.avatar}
+                    </div>
+                    <div>
+                      <p className="font-display text-lg text-black sm:text-xl">
+                        {review.name}
+                      </p>
+                      <p className="text-xs text-slate-700 sm:text-sm">
+                        {review.role}
+                      </p>
+                    </div>
+                  </div>
+                  <div className="grid h-10 w-10 place-items-center rounded-full bg-sky-500/12 text-sky-700">
+                    <Quote size={18} />
+                  </div>
+                </div>
+                <p className="mt-5 text-sm leading-6 text-slate-900 sm:leading-7">
                   {review.text}
                 </p>
-                <div className="mt-5">
-                  <p className="font-display text-lg text-black sm:text-xl">
-                    {review.name}
-                  </p>
-                  <p className="text-xs text-slate-700 sm:text-sm">
-                    {review.role}
-                  </p>
-                </div>
               </div>
             </article>
           ))}
@@ -123,8 +207,8 @@ export function FaqSection() {
     >
       <SectionHeading
         badge="FAQ"
-        title="Questions we usually answer before a build begins"
-        description="A quick view into how we approach projects, who we are best for, and what to expect when we work together."
+        title="Questions People Ask Before Getting Started"
+        description="A simple look at pricing, timelines, and what it is like to work with us if you are not technical."
       />
 
       <div className="mt-8 grid gap-3 sm:mt-10 sm:gap-4 lg:grid-cols-[1.2fr_0.8fr]">
@@ -153,15 +237,15 @@ export function FaqSection() {
         <aside className="md:relative rounded-[1.4rem] p-2 sm:rounded-[1.65rem] bg-white/40 backdrop-bur-sm hidden md:block">
           <div className="bg-sky-700/30 h-full md:relative rounded-[1.4rem] sm:rounded-[1.65rem] p-4">
             <p className="text-[10px] uppercase tracking-[0.22em] text-slate-700">
-              What clients value
+              Before you start
             </p>
             <h3 className="font-display mt-2 text-2xl text-black sm:text-3xl">
-              Taste, speed, and{" "}
-              <span className="text-sky-800">attention to </span> detail
+              Clear answers.{" "}
+              <span className="text-sky-800">No pressure.</span>
             </h3>
             <p className="my-3 text-sm leading-6 text-slate-600 font-bold sm:leading-7 absolute bottom-0">
-              We build websites that feel considered, not generic, while still
-              moving with the pace ambitious teams need.
+              We explain things in plain language, give clear prices, and make
+              the whole process easier to trust.
             </p>
           </div>
         </aside>

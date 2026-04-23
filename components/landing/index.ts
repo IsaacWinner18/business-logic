@@ -1,6 +1,8 @@
 export { HeroSection } from "@/components/landing/hero-section";
 export {
+  ProblemSection,
   ServicesSection,
+  ProcessSection,
   ProjectsSection,
 } from "@/components/landing/feature-sections";
 export {
