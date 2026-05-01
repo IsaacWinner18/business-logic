@@ -244,7 +244,7 @@ export function ContactSection() {
               disabled={status === "submitting"}
               className="primary-button inline-flex items-center justify-center rounded-none px-6 py-4 text-[10px] font-semibold uppercase tracking-[0.22em] text-white disabled:opacity-70"
             >
-              {status === "submitting" ? "Submitting..." : "Capture lead"}
+              {status === "submitting" ? "Submitting..." : "Submit"}
             </button>
           </div>
 
