@@ -19,23 +19,21 @@ export function SectionHeading({
 
   return (
     <div className={centered ? "mx-auto max-w-3xl text-center" : "max-w-xl"}>
-      <div className="mb-3 inline-flex rounded-full px-3 py-1 text-[10px] font-medium uppercase tracking-[0.22em] text-slate-900/90 sm:mb-4 sm:px-4">
+      <div className="mb-3 inline-flex px-0 py-1 text-[10px] font-medium uppercase tracking-[0.26em] text-[var(--ink-faint)] sm:mb-4">
         {badge}
       </div>
       <h2
-        className={` font-display text-[1.6rem] leading-tight text-black  md:text-[3.35rem] ${nohemi.variable} `}
+        className={`font-display text-[2rem] leading-[0.98] text-black md:text-[3.35rem] ${nohemi.variable}`}
       >
         {highlight ? (
           <>
-            {parts[0]}
-            <span className="text-sky-400">{highlight}</span>
-            {parts[1]}
+            {parts[0]}<span className="text-[var(--accent)]">{highlight}</span>{parts[1]}
           </>
         ) : (
           title
         )}
       </h2>
-      <p className="text-gray-700 mx-auto mt-3 max-w-2xl text-sm leading-6 sm:mt-4 sm:text-base sm:leading-7">
+      <p className="mx-auto mt-3 max-w-2xl text-sm leading-7 text-[var(--ink-soft)] sm:mt-4 sm:text-base">
         {description}
       </p>
     </div>

@@ -1,0 +1,7 @@
+<svg width="240" height="72" viewBox="0 0 240 72" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="240" height="72" rx="8" fill="#F8F3ED"/>
+  <path d="M32 48L44 24L56 48H32Z" fill="#171412"/>
+  <path d="M44 48V22" stroke="#F8F3ED" stroke-width="2"/>
+  <text x="76" y="35" fill="#171412" font-family="Arial, sans-serif" font-size="18" font-weight="700" letter-spacing="1.4">EARNSTAK</text>
+  <text x="76" y="50" fill="#8C8177" font-family="Arial, sans-serif" font-size="9" letter-spacing="3">DIGITAL PAYMENTS</text>
+</svg>

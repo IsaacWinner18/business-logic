@@ -1,11 +1,18 @@
 @import "tailwindcss";
 
 :root {
-  --background: #f5f8ff;
-  --foreground: #f4f7ff;
-  --muted: #99a4c3;
-  --line: rgba(134, 160, 215, 0.08);
-  --blue: #3188ff;
+  --background: #f6f1ea;
+  --foreground: #171412;
+  --muted: #736a63;
+  --line: rgba(49, 39, 31, 0.12);
+  --blue: #8f6a2f;
+  --panel: #f9f5f0;
+  --panel-strong: #f0e8df;
+  --ink-soft: #4c433d;
+  --ink-faint: #8c8177;
+  --accent: #8f6a2f;
+  --accent-dark: #6d4f22;
+  --dark: #191715;
 }
 
 @theme inline {
@@ -24,7 +31,9 @@ html {
 }
 
 body {
-  background-color: white;
+  background:
+    radial-gradient(circle at top left, rgba(255, 255, 255, 0.88), transparent 22%),
+    linear-gradient(180deg, #fbf8f3 0%, #f5efe7 100%);
   color: var(--foreground);
   font-family: var(--font-sans);
 }
@@ -50,16 +59,17 @@ a {
   inset: 0;
   pointer-events: none;
   background:
-    radial-gradient(circle at 12% 6%, rgba(41, 123, 255, 0.28), transparent 18%),
-    radial-gradient(circle at 88% 12%, rgba(68, 173, 255, 0.34), transparent 18%),
-    radial-gradient(circle at 82% 92%, rgba(40, 89, 255, 0.2), transparent 12%);
-  opacity: 0.9;
+    radial-gradient(circle at 12% 8%, rgba(177, 141, 92, 0.12), transparent 20%),
+    radial-gradient(circle at 88% 16%, rgba(212, 201, 189, 0.32), transparent 18%),
+    linear-gradient(180deg, rgba(255, 255, 255, 0.3), transparent 24%);
+  opacity: 1;
 }
 
 .section-shell {
   position: relative;
   border: 1px solid var(--line);
-  background: "white";
+  background: rgba(255, 255, 255, 0.58);
+  backdrop-filter: blur(10px);
 }
 
 .mesh-card {
@@ -87,7 +97,7 @@ a {
 }
 
 .hero-panel {
-  background-color: #04070f;
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.72), rgba(245, 239, 231, 0.92));
 }
 
 .hero-panel::before {
@@ -95,9 +105,9 @@ a {
   position: absolute;
   inset: 0;
   background:
-    linear-gradient(180deg, rgba(4, 7, 15, 0.46), rgba(3, 4, 10, 0.78)),
-    url("/bg-mesh.png") center top / cover no-repeat;
-  opacity: 0.98;
+    linear-gradient(90deg, rgba(255, 255, 255, 0.54), rgba(255, 255, 255, 0.08)),
+    linear-gradient(180deg, rgba(255, 255, 255, 0.14), rgba(239, 232, 223, 0.4));
+  opacity: 1;
   pointer-events: none;
 }
 
@@ -106,9 +116,10 @@ a {
   position: absolute;
   inset: 0;
   background:
-    radial-gradient(circle at 18% 12%, rgba(46, 134, 255, 0.16), transparent 20%),
-    radial-gradient(circle at 86% 10%, rgba(66, 181, 255, 0.22), transparent 22%),
-    linear-gradient(180deg, rgba(255, 255, 255, 0.02), transparent 24%, rgba(0, 0, 0, 0.1) 100%);
+    linear-gradient(90deg, rgba(23, 20, 18, 0.05) 1px, transparent 1px),
+    linear-gradient(rgba(23, 20, 18, 0.05) 1px, transparent 1px);
+  background-size: 40px 40px;
+  mask-image: linear-gradient(90deg, transparent 0%, rgba(0, 0, 0, 0.16) 45%, rgba(0, 0, 0, 0.5) 100%);
   pointer-events: none;
 }
 
@@ -127,29 +138,42 @@ a {
 }
 
 .pill {
-  border: 1px solid rgba(116, 151, 229, 0.16);
-  background: rgba(13, 18, 33, 0.68);
-  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(73, 58, 44, 0.12);
+  background: rgba(255, 255, 255, 0.72);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.7);
 }
 
 .primary-button {
-  background: linear-gradient(135deg, #0a67ff 0%, #46a2ff 100%);
+  background: linear-gradient(135deg, var(--accent) 0%, #b28642 100%);
   box-shadow:
-    inset 0 1px 0 rgba(255, 255, 255, 0.26),
-    0 10px 30px rgba(20, 112, 255, 0.36);
+    inset 0 1px 0 rgba(255, 255, 255, 0.32),
+    0 12px 28px rgba(143, 106, 47, 0.24);
 }
 
 .secondary-button {
-  border: 1px solid rgba(138, 165, 228, 0.16);
-  background: rgba(8, 12, 23, 0.92);
+  border: 1px solid rgba(73, 58, 44, 0.12);
+  background: rgba(255, 255, 255, 0.72);
 }
 
 
 .grid-line {
   background-image:
-    linear-gradient(rgba(118, 140, 191, 0.08) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(118, 140, 191, 0.08) 1px, transparent 1px);
+    linear-gradient(rgba(73, 58, 44, 0.08) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(73, 58, 44, 0.08) 1px, transparent 1px);
   background-size: 2.75rem 2.75rem;
+}
+
+.editorial-card {
+  border: 1px solid rgba(49, 39, 31, 0.1);
+  background: rgba(255, 255, 255, 0.76);
+  box-shadow: 0 18px 40px rgba(41, 31, 23, 0.06);
+}
+
+.dark-panel {
+  background:
+    linear-gradient(180deg, rgba(27, 24, 21, 0.98), rgba(18, 16, 14, 0.98)),
+    radial-gradient(circle at top, rgba(143, 106, 47, 0.24), transparent 30%);
+  color: #f8f2eb;
 }
 
 .testimonial-track {

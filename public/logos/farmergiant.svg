@@ -1,0 +1,7 @@
+<svg width="260" height="72" viewBox="0 0 260 72" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="260" height="72" rx="8" fill="#F8F3ED"/>
+  <circle cx="42" cy="36" r="14" stroke="#171412" stroke-width="2"/>
+  <path d="M42 22V50M28 36H56" stroke="#171412" stroke-width="2"/>
+  <text x="72" y="33" fill="#171412" font-family="Arial, sans-serif" font-size="18" font-weight="700" letter-spacing="1.5">FARMERGIANT</text>
+  <text x="72" y="49" fill="#8C8177" font-family="Arial, sans-serif" font-size="9" letter-spacing="3">AGRICULTURE SYSTEMS</text>
+</svg>

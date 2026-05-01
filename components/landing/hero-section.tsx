@@ -1,165 +1,192 @@
+"use client";
+
 import { nohemi } from "@/lib/font";
-import { CheckCircle } from "lucide-react";
+import { ArrowUpRight, Menu, X } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
-import Marquee from "react-fast-marquee";
+import { useEffect, useState } from "react";
+
+const navItems = [
+  { href: "#services", label: "Services" },
+  { href: "#projects", label: "Projects" },
+  { href: "#positioning", label: "Why Us" },
+  { href: "#testimonials", label: "Results" },
+];
 
 export function HeroSection() {
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+
+  useEffect(() => {
+    document.body.style.overflow = isMenuOpen ? "hidden" : "";
+
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, [isMenuOpen]);
+
+  function closeMenu() {
+    setIsMenuOpen(false);
+  }
+
   return (
-    <section className="section-shell hero-panel relative overflow-hidden px-4 pb-10 pt-5 lg:px-10 lg:pb-14 ">
-      <header className="relative z-10 flex  gap-4 lg:flex-row items-center justify-between">
-        <div className="flex items-center gap-3">
-          <div className="grid h-8 h-8 md:h-11 md:w-11 place-items-center  border border-sky-400/30 bg-sky-500/10 text-[10px] md:text-lg text-white shadow-[0_0_35px_rgba(58,130,246,0.35)]">
-            [BL]
-          </div>
-          <div>
-            <div className="font-display text-[14px] md:text-xl text-white">
-              Business Logic
+    <section className="section-shell hero-panel relative overflow-hidden px-4 pb-8 pt-5 lg:px-8 lg:pb-0">
+      <header className="relative z-20 flex flex-col gap-6 border-b border-black/8 pb-5 lg:flex-row lg:items-center lg:justify-between">
+        <div className="flex items-center justify-between gap-4">
+          <div className="flex items-center gap-3">
+            <div className="grid h-9 w-9 place-items-center border border-black/10 bg-white/90 text-[10px] font-semibold text-black md:h-11 md:w-11 md:text-sm">
+              BL
             </div>
-            <p className="text-[8px] md:text-xs uppercase tracking-[0.28em] text-slate-400">
-              Ideas To Business
-            </p>
+            <div>
+              <div className="font-display text-[14px] text-black md:text-xl">
+                Business Logic
+              </div>
+              <p className="text-[8px] uppercase tracking-[0.28em] text-[var(--ink-faint)] md:text-xs">
+                Established Performance
+              </p>
+            </div>
           </div>
+
+          <button
+            type="button"
+            aria-expanded={isMenuOpen}
+            aria-controls="mobile-navigation"
+            aria-label={isMenuOpen ? "Close menu" : "Open menu"}
+            onClick={() => setIsMenuOpen((open) => !open)}
+            className="inline-flex h-11 w-11 items-center justify-center border border-black/10 bg-white/80 text-black lg:hidden"
+          >
+            {isMenuOpen ? <X size={18} /> : <Menu size={18} />}
+          </button>
         </div>
 
-        <div className="flex items-center gap-3 ">
+        <nav className="hidden flex-wrap items-center justify-center gap-4 text-[10px] uppercase tracking-[0.28em] text-[var(--ink-faint)] md:gap-8 lg:flex">
+          {navItems.map((item) => (
+            <Link key={item.href} href={item.href}>
+              {item.label}
+            </Link>
+          ))}
+        </nav>
+
+        <div className="hidden items-center gap-3 lg:flex">
           <Link
             href="#contact"
-            className="secondary-button rounded-full px-5 py-2 text-sm text-white hidden md:flex"
+            className="primary-button rounded-none px-5 py-3 text-[10px] font-semibold uppercase tracking-[0.22em] text-white md:px-6"
           >
-            Contact
-          </Link>
-          <Link
-            href="#contact"
-            className="primary-button rounded-full px-5 py-2 text-sm font-medium text-white"
-          >
-            Book a Free Call
+            Consultation
           </Link>
         </div>
       </header>
 
-      <div className="relative z-10 mx-auto mt-14 max-w-5xl text-center">
-        <div className="pill inline-flex rounded-full px-4 py-1 text-xs text-sky-100">
-          <div className="flex items-center">
-            <p>Simple websites that win customers</p>
+      <div
+        className={`absolute inset-0 z-30 bg-black/30 transition-opacity duration-300 lg:hidden ${
+          isMenuOpen
+            ? "pointer-events-auto opacity-100"
+            : "pointer-events-none opacity-0"
+        }`}
+        onClick={closeMenu}
+      />
 
-            <Image src="/arrow.png" alt="Rocket" width={20} height={20} />
+      <aside
+        id="mobile-navigation"
+        className={`absolute bottom-0 right-0 top-0 z-40 w-[min(88vw,22rem)] border-l border-black/10 bg-[var(--panel)] px-6 py-6 shadow-[0_24px_60px_rgba(28,23,19,0.18)] transition-transform duration-300 ease-out lg:hidden ${
+          isMenuOpen ? "translate-x-0" : "translate-x-full"
+        }`}
+      >
+        <div className="flex items-center justify-between border-b border-black/8 pb-4">
+          <div>
+            <p className="font-display text-lg text-black">Business Logic</p>
+            <p className="mt-1 text-[10px] uppercase tracking-[0.24em] text-[var(--ink-faint)]">
+              Navigation
+            </p>
           </div>
+          <button
+            type="button"
+            aria-label="Close menu"
+            onClick={closeMenu}
+            className="inline-flex h-10 w-10 items-center justify-center border border-black/10 bg-white/80 text-black"
+          >
+            <X size={18} />
+          </button>
         </div>
 
-        <h1
-          className={`${nohemi.className} font-display mx-auto mt-6 max-w-4xl text-5xl leading-[0.95] text-white text-[2rem] md:text-[3.5rem]`}
-        >
-          Your Business Deserves a Website That Actually{" "}
-          <span className="text-sky-400">Brings In Customers</span>
-        </h1>
-        <p className="muted mx-auto mt-6 max-w-2xl text-sm leading-7 md:text-base">
-          We build websites that explain what you do clearly, look professional,
-          and turn visitors into paying customers whether you sell services,
-          products, or run a company.
-        </p>
+        <nav className="mt-8 flex flex-col">
+          {navItems.map((item) => (
+            <Link
+              key={item.href}
+              href={item.href}
+              onClick={closeMenu}
+              className="border-b border-black/8 py-4 text-sm uppercase tracking-[0.18em] text-black"
+            >
+              {item.label}
+            </Link>
+          ))}
+        </nav>
 
-        <div className="mt-8 flex flex-wrap items-center justify-center gap-3">
-          <Link
-            href="#process"
-            className="primary-button rounded-full px-6 py-3 text-sm font-medium text-white"
-          >
-            See How It Works
-          </Link>
+        <div className="mt-8 space-y-4">
+          <p className="text-sm leading-7 text-[var(--ink-soft)]">
+            High-performance websites, conversion systems, and premium brand
+            presentation for growth-stage businesses.
+          </p>
           <Link
             href="#contact"
-            className="secondary-button rounded-full px-6 py-3 text-sm text-white"
+            onClick={closeMenu}
+            className="primary-button inline-flex w-full items-center justify-center rounded-none px-5 py-4 text-[10px] font-semibold uppercase tracking-[0.22em] text-white"
           >
-            Book a Free Call
+            Consultation
           </Link>
         </div>
-      </div>
+      </aside>
 
-      <div className="relative z-10 mx-auto mt-14 grid max-w-5xl gap-5 lg:grid-cols-[1fr_1.25fr_1fr] hidden md:grid">
-        <div className="mesh-card rounded-[1.6rem] p-5 hidden md:block">
-          <p className="text-xs uppercase tracking-[0.25em] text-slate-400">
-            We build for
-          </p>
-          <div className="mt-5 space-y-3">
-            {[
-              "Service businesses",
-              "Real estate firms",
-              "Consultants",
-              "Private practices",
-              "Growing companies",
-            ].map((item) => (
-              <div
-                key={item}
-                className="rounded-2xl border border-white/6 bg-black/30 px-4 py-3 text-sm text-slate-200"
+      <div className="relative z-10 grid lg:min-h-[620px] lg:grid-cols-2">
+        <div className="flex items-center py-14 lg:py-20">
+          <div className="max-w-[38rem]">
+            <p className="text-[10px] uppercase tracking-[0.28em] text-[var(--ink-faint)]">
+              Established Performance
+            </p>
+            <h1
+              className={`${nohemi.className} mt-6 max-w-3xl text-[2.5rem] leading-[0.95] text-black sm:text-[3.4rem] lg:text-[4.35rem]`}
+            >
+              We Turn Ideas into Business. We Scale Brands and Businesses.
+            </h1>
+            <p className="mt-6 max-w-xl text-sm leading-7 text-[var(--ink-soft)] md:text-base">
+              High-performance web development for companies that value results
+              over tech. We build the architecture of your digital revenue.
+            </p>
+
+            <div className="mt-8 flex flex-wrap items-center gap-4">
+              <Link
+                href="#contact"
+                className="primary-button inline-flex items-center gap-2 rounded-none px-6 py-4 text-[10px] font-semibold uppercase tracking-[0.22em] text-white"
               >
-                {item}
-              </div>
-            ))}
-          </div>
-        </div>
-
-        <div className="mesh-card grid-line rounded-[1.8rem] border border-sky-400/20 p-5">
-          <div className="mx-auto flex h-full w-full max-w-md flex-col rounded-[1.3rem] border border-white/8 bg-black/35 p-5">
-            <div className="flex items-center justify-between text-xs text-slate-400">
-              <span>Your website is taking shape</span>
-              <span className="rounded-full bg-emerald-400/15 px-2 py-1 text-emerald-300">
-                In Progress
-              </span>
-            </div>
-            <div className="mt-6 flex-1 rounded-[1.1rem] border border-white/7 bg-gradient-to-b from-slate-900/80 to-black/40 p-4">
-              <div className="mb-4 h-3 w-28 rounded-full bg-white/10" />
-              <div className="grid gap-3 md:grid-cols-[0.9fr_1.2fr]">
-                <div className="space-y-2">
-                  <div className="h-16 rounded-2xl bg-white/6" />
-                  <div className="h-9 rounded-full bg-sky-400/20" />
-                  <div className="h-24 rounded-2xl bg-white/6" />
-                </div>
-                <div className="rounded-[1rem] border border-sky-400/20 bg-black/45 p-4">
-                  <div className="h-full rounded-[0.9rem] bg-[radial-gradient(circle_at_top,rgba(64,140,255,0.35),transparent_35%),linear-gradient(180deg,rgba(16,19,33,0.95),rgba(3,4,10,0.95))]" />
-                </div>
-              </div>
+                Get a Website That Sells
+              </Link>
+              <Link
+                href="#projects"
+                className="inline-flex items-center gap-2 text-[10px] uppercase tracking-[0.22em] text-[var(--ink-faint)]"
+              >
+                View our blueprint
+                <ArrowUpRight size={14} />
+              </Link>
             </div>
           </div>
         </div>
 
-        <div className="mesh-card rounded-[1.6rem] p-4 hidden md:block">
-          <p className="text-xs uppercase tracking-[0.25em] text-slate-400">
-            What your site should do
-          </p>
-          <ul className="mt-5 space-y-3 text-sm text-slate-200">
-            {[
-              "Explain your offer clearly",
-              "Build trust fast",
-              "Work on every screen",
-              "Load quickly",
-              "Bring in better leads",
-            ].map((item) => (
-              <li
-                key={item}
-                className="flex items-center justify-between rounded-2xl border border-white/6 bg-black/30 px-4 py-3"
-              >
-                <span>{item}</span>
-                {/* <span className="h-2.5 w-2.5 rounded-full bg-sky-400 shadow-[0_0_16px_rgba(56,189,248,0.85)]" /> */}
-                <span>
-                  {" "}
-                  <CheckCircle />{" "}
-                </span>
-              </li>
-            ))}
-          </ul>
-        </div>
-      </div>
-
-      <div className="relative z-10 mx-auto mt-10 max-w-5xl text-center ">
-        <p className="text-xs uppercase tracking-[0.26em] text-slate-500">
-          Businesses using Business Logic to improve how they show up online
-        </p>
-        <div className="mt-5 flex items-center justify-center text-base text-slate-400 sm:text-2xl">
-          {["Dben Real Estate", "Farmergiant", "Earnstak", "IGiftways"].map(
-            (brand) => (
-              <Marquee key={brand}>{brand}</Marquee>
-            ),
-          )}
+        <div className="relative hidden min-h-[420px] border-l border-black/8 lg:block">
+          <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(255,255,255,0.08),rgba(0,0,0,0.03))]" />
+          <div className="absolute inset-y-0 left-8 right-8 overflow-hidden">
+            <div className="absolute inset-x-0 top-10 h-px bg-black/8" />
+            <div className="absolute inset-x-0 bottom-10 h-px bg-black/8" />
+            <div className="absolute inset-y-0 left-1/2 w-px -translate-x-1/2 bg-black/8" />
+            <div className="absolute inset-x-0 bottom-0 top-0">
+              <Image
+                src="/Website-Development-Agencies-In-Nigeria.webp"
+                alt="Business Logic hero presentation"
+                fill
+                sizes="50vw"
+                className="object-cover opacity-[0.18] grayscale"
+              />
+            </div>
+            <div className="absolute inset-y-12 left-12 right-12 border border-white/40" />
+          </div>
         </div>
       </div>
     </section>
