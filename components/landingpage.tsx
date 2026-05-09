@@ -43,6 +43,7 @@ export default function LandingPage() {
     <main className="page-shell">
       <div className="relative mx-auto flex min-h-screen w-full max-w-[1440px] flex-col gap-6 px-2 py-3 md:px-4 md:py-4">
         <HeroSection />
+        <ServicesSection />
 
         <section className="section-shell overflow-hidden px-5 py-8 md:px-8">
           <div className="grid gap-6 md:grid-cols-[0.6fr_1.4fr] md:items-center">
@@ -84,7 +85,6 @@ export default function LandingPage() {
           </div>
         </section>
 
-        <ServicesSection />
         <ProjectsSection />
         <ProcessSection />
         <TestimonialsSection />

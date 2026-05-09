@@ -41,7 +41,7 @@ export function HeroSection() {
                 Business Logic
               </div>
               <p className="text-[8px] uppercase tracking-[0.28em] text-[var(--ink-faint)] md:text-xs">
-                Established Performance
+                Scaling Business
               </p>
             </div>
           </div>
@@ -145,25 +145,26 @@ export function HeroSection() {
             <h1
               className={`${nohemi.className} mt-6 max-w-3xl text-[2.5rem] leading-[0.95] text-black sm:text-[3.4rem] lg:text-[4.35rem]`}
             >
-              We Turn Ideas into Business. We Scale Brands and Businesses.
+              Websites That Make Your{" "}
+              <span className="text-orange-700">Business </span> Look Serious..
             </h1>
             <p className="mt-6 max-w-xl text-sm leading-7 text-[var(--ink-soft)] md:text-base">
-              High-performance web development for companies that value results
-              over tech. We build the architecture of your digital revenue.
+              We help businesses build modern websites that attract customers,
+              increase trust, and grow their brand online.
             </p>
 
             <div className="mt-8 flex flex-wrap items-center gap-4">
               <Link
                 href="#contact"
-                className="primary-button inline-flex items-center gap-2 rounded-none px-6 py-4 text-[10px] font-semibold uppercase tracking-[0.22em] text-white"
+                className="bg-orange-600 inline-flex items-center gap-2 rounded-none px-6 py-4 text-[10px] font-semibold uppercase tracking-[0.22em] text-white"
               >
-                Get a Website That Sells
+                Start Your Project
               </Link>
               <Link
                 href="#projects"
                 className="inline-flex items-center gap-2 text-[10px] uppercase tracking-[0.22em] text-[var(--ink-faint)]"
               >
-                View our blueprint
+                View Our Work
                 <ArrowUpRight size={14} />
               </Link>
             </div>

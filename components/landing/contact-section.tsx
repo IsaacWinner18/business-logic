@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import Link from "next/link";
 import { FormEvent, useState } from "react";
 
@@ -111,7 +112,15 @@ export function ContactSection() {
               href="http://wa.me/2348119188295"
               className="inline-flex items-center text-[10px] font-semibold uppercase tracking-[0.24em] text-white/70"
             >
-              Prefer WhatsApp instead? Start there
+              Prefer WhatsApp? <span className="underline">click here</span>{" "}
+              <span className="bg-green-400 rounded-full">
+                <Image
+                  src="/whatsapp-svgrepo-com.svg"
+                  alt="Whatsapp icon for business logic"
+                  width={30}
+                  height={30}
+                />{" "}
+              </span>
             </Link>
           </div>
         </div>

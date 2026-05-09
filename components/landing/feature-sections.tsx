@@ -1,55 +1,96 @@
 import { SectionHeading } from "@/components/landing/shared";
-import { ArrowUpRight, CircleDashed, TrendingUp, UserRoundSearch } from "lucide-react";
+import { ArrowUpRight, Check, CircleDashed, TrendingUp, UserRoundSearch } from "lucide-react";
 import Image from "next/image";
 
 const services = [
   {
     icon: UserRoundSearch,
-    title: "Websites That Convert Visitors to Customers",
-    copy:
-      "A digital storefront designed with psychological precision to guide high-intent users toward action.",
+    title: "Business Websites",
+    copy: "Professional websites for companies, brands, and service businesses.",
   },
   {
     icon: CircleDashed,
-    title: "Online Presence That Builds Instant Trust",
-    copy:
-      "We build identity that signals authority from your homepage to your inquiry flow and pricing architecture.",
+    title: "E-commerce Websites",
+    copy: "Online stores that help you sell products and receive payments easily.",
   },
   {
     icon: TrendingUp,
-    title: "Sales-Focused Landing Pages",
-    copy:
-      "Engineered funnels that articulate your value proposition with surgical clarity and developer-grade speed.",
+    title: "Landing Pages",
+    copy: "High-converting pages designed for ads, promotions, and lead generation.",
+  },
+  {
+    icon: Check,
+    title: "Website Redesign",
+    copy: "Transform outdated websites into modern, professional platforms.",
+  },
+  {
+    icon: CircleDashed,
+    title: "Website Maintenance",
+    copy: "We help keep your website updated, secure, and running smoothly.",
+  },
+  {
+    icon: UserRoundSearch,
+    title: "Custom Web Applications",
+    copy: "Need something more advanced? We also build custom systems tailored to your business.",
   },
 ];
 
 const projects = [
   {
-    title: "Aura Luxury Estates",
+    title: "Dben Real Estates",
     category: "Real Estate · Scaling Architecture",
     metric: "+32% lead quality",
-    image: "/project-placeholder-01.svg",
+    image:
+      "https://res.cloudinary.com/dcvlszzoy/image/upload/v1775340748/Screenshot_2026-04-04_231209_scjkvp.png",
   },
   {
-    title: "Vertex Global Consulting",
-    category: "Fintech · Strategic Overhaul",
+    title: "Buychow Ng Group",
+    category: "Foodtech · Strategic Overhaul",
     metric: "40% growth in inquiries",
-    image: "/project-placeholder-02.svg",
+    image:
+      "https://res.cloudinary.com/dcvlszzoy/image/upload/v1778334695/Screenshot_2026-05-09_144304_n36rfa.png",
   },
 ];
 
 const positioningPoints = [
   {
-    title: "Business Acumen",
-    copy: "We understand your customer acquisition costs and lifetime value.",
+    title: "Modern Design",
+    copy: "We create clean websites that immediately improve your brand image.",
   },
   {
-    title: "Unrivaled Reliability",
-    copy: "Projects are built with the discipline of a serious commercial operation.",
+    title: "Fast Communication",
+    copy: "No disappearing. No endless delays. Clear updates throughout the project.",
   },
   {
-    title: "Architectural Scaling",
-    copy: "Our foundations are structured for growth, not just a pretty launch day.",
+    title: "Mobile First",
+    copy: "Most Nigerians browse with phones. Your website will be optimized for mobile users first.",
+  },
+  {
+    title: "Results Focused",
+    copy: "We build with business goals in mind - not just aesthetics.",
+  },
+];
+
+const processSteps = [
+  {
+    number: "01",
+    title: "Consultation",
+    copy: "We understand your business, goals, and what you need.",
+  },
+  {
+    number: "02",
+    title: "Design",
+    copy: "We create a modern design tailored to your brand.",
+  },
+  {
+    number: "03",
+    title: "Development",
+    copy: "We build your website using fast and reliable technologies.",
+  },
+  {
+    number: "04",
+    title: "Launch",
+    copy: "Your website goes live and is ready for customers.",
   },
 ];
 
@@ -65,18 +106,18 @@ export function ServicesSection() {
     >
       <div className="grid gap-10 lg:grid-cols-[1fr_0.8fr] lg:items-start">
         <SectionHeading
-          badge="Our capabilities"
-          title="Here is Exactly What We Build For You"
-          description="Business websites, launch funnels, and trust systems designed to improve the quality of every inbound action."
+          badge="Services"
+          title="Our Services"
+          description="We build websites and web-based systems that help businesses look professional, attract customers, and grow online."
           centered={false}
         />
         <p className="max-w-md text-sm leading-7 text-[var(--ink-soft)] lg:justify-self-end lg:pt-12">
-          We strip away the noise and focus on the metrics that matter:
-          conversion, positioning, and perception in-market.
+          Every project is tailored to the stage of your business, your goals,
+          and the experience your customers need when they land on your site.
         </p>
       </div>
 
-      <div className="mt-10 grid gap-px overflow-hidden border border-black/8 bg-black/8 lg:grid-cols-3">
+      <div className="mt-10 grid gap-px overflow-hidden border border-black/8 bg-black/8 md:grid-cols-2 xl:grid-cols-3">
         {services.map((service) => {
           const Icon = service.icon;
 
@@ -124,6 +165,7 @@ export function ProjectsSection() {
                   src={project.image}
                   alt={`${project.title} case study preview`}
                   fill
+                  unoptimized
                   sizes="(max-width: 1024px) 100vw, 50vw"
                   className="object-cover"
                 />
@@ -152,62 +194,84 @@ export function ProjectsSection() {
 
 export function ProcessSection() {
   return (
-    <section
-      id="positioning"
-      className="section-shell px-5 py-16 md:px-8 md:py-20 lg:px-12"
-    >
-      <div className="grid gap-10 lg:grid-cols-[0.95fr_1.05fr] lg:items-center">
-        <div>
-          <p className="text-[10px] uppercase tracking-[0.28em] text-[var(--ink-faint)]">
-            The advantage
-          </p>
-          <h2 className="font-display mt-4 max-w-md text-[2.2rem] leading-[1] text-black md:text-[3.4rem]">
-            Why Global Brands Choose Business Logic
-          </h2>
-          <p className="mt-5 max-w-md text-sm leading-7 text-[var(--ink-soft)]">
-            We are not just developers. We are business consultants who use code
-            as a tool for financial expansion. Most agencies deliver a site. We
-            deliver a system.
-          </p>
+    <>
+      <section
+        id="positioning"
+        className="section-shell px-5 py-16 md:px-8 md:py-20 lg:px-12"
+      >
+        <div className="grid gap-10 lg:grid-cols-[0.95fr_1.05fr] lg:items-center">
+          <div>
+            <p className="text-[10px] uppercase tracking-[0.28em] text-[var(--ink-faint)]">
+              WHY CHOOSE US
+            </p>
+            <h2 className="font-display mt-4 max-w-md text-[2.2rem] leading-[1] text-black md:text-[3.4rem]">
+              Why Businesses Choose Business Logic
+            </h2>
+            <p className="mt-5 max-w-md text-sm leading-7 text-[var(--ink-soft)]">
+              We build websites that look professional, work smoothly on mobile,
+              and stay aligned with the business goals that matter most to you.
+            </p>
 
-          <div className="mt-8 space-y-5">
-            {positioningPoints.map((point) => (
-              <div key={point.title} className="flex gap-4">
-                <div className="mt-1 h-5 w-5 rounded-full border border-black/15" />
-                <div>
-                  <h3 className="text-sm font-semibold uppercase tracking-[0.16em] text-black">
-                    {point.title}
-                  </h3>
-                  <p className="mt-2 max-w-md text-sm leading-7 text-[var(--ink-soft)]">
-                    {point.copy}
-                  </p>
+            <div className="mt-8 space-y-5">
+              {positioningPoints.map((point) => (
+                <div key={point.title} className="flex gap-4">
+                  <div className="mt-1 h-5 w-5 rounded-full border border-black/15" />
+                  <div>
+                    <h3 className="text-sm font-semibold uppercase tracking-[0.16em] text-black">
+                      {point.title}
+                    </h3>
+                    <p className="mt-2 max-w-md text-sm leading-7 text-[var(--ink-soft)]">
+                      {point.copy}
+                    </p>
+                  </div>
                 </div>
-              </div>
-            ))}
-          </div>
-        </div>
-
-        <div className="relative mx-auto w-full max-w-[34rem]">
-          <div className="editorial-card relative overflow-hidden p-3">
-            <div className="relative aspect-[4/4.6] bg-[#d9d1c8]">
-              <Image
-                src="/Isaac Winner 2.png"
-                alt="Business consultant portrait"
-                fill
-                sizes="(max-width: 1024px) 100vw, 34rem"
-                className="object-cover grayscale"
-              />
+              ))}
             </div>
           </div>
 
-          <div className="absolute -bottom-20 md:bottom-0 left-0 max-w-[15rem] translate-x-[-2%] translate-y-[18%] bg-[var(--accent)] p-5 text-white shadow-[0_20px_40px_rgba(79,55,21,0.24)]">
-            <p className="font-display text-3xl">15+</p>
-            <p className="mt-2 text-[10px] uppercase tracking-[0.22em] leading-5 text-white/85">
-              Years of combined digital strategy and execution across the market
-            </p>
+          <div className="relative mx-auto w-full max-w-[34rem]">
+            <div className="editorial-card relative overflow-hidden p-3">
+              <div className="relative aspect-[4/4.6] bg-[#d9d1c8]">
+                <Image
+                  src="/Isaac Winner 2.png"
+                  alt="Business consultant portrait"
+                  fill
+                  sizes="(max-width: 1024px) 100vw, 34rem"
+                  className="object-cover grayscale"
+                />
+              </div>
+            </div>
+
+            <div className="absolute -bottom-20 left-0 max-w-[15rem] translate-x-[-2%] translate-y-[18%] bg-[var(--accent)] p-5 text-white shadow-[0_20px_40px_rgba(79,55,21,0.24)] md:bottom-0">
+              <p className="font-display text-3xl">4+</p>
+              <p className="mt-2 text-[10px] uppercase leading-5 tracking-[0.22em] text-white/85">
+                Years of combined digital strategy and execution across the market
+              </p>
+            </div>
           </div>
         </div>
-      </div>
-    </section>
+      </section>
+
+      <section className="section-shell px-5 py-16 md:px-8 md:py-20 lg:px-12">
+        <SectionHeading
+          badge=""
+          title="Our Process"
+          description="A clear workflow that keeps your project moving from idea to launch without confusion."
+        />
+
+        <div className="mt-10 grid gap-px overflow-hidden border border-black/8 bg-black/8 lg:grid-cols-4">
+          {processSteps.map((step) => (
+            <article key={step.number} className="bg-[var(--panel)] p-6 md:p-8">
+              <p className="text-[10px] uppercase tracking-[0.28em] text-[var(--ink-faint)]">
+                {step.number} - {step.title}
+              </p>
+              <p className="mt-5 max-w-sm text-sm leading-7 text-[var(--ink-soft)]">
+                {step.copy}
+              </p>
+            </article>
+          ))}
+        </div>
+      </section>
+    </>
   );
 }
