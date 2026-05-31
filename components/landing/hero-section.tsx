@@ -2,7 +2,6 @@
 
 import { nohemi } from "@/lib/font";
 import { ArrowUpRight, Menu, X } from "lucide-react";
-import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 
@@ -29,18 +28,35 @@ export function HeroSection() {
   }
 
   return (
-    <section className="section-shell hero-panel relative overflow-hidden px-4 pb-8 pt-5 lg:px-8 lg:pb-0">
-      <header className="relative z-20 flex flex-col gap-6 border-b border-black/8 pb-5 lg:flex-row lg:items-center lg:justify-between">
+    <section className="relative overflow-hidden px-4 pb-8 pt-5 lg:px-8 lg:pb-0 h-screen">
+      <video
+        autoPlay
+        loop
+        muted
+        playsInline
+        className="absolute inset-0 z-0 h-full w-full object-cover"
+      >
+        <source
+          src="/videos/business-logic-web-development-agency.mp4"
+          type="video/mp4"
+        />
+        Your browser does not support the video tag.
+      </video>
+
+      <div className="absolute inset-0 z-0 bg-black/40" />
+
+      {/* HEADER LAYER */}
+      <header className="relative z-20 flex flex-col gap-6 border-b border-gray-300/20 pb-5 lg:flex-row lg:items-center lg:justify-between">
         <div className="flex items-center justify-between gap-4">
           <div className="flex items-center gap-3">
             <div className="grid h-9 w-9 place-items-center border border-black/10 bg-white/90 text-[10px] font-semibold text-black md:h-11 md:w-11 md:text-sm">
-              BL
+              [BL]
             </div>
             <div>
-              <div className="font-display text-[14px] text-black md:text-xl">
+              <div className="font-mono text-[14px] text-white md:text-xl">
                 Business Logic
               </div>
-              <p className="text-[8px] uppercase tracking-[0.28em] text-[var(--ink-faint)] md:text-xs">
+              <p className="text-[8px] uppercase tracking-[0.28em] text-gray-100 md:text-xs">
                 Scaling Business
               </p>
             </div>
@@ -76,6 +92,7 @@ export function HeroSection() {
         </div>
       </header>
 
+      {/* MOBILE NAV OVERLAY */}
       <div
         className={`absolute inset-0 z-30 bg-black/30 transition-opacity duration-300 lg:hidden ${
           isMenuOpen
@@ -85,6 +102,7 @@ export function HeroSection() {
         onClick={closeMenu}
       />
 
+      {/* MOBILE ASIDE */}
       <aside
         id="mobile-navigation"
         className={`absolute bottom-0 right-0 top-0 z-40 w-[min(88vw,22rem)] border-l border-black/10 bg-[var(--panel)] px-6 py-6 shadow-[0_24px_60px_rgba(28,23,19,0.18)] transition-transform duration-300 ease-out lg:hidden ${
@@ -95,7 +113,7 @@ export function HeroSection() {
           <div>
             <p className="font-display text-lg text-black">Business Logic</p>
             <p className="mt-1 text-[10px] uppercase tracking-[0.24em] text-[var(--ink-faint)]">
-              Navigation
+              Website Agency
             </p>
           </div>
           <button
@@ -136,33 +154,38 @@ export function HeroSection() {
         </div>
       </aside>
 
+      {/* CONTENT LAYER */}
       <div className="relative z-10 grid lg:min-h-[620px] lg:grid-cols-2">
         <div className="flex items-center py-14 lg:py-20">
           <div className="max-w-[38rem]">
-            <p className="text-[10px] uppercase tracking-[0.28em] text-[var(--ink-faint)]">
+            <p className="text-[10px] uppercase tracking-[0.28em] text-gray-200">
               Established Performance
             </p>
             <h1
-              className={`${nohemi.className} mt-6 max-w-3xl text-[2.5rem] leading-[0.95] text-black sm:text-[3.4rem] lg:text-[4.35rem]`}
+              className={`${nohemi.className} mt-6 max-w-3xl text-[2.5rem] leading-[0.95] text-white md:text-[3.4rem] `}
             >
               Websites That Make Your{" "}
-              <span className="text-orange-700">Business </span> Look Serious..
+              <span className="text-orange-700 border border-white">
+                {" "}
+                 Business
+              </span>{" "}
+              Look Serious..
             </h1>
-            <p className="mt-6 max-w-xl text-sm leading-7 text-[var(--ink-soft)] md:text-base">
+            <p className="mt-6 max-w-xl text-sm leading-7 text-gray-200 md:text-base">
               We help businesses build modern websites that attract customers,
               increase trust, and grow their brand online.
             </p>
 
-            <div className="mt-8 flex flex-wrap items-center gap-4">
+            <div className="mt-8 flex flex-wrap items-center gap-4 text-white">
               <Link
                 href="#contact"
-                className="bg-orange-600 inline-flex items-center gap-2 rounded-none px-6 py-4 text-[10px] font-semibold uppercase tracking-[0.22em] text-white"
+                className=" text-white bg-orange-600 inline-flex items-center gap-2 rounded-none px-6 py-4 text-[10px] font-semibold uppercase tracking-[0.22em] text-white"
               >
                 Start Your Project
               </Link>
               <Link
                 href="#projects"
-                className="inline-flex items-center gap-2 text-[10px] uppercase tracking-[0.22em] text-[var(--ink-faint)]"
+                className="inline-flex items-center gap-2 text-[10px] uppercase tracking-[0.22em] text-white"
               >
                 View Our Work
                 <ArrowUpRight size={14} />
@@ -171,24 +194,8 @@ export function HeroSection() {
           </div>
         </div>
 
-        <div className="relative hidden min-h-[420px] border-l border-black/8 lg:block">
-          <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(255,255,255,0.08),rgba(0,0,0,0.03))]" />
-          <div className="absolute inset-y-0 left-8 right-8 overflow-hidden">
-            <div className="absolute inset-x-0 top-10 h-px bg-black/8" />
-            <div className="absolute inset-x-0 bottom-10 h-px bg-black/8" />
-            <div className="absolute inset-y-0 left-1/2 w-px -translate-x-1/2 bg-black/8" />
-            <div className="absolute inset-x-0 bottom-0 top-0">
-              <Image
-                src="/Website-Development-Agencies-In-Nigeria.webp"
-                alt="Business Logic hero presentation"
-                fill
-                sizes="50vw"
-                className="object-cover opacity-[0.18] grayscale"
-              />
-            </div>
-            <div className="absolute inset-y-12 left-12 right-12 border border-white/40" />
-          </div>
-        </div>
+        {/* Keeping the right column layout empty allows the video background to breathe and be visible on desktop */}
+        <div className="relative hidden lg:block" />
       </div>
     </section>
   );

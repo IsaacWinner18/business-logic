@@ -41,7 +41,7 @@ const featuredBrands = [
 export default function LandingPage() {
   return (
     <main className="page-shell">
-      <div className="relative mx-auto flex min-h-screen w-full max-w-[1440px] flex-col gap-6 px-2 py-3 md:px-4 md:py-4">
+      <div className="relative mx-auto flex min-h-screen w-full max-w-[1440px] flex-col gap-6 ">
         <HeroSection />
         <ServicesSection />
 

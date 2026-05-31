@@ -1,37 +1,41 @@
 import { SectionHeading } from "@/components/landing/shared";
-import { ArrowUpRight, Check, CircleDashed, TrendingUp, UserRoundSearch } from "lucide-react";
+import { ArrowUpRight, CircleDashed, UserRoundSearch } from "lucide-react";
 import Image from "next/image";
 
 const services = [
   {
     icon: UserRoundSearch,
-    title: "Business Websites",
-    copy: "Professional websites for companies, brands, and service businesses.",
-  },
-  {
-    icon: CircleDashed,
-    title: "E-commerce Websites",
-    copy: "Online stores that help you sell products and receive payments easily.",
-  },
-  {
-    icon: TrendingUp,
-    title: "Landing Pages",
-    copy: "High-converting pages designed for ads, promotions, and lead generation.",
-  },
-  {
-    icon: Check,
-    title: "Website Redesign",
-    copy: "Transform outdated websites into modern, professional platforms.",
+    title: "All Types of Websites",
+    copy: "Professional websites for small businesses, companies, startups, brands, and service businesses.",
+    tag: ["E-commerce", "Landing Pages", "Website Redesign"],
+    image:
+      "https://res.cloudinary.com/dcvlszzoy/image/upload/v1780227747/Choose-Business-logic-for-Website-Development-Agency-In-trusted_ets6xj.webp",
   },
   {
     icon: CircleDashed,
     title: "Website Maintenance",
-    copy: "We help keep your website updated, secure, and running smoothly.",
+    copy: "We help keep your website updated, secure, and running smoothly. You don't need to know what's happening behind the scenes.",
+    tag: [
+      "Optimization",
+      "Error Monitoring",
+      "Feature Integration",
+      "Content Updates",
+    ],
+    image:
+      "https://res.cloudinary.com/dcvlszzoy/image/upload/v1780227649/Business-logic-website-management_yb93hq.png",
   },
   {
     icon: UserRoundSearch,
-    title: "Custom Web Applications",
-    copy: "Need something more advanced? We also build custom systems tailored to your business.",
+    title: "Search Engine Optimization (SEO)",
+    copy: "Rank higher above your competitor online, get the traffic from organic searches.",
+    tag: [
+      "Google Search",
+      "AI Chatbot Visibility",
+      "Mobile Audits",
+      "Marketing Strategy",
+    ],
+    image:
+      "https://res.cloudinary.com/dcvlszzoy/image/upload/v1780227664/google-analytics-screen_gf6eb5.webp",
   },
 ];
 
@@ -41,7 +45,7 @@ const projects = [
     category: "Real Estate · Scaling Architecture",
     metric: "+32% lead quality",
     image:
-      "https://res.cloudinary.com/dcvlszzoy/image/upload/v1775340748/Screenshot_2026-04-04_231209_scjkvp.png",
+      "https://res.cloudinary.com/dcvlszzoy/image/upload/v1780229406/Screenshot_2026-05-31_130940_y1tuf3.png",
   },
   {
     title: "Buychow Ng Group",
@@ -104,37 +108,80 @@ export function ServicesSection() {
       id="services"
       className="section-shell px-5 py-16 md:px-8 md:py-20 lg:px-12"
     >
-      <div className="grid gap-10 lg:grid-cols-[1fr_0.8fr] lg:items-start">
-        <SectionHeading
-          badge="Services"
-          title="Our Services"
-          description="We build websites and web-based systems that help businesses look professional, attract customers, and grow online."
-          centered={false}
-        />
-        <p className="max-w-md text-sm leading-7 text-[var(--ink-soft)] lg:justify-self-end lg:pt-12">
-          Every project is tailored to the stage of your business, your goals,
-          and the experience your customers need when they land on your site.
+      <div className="mb-16 max-w-3xl">
+        <p className="text-[10px] uppercase tracking-[0.28em] text-[var(--ink-faint)]">
+          Services
+        </p>
+        <h2 className="font-display mt-4 text-[2.5rem] leading-[1.05] text-black sm:text-[3.2rem]">
+          Our Services
+        </h2>
+        <p className="mt-6 max-w-xl text-sm leading-7 text-[var(--ink-soft)] md:text-base">
+          We build websites and web-based systems that help businesses look
+          professional, attract customers, and grow online.
         </p>
       </div>
 
-      <div className="mt-10 grid gap-px overflow-hidden border border-black/8 bg-black/8 md:grid-cols-2 xl:grid-cols-3">
-        {services.map((service) => {
+      {/* BENTO GRID WRAPPER */}
+      <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+        {services.map((service, index) => {
           const Icon = service.icon;
+
+          // Asymmetric Bento configurations for desktop (3 columns layout)
+          // Card 0: Wide (2 cols) | Card 1: Tall (1 col, spans 2 rows) | Card 2: Wide (2 cols)
+          const bentoClasses =
+            index === 0
+              ? "md:col-span-2 lg:col-span-2 min-h-[440px]"
+              : index === 1
+                ? "md:col-span-1 lg:col-span-1 lg:row-span-2 min-h-[480px] lg:min-h-full"
+                : "md:col-span-1 lg:col-span-2 min-h-[440px]";
 
           return (
             <article
               key={service.title}
-              className="bg-[var(--panel)] p-6 md:p-8"
+              className={`group relative flex flex-col justify-between overflow-hidden border border-black/8 p-6 md:p-8 transition-all duration-300 hover:border-black/20 ${bentoClasses}`}
             >
-              <div className="grid h-10 w-10 place-items-center border border-black/10 bg-white text-[var(--accent-dark)]">
-                <Icon size={16} />
+              {/* IMAGE BACKGROUND LAYER */}
+              <div className="absolute inset-0 z-0">
+                <Image
+                  src={service.image}
+                  alt={service.title}
+                  fill
+                  sizes="(max-w-780px) 100vw, 50vw"
+                  className="object-contain object-bottom  transition-all duration-700 ease-out group-hover:scale-[1.03] group-hover:opacity-[0.9]"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black via-slate-600/70 to-black" />
               </div>
-              <h3 className="font-display mt-8 max-w-xs text-[1.6rem] leading-tight text-black">
-                {service.title}
-              </h3>
-              <p className="mt-4 max-w-sm text-sm leading-7 text-[var(--ink-soft)]">
-                {service.copy}
-              </p>
+
+              {/* TOP CONTENT OVERLAY */}
+              <div className="relative z-10">
+                <div className="grid h-10 w-10 place-items-center border border-black/10 bg-white text-[var(--accent-dark)] shadow-sm">
+                  <Icon size={16} />
+                </div>
+
+                <h3 className="font-display mt-8 max-w-md text-[1.6rem] leading-tight text-white md:text-[1.8rem]">
+                  {service.title.split(" ")[0]} {service.title.split(" ")[1]}{" "}
+                  {service.title.split(" ")[2]}{" "}
+                  <span className="text-orange-700">
+                    {service.title.split(" ")[3]}
+                  </span>
+                </h3>
+
+                <p className="mt-4 max-w-xl text-base leading-7 text-gray-100">
+                  {service.copy}
+                </p>
+              </div>
+
+              {/* BOTTOM CONTENT OVERLAY: CHIPS/TAGS */}
+              <div className="relative z-10 mt-12 flex flex-wrap gap-2">
+                {service.tag.map((t) => (
+                  <span
+                    key={t}
+                    className="border border-black/5 bg-white/20 px-2.5 py-1 text-[9px] font-medium uppercase tracking-wider text-white backdrop-blur-[1px]"
+                  >
+                    {t}
+                  </span>
+                ))}
+              </div>
             </article>
           );
         })}
