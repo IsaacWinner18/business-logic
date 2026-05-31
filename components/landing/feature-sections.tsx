@@ -67,7 +67,7 @@ const positioningPoints = [
   },
   {
     title: "Mobile First",
-    copy: "Most Nigerians browse with phones. Your website will be optimized for mobile users first.",
+    copy: "Most users browse with phones. Your website will be optimized for mobile users first.",
   },
   {
     title: "Results Focused",
