@@ -6,6 +6,7 @@ import {
   ProjectsSection,
   ServicesSection,
   TestimonialsSection,
+  ArchitectSandbox,
 } from "@/components/landing";
 import Image from "next/image";
 import Marquee from "react-fast-marquee";
@@ -88,6 +89,7 @@ export default function LandingPage() {
         <ProjectsSection />
         <ProcessSection />
         <TestimonialsSection />
+        <ArchitectSandbox />
         <ContactSection />
         <FooterCtaSection />
       </div>

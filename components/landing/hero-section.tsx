@@ -74,7 +74,7 @@ export function HeroSection() {
           </button>
         </div>
 
-        <nav className="hidden flex-wrap items-center justify-center gap-4 text-[10px] uppercase tracking-[0.28em] text-[var(--ink-faint)] md:gap-8 lg:flex">
+        <nav className="hidden flex-wrap items-center justify-center gap-4 text-[10px] uppercase tracking-[0.28em] text-gray-200 md:gap-8 lg:flex">
           {navItems.map((item) => (
             <Link key={item.href} href={item.href}>
               {item.label}
@@ -139,7 +139,7 @@ export function HeroSection() {
           ))}
         </nav>
 
-        <div className="mt-8 space-y-4">
+        <div className="my-8 space-y-4 absolute bottom-0">
           <p className="text-sm leading-7 text-[var(--ink-soft)]">
             High-performance websites, conversion systems, and premium brand
             presentation for growth-stage businesses.
@@ -147,7 +147,7 @@ export function HeroSection() {
           <Link
             href="#contact"
             onClick={closeMenu}
-            className="primary-button inline-flex w-full items-center justify-center rounded-none px-5 py-4 text-[10px] font-semibold uppercase tracking-[0.22em] text-white"
+            className=" bg-[#b28642] inline-flex w-[90%] items-center justify-center rounded-none px-5 py-4 text-[10px] font-semibold uppercase tracking-[0.22em] text-white"
           >
             Consultation
           </Link>
@@ -155,7 +155,7 @@ export function HeroSection() {
       </aside>
 
       {/* CONTENT LAYER */}
-      <div className="relative z-10 grid lg:min-h-[620px] lg:grid-cols-2">
+      <div className="relative z-10 grid lg:min-h-[620px] lg:grid-cols-2 top-16 md:top-0">
         <div className="flex items-center py-14 lg:py-20">
           <div className="max-w-[38rem]">
             <p className="text-[10px] uppercase tracking-[0.28em] text-gray-200">
@@ -165,9 +165,9 @@ export function HeroSection() {
               className={`${nohemi.className} mt-6 max-w-3xl text-[2.5rem] leading-[0.95] text-white md:text-[3.4rem] `}
             >
               Websites That Make Your{" "}
-              <span className="text-orange-700 border border-white">
+              <span className=" border border-orange-600 bg-orange-600">
                 {" "}
-                 Business
+                Business
               </span>{" "}
               Look Serious..
             </h1>
@@ -176,16 +176,16 @@ export function HeroSection() {
               increase trust, and grow their brand online.
             </p>
 
-            <div className="mt-8 flex flex-wrap items-center gap-4 text-white">
+            <div className="mt-8 text-white md:mt-8 mt-28 flex gap-6">
               <Link
-                href="#contact"
+                href="/apply"
                 className=" text-white bg-orange-600 inline-flex items-center gap-2 rounded-none px-6 py-4 text-[10px] font-semibold uppercase tracking-[0.22em] text-white"
               >
                 Start Your Project
               </Link>
               <Link
                 href="#projects"
-                className="inline-flex items-center gap-2 text-[10px] uppercase tracking-[0.22em] text-white"
+                className="inline-flex items-center gap-2 text-[10px] uppercase tracking-[0.22em] text-white border-b "
               >
                 View Our Work
                 <ArrowUpRight size={14} />

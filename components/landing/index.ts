@@ -1,10 +1,8 @@
 export { HeroSection } from "@/components/landing/hero-section";
-export {
-  ProblemSection,
-  ServicesSection,
-  ProcessSection,
-  ProjectsSection,
-} from "@/components/landing/feature-sections";
+export { ServicesSection } from "@/components/landing/services-section";
+export { ProcessSection } from "@/components/landing/process-section";
+export { ProjectsSection } from "@/components/landing/projects-section";
+export { ArchitectSandbox } from "@/components/landing/architect-sandbox";
 export {
   TestimonialsSection,
   FaqSection,
