@@ -1,10 +1,11 @@
 "use client";
 
 import { SectionHeading } from "@/components/landing/shared";
-import { ArrowUpRight } from "lucide-react";
+import { ArrowUpRight, ChevronLeft, ChevronRight } from "lucide-react";
 import { motion } from "framer-motion";
 import Link from "next/link";
 import { Macbook3D } from "./macbook-3d";
+import { useRef } from "react";
 
 const projects = [
   {
@@ -38,6 +39,16 @@ const projects = [
 ];
 
 export function ProjectsSection() {
+  const scrollRef = useRef<HTMLDivElement>(null);
+
+  const scroll = (direction: "left" | "right") => {
+    if (scrollRef.current) {
+      const { clientWidth } = scrollRef.current;
+      const scrollAmount = direction === "left" ? -clientWidth * 0.8 : clientWidth * 0.8;
+      scrollRef.current.scrollBy({ left: scrollAmount, behavior: "smooth" });
+    }
+  };
+
   return (
     <section
       id="projects"
@@ -50,16 +61,38 @@ export function ProjectsSection() {
           description="Selected engagements where clarity, premium positioning, and stronger conversion mechanics changed the conversation."
           centered={false}
         />
-        <Link 
-          href="/case-studies"
-          className="group inline-flex items-center gap-2 rounded-full border border-black/10 bg-white px-6 py-3 font-unbounded text-sm transition-all hover:border-black/30 hover:bg-black/5"
-        >
-          See all case studies
-          <ArrowUpRight className="transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" size={16} />
-        </Link>
+        <div className="flex items-center gap-3 md:gap-4 flex-wrap">
+          <div className="flex items-center gap-2">
+            <button
+              onClick={() => scroll("left")}
+              className="flex h-11 w-11 md:h-12 md:w-12 items-center justify-center rounded-full border border-black/10 bg-white transition-all hover:bg-black/5"
+              aria-label="Scroll left"
+            >
+              <ChevronLeft size={20} />
+            </button>
+            <button
+              onClick={() => scroll("right")}
+              className="flex h-11 w-11 md:h-12 md:w-12 items-center justify-center rounded-full border border-black/10 bg-white transition-all hover:bg-black/5"
+              aria-label="Scroll right"
+            >
+              <ChevronRight size={20} />
+            </button>
+          </div>
+          <Link 
+            href="/case-studies"
+            className="group inline-flex h-11 md:h-12 items-center gap-2 rounded-full border border-black/10 bg-white px-5 md:px-6 font-unbounded text-sm transition-all hover:border-black/30 hover:bg-black/5"
+          >
+            <span className="hidden md:inline">See all case studies</span>
+            <span className="md:hidden">See all</span>
+            <ArrowUpRight className="transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" size={16} />
+          </Link>
+        </div>
       </div>
 
-      <div className="mt-10 flex overflow-x-auto snap-x snap-mandatory gap-6 pb-8 hide-scrollbar">
+      <div 
+        ref={scrollRef}
+        className="mt-10 flex overflow-x-auto snap-x snap-mandatory gap-6 pb-8 hide-scrollbar"
+      >
         {projects.map((project, index) => (
           <motion.article 
             initial={{ opacity: 0, scale: 0.96 }}
