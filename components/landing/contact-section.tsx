@@ -44,7 +44,7 @@ export function ContactSection() {
           transition={{ delay: 0.2 }}
           className="mt-8 text-lg leading-relaxed text-white/70 max-w-2xl"
         >
-          We don't just build websites. We build scalable digital ecosystems that attract, convert, and retain high-value customers. Tell us what your business needs and we will recommend the right approach.
+          We don't just build websites. We build scalable digital ecosystems that attract, convert, and retain high-value customers. Proudly partnering with businesses in Abuja, Enugu, Lagos, and across Nigeria to deliver the best web development solutions. Tell us what your business needs and we will recommend the right approach.
         </motion.p>
 
         <motion.div 
