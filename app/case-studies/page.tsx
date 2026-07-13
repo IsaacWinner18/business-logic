@@ -10,7 +10,8 @@ const caseStudies = [
     id: "01",
     brand: "Dben Real Estates",
     title: "Scaling Architecture for High-Volume Lead Generation",
-    image: "https://res.cloudinary.com/dcvlszzoy/image/upload/v1780229406/Screenshot_2026-05-31_130940_y1tuf3.png",
+    image:
+      "https://res.cloudinary.com/dcvlszzoy/image/upload/v1780229406/Screenshot_2026-05-31_130940_y1tuf3.png",
     metrics: [
       { value: "+32%", label: "LEAD QUALITY" },
       { value: "4x", label: "CONVERSION RATE" },
@@ -43,7 +44,8 @@ const caseStudies = [
     id: "02",
     brand: "Buychow Ng Group",
     title: "Strategic Overhaul for a Foodtech Pioneer",
-    image: "https://res.cloudinary.com/dcvlszzoy/image/upload/v1778334695/Screenshot_2026-05-09_144304_n36rfa.png",
+    image:
+      "https://res.cloudinary.com/dcvlszzoy/image/upload/v1778334695/Screenshot_2026-05-09_144304_n36rfa.png",
     metrics: [
       { value: "40%", label: "GROWTH IN INQUIRIES" },
       { value: "2.5x", label: "USER RETENTION" },
@@ -76,7 +78,8 @@ const caseStudies = [
     id: "03",
     brand: "Exampreps",
     title: "Building a Seamless Platform for EdTech Growth",
-    image: "https://res.cloudinary.com/dcvlszzoy/image/upload/v1783873796/Screenshot_2026-07-12_172934_qxzilr.png", // Placeholder
+    image:
+      "https://res.cloudinary.com/dcvlszzoy/image/upload/v1783873796/Screenshot_2026-07-12_172934_qxzilr.png", // Placeholder
     metrics: [
       { value: "50k+", label: "STUDENTS ENROLLED" },
       { value: "92%", label: "COMPLETION RATE" },
@@ -109,7 +112,8 @@ const caseStudies = [
     id: "04",
     brand: "FeemTech",
     title: "Establishing Corporate Trust in the Tech Sector",
-    image: "https://res.cloudinary.com/dcvlszzoy/image/upload/v1783873692/Screenshot_2026-07-12_164904_wpahph.png", // Placeholder
+    image:
+      "https://res.cloudinary.com/dcvlszzoy/image/upload/v1783873692/Screenshot_2026-07-12_164904_wpahph.png", // Placeholder
     metrics: [
       { value: "200%", label: "B2B LEADS" },
       { value: "1st", label: "PAGE RANKING" },
@@ -142,7 +146,8 @@ const caseStudies = [
     id: "05",
     brand: "Farmergiant",
     title: "E-Commerce Transformation for Agrotech",
-    image: "https://res.cloudinary.com/dcvlszzoy/image/upload/v1783875916/Screenshot_2026-07-12_180458_h6ojxe.png",
+    image:
+      "https://res.cloudinary.com/dcvlszzoy/image/upload/v1783875916/Screenshot_2026-07-12_180458_h6ojxe.png",
     metrics: [
       { value: "150%", label: "INCREASE IN SALES" },
       { value: "10k+", label: "ORDERS PROCESSED" },
@@ -175,7 +180,8 @@ const caseStudies = [
     id: "06",
     brand: "Earnstak",
     title: "Streamlining Workflows for a Fintech Startup",
-    image: "https://res.cloudinary.com/dcvlszzoy/image/upload/v1778334695/Screenshot_2026-05-09_144304_n36rfa.png", // Placeholder
+    image:
+      "https://res.cloudinary.com/dcvlszzoy/image/upload/v1783940517/Screenshot_2026-07-13_115221_vpr9lr.png", 
     metrics: [
       { value: "5x", label: "USER ACQUISITION" },
       { value: "< 1s", label: "API RESPONSE TIME" },
@@ -208,7 +214,8 @@ const caseStudies = [
     id: "07",
     brand: "Santorini",
     title: "Elevating the Digital Experience for Luxury Hospitality",
-    image: "https://res.cloudinary.com/dcvlszzoy/image/upload/v1783874011/Screenshot_2026-07-12_173311_dqd6ee.png", // Placeholder
+    image:
+      "https://res.cloudinary.com/dcvlszzoy/image/upload/v1783874011/Screenshot_2026-07-12_173311_dqd6ee.png", // Placeholder
     metrics: [
       { value: "80%", label: "DIRECT BOOKINGS" },
       { value: "3x", label: "TIME ON SITE" },
