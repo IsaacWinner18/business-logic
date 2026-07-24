@@ -39,12 +39,9 @@ export function FaqSection() {
             [ EXPERTISE & CLARITY ]
           </p>
           <h2 className="font-unbounded text-4xl leading-tight text-black md:text-5xl">
-            Frequently <br />
-            asked questions.
+           FAQs
           </h2>
-          <p className="text-lg text-[var(--ink-soft)]">
-            Everything you need to know about partnering with the premier web development agency in Nigeria.
-          </p>
+        
         </div>
 
         {/* Accordion side */}
