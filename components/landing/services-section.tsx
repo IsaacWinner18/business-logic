@@ -3,7 +3,6 @@
 import { CircleDashed, UserRoundSearch } from "lucide-react";
 import Image from "next/image";
 import { motion } from "framer-motion";
-import { ParticleBackground3D } from "./particle-background";
 
 const services = [
   {
@@ -48,10 +47,6 @@ export function ServicesSection() {
       id="services"
       className="relative px-5 py-16 md:px-8 md:py-20 lg:px-12 overflow-hidden bg-white"
     >
-      {/* 3D PARTICLE FIELD BACKGROUND */}
-      <ParticleBackground3D />
-      <div className="absolute inset-0 z-0 bg-[radial-gradient(#d1d1d1_1px,transparent_1px)] [background-size:24px_24px] opacity-30 pointer-events-none" />
-
       <motion.div 
         initial={{ opacity: 0, y: 20 }}
         whileInView={{ opacity: 1, y: 0 }}

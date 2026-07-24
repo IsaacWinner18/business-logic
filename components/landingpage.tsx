@@ -6,7 +6,6 @@ import {
   ProjectsSection,
   ServicesSection,
   TestimonialsSection,
-  ArchitectSandbox,
   FaqSection,
 } from "@/components/landing";
 import Image from "next/image";
@@ -90,7 +89,6 @@ export default function LandingPage() {
         <ProjectsSection />
         <ProcessSection />
         <TestimonialsSection />
-        <ArchitectSandbox />
         <FaqSection />
         <ContactSection />
         <FooterCtaSection />

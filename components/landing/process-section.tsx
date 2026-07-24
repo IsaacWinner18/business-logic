@@ -3,7 +3,6 @@
 import { SectionHeading } from "@/components/landing/shared";
 import Image from "next/image";
 import { motion } from "framer-motion";
-import { JointJSProcessCanvas } from "./jointjs-process-canvas";
 
 const positioningPoints = [
   {
@@ -127,7 +126,7 @@ export function ProcessSection() {
 
         <div className="mt-12 w-full max-w-7xl mx-auto border border-black/20 bg-white">
           {/* PROCESS CONTENT GRID */}
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 divide-y md:divide-y-0 lg:divide-x divide-black/20 border-b border-black/20">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 divide-y md:divide-y-0 lg:divide-x divide-black/20">
             {processSteps.map((step, index) => (
               <div key={step.number} className="relative p-6 lg:p-8 flex flex-col bg-white group hover:bg-[#FAFAFA] transition-colors">
                 <div className="flex items-center justify-between mb-8">
@@ -149,15 +148,6 @@ export function ProcessSection() {
                 <div className="absolute bottom-0 right-0 w-2 h-2 border-b border-r border-black/20 opacity-0 group-hover:opacity-100 transition-opacity" />
               </div>
             ))}
-          </div>
-
-          {/* TECHNICAL SVG CANVAS HEADER */}
-          <div className="h-[800px] md:h-[450px] relative overflow-hidden bg-[#FAFAFA]">
-            {/* Engineering Grid */}
-            <div className="absolute inset-0 bg-[radial-gradient(#00000015_1px,transparent_1px)] [background-size:16px_16px]" />
-            
-            {/* Dynamic JointJS Flowchart */}
-            <JointJSProcessCanvas />
           </div>
         </div>
       </section>
