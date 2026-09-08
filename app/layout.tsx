@@ -60,8 +60,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" data-scroll-behavior="smooth" className={`${nohemi.variable} ${caveat.variable} ${unbounded.variable} h-full antialiased`}>
-      <body className="min-h-full">
+    <html lang="en" className={`${nohemi.variable} ${caveat.variable} ${unbounded.variable} antialiased`}>
+      <body className="min-h-screen">
         <SmoothScrollProvider>
           <NoiseOverlay />
           {children}

@@ -71,6 +71,12 @@ function url(value: string): NotionProperties[string] {
   };
 }
 
+function email(value: string): NotionProperties[string] {
+  return {
+    email: value,
+  };
+}
+
 function date(value: string | null): NotionProperties[string] {
   return {
     date: value
@@ -134,7 +140,7 @@ function buildProperties(body: NotionLeadUpdateBody): NotionProperties {
   }
 
   if (body.emailAddress) {
-    properties["Email address"] = richText(body.emailAddress);
+    properties["Email address"] = email(body.emailAddress);
   }
 
   if (body.referralSource) {
@@ -188,14 +194,38 @@ async function getNotionDataSourceId() {
 
 export async function POST(req: Request) {
   try {
+    if (!process.env.NOTION_API_KEY) {
+      return NextResponse.json(
+        {
+          error:
+            "NOTION_API_KEY is missing in your .env.local file. Please configure your Notion integration token.",
+        },
+        { status: 500 },
+      );
+    }
+
+    if (!process.env.NOTION_DB_ID && !process.env.NOTION_DATA_SOURCE_ID) {
+      return NextResponse.json(
+        {
+          error:
+            "NOTION_DB_ID is missing in your .env.local file. Please configure your Notion database ID.",
+        },
+        { status: 500 },
+      );
+    }
+
     const body = (await req.json()) as NotionLeadUpdateBody;
     const properties = buildProperties(body);
     const hasProperties = Object.keys(properties).length > 0;
 
     if (!hasProperties) {
-      return NextResponse.json({
-        error: "Send at least one field from the lead payload to create or update a Notion page.",
-      }, { status: 400 });
+      return NextResponse.json(
+        {
+          error:
+            "Send at least one field from the lead payload to create or update a Notion page.",
+        },
+        { status: 400 },
+      );
     }
 
     if (body.pageId) {
@@ -212,11 +242,15 @@ export async function POST(req: Request) {
       });
     }
 
-    const dataSourceId = await getNotionDataSourceId();
+    // Determine parent: prioritize direct database_id or data_source_id
+    const parentParam = process.env.NOTION_DATA_SOURCE_ID
+      ? { data_source_id: process.env.NOTION_DATA_SOURCE_ID }
+      : process.env.NOTION_DB_ID
+        ? { database_id: process.env.NOTION_DB_ID }
+        : { data_source_id: await getNotionDataSourceId() };
+
     const response = await notion.pages.create({
-      parent: {
-        data_source_id: dataSourceId,
-      },
+      parent: parentParam,
       properties,
     });
 
@@ -228,7 +262,9 @@ export async function POST(req: Request) {
     });
   } catch (error) {
     const message =
-      error instanceof Error ? error.message : "Failed to create or update Notion page.";
+      error instanceof Error
+        ? error.message
+        : "Failed to create or update Notion page.";
 
     return NextResponse.json({ error: message }, { status: 500 });
   }

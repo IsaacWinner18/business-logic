@@ -28,7 +28,7 @@ export function HeroSection() {
   }
 
   return (
-    <section className="relative overflow-hidden px-4 pb-8 pt-5 lg:px-8 lg:pb-0 h-screen">
+    <section className="relative overflow-hidden px-4 pt-5 lg:px-8  h-screen">
       <video
         autoPlay
         loop
@@ -53,10 +53,10 @@ export function HeroSection() {
               [BL]
             </div>
             <div>
-              <div className="font-mono text-[14px] text-white md:text-xl">
+              <div className=" text-[14px] text-white md:text-xl">
                 Business Logic
               </div>
-              <p className="text-[8px] uppercase tracking-[0.28em] text-gray-100 md:text-xs">
+              <p className="text-[8px] uppercase tracking-[0.28em] text-gray-100 md:text-[8px]">
                 Scaling Business
               </p>
             </div>
@@ -83,6 +83,12 @@ export function HeroSection() {
         </nav>
 
         <div className="hidden items-center gap-3 lg:flex">
+          <Link
+            href="/audit"
+            className="rounded-none bg-orange-600 px-5 py-3 text-[10px] font-semibold uppercase tracking-[0.22em] text-white hover:bg-orange-500 transition-colors shadow-sm"
+          >
+            Free Audit
+          </Link>
           <Link
             href="#contact"
             className="primary-button rounded-none px-5 py-3 text-[10px] font-semibold uppercase tracking-[0.22em] text-white md:px-6"
@@ -139,15 +145,21 @@ export function HeroSection() {
           ))}
         </nav>
 
-        <div className="my-8 space-y-4 absolute bottom-0">
-          <p className="text-sm leading-7 text-[var(--ink-soft)]">
-            High-performance websites, conversion systems, and premium brand
-            presentation for growth-stage businesses.
+        <div className="my-8 space-y-3 absolute bottom-0 w-[85%]">
+          <p className="text-xs leading-5 text-[var(--ink-soft)]">
+           We build websites for Businesses
           </p>
+          <Link
+            href="/audit"
+            onClick={closeMenu}
+            className="bg-orange-600 inline-flex w-full items-center justify-center rounded-none px-5 py-3.5 text-[10px] font-semibold uppercase tracking-[0.22em] text-white hover:bg-orange-500 transition-colors"
+          >
+            Free Audit
+          </Link>
           <Link
             href="#contact"
             onClick={closeMenu}
-            className=" bg-[#b28642] inline-flex w-[90%] items-center justify-center rounded-none px-5 py-4 text-[10px] font-semibold uppercase tracking-[0.22em] text-white"
+            className="bg-[#b28642] inline-flex w-full items-center justify-center rounded-none px-5 py-3.5 text-[10px] font-semibold uppercase tracking-[0.22em] text-white"
           >
             Consultation
           </Link>
@@ -164,16 +176,15 @@ export function HeroSection() {
             <h1
               className={`${nohemi.className} mt-6 max-w-3xl text-[2.5rem] leading-[0.95] text-white md:text-[3.4rem] `}
             >
-              Websites That Make Your{" "}
+              We build Websites for{" "}
               <span className=" border border-orange-600 bg-orange-600">
                 {" "}
-                Business
+                Businesses
               </span>{" "}
-              Look Serious..
             </h1>
             <p className="mt-6 max-w-xl text-sm leading-7 text-gray-200 md:text-base">
-              We help businesses build modern websites that attract customers,
-              increase trust, and grow their brand online.
+              We build modern websites for businesses that attract customers,
+              increase trust, and grow their brand.
             </p>
 
             <div className="mt-8 text-white md:mt-8 mt-28 flex gap-6">

@@ -31,8 +31,19 @@ export function FaqSection() {
   const [openIndex, setOpenIndex] = useState<number | null>(0);
 
   return (
-    <section className="relative w-full border-t border-black/10 bg-[#fdfbf7] py-24 md:py-32 px-5 md:px-8">
-      <div className="mx-auto flex max-w-[1200px] flex-col gap-12 lg:flex-row lg:gap-24">
+    <section className="relative w-full border-t border-black/10 bg-[#fdfbf7] py-24 md:py-32 px-5 md:px-8 overflow-hidden">
+      {/* WHITE VERY GRAINY-CRISPY SVG LAYER */}
+      <div
+        aria-hidden="true"
+        className="pointer-events-none absolute inset-0 z-0 opacity-80"
+        style={{
+          backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='whiteCrispyGrain'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.92' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix type='matrix' values='0 0 0 0 1  0 0 0 0 1  0 0 0 0 1  1 0 0 0 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23whiteCrispyGrain)'/%3E%3C/svg%3E")`,
+          backgroundRepeat: "repeat",
+          backgroundSize: "160px 160px",
+        }}
+      />
+
+      <div className="relative z-10 mx-auto flex max-w-[1200px] flex-col gap-12 lg:flex-row lg:gap-24">
         {/* Header side */}
         <div className="flex flex-col gap-6 lg:w-1/3">
           <p className="font-caveat text-2xl text-[var(--ink-faint)]">

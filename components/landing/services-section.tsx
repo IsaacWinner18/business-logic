@@ -2,13 +2,16 @@
 
 import { CircleDashed, UserRoundSearch } from "lucide-react";
 import Image from "next/image";
-import { motion } from "framer-motion";
+import { motion, useScroll, useTransform } from "framer-motion";
+import { useRef } from "react";
+import { FloatingPills } from "./floating-pills";
+import { WebsiteMaintenanceVisual } from "./website-maintenance-visual";
 
 const services = [
   {
     icon: UserRoundSearch,
     title: "All Types of Websites",
-    copy: "Professional websites for small businesses, companies, startups, brands, and service businesses.",
+    copy: "Professional websites for businesses, companies, startups, brands, and service businesses.",
     tag: ["E-commerce", "Landing Pages", "Website Redesign"],
     image:
       "https://res.cloudinary.com/dcvlszzoy/image/upload/v1780227747/Choose-Business-logic-for-Website-Development-Agency-In-trusted_ets6xj.webp",
@@ -42,91 +45,103 @@ const services = [
 ];
 
 export function ServicesSection() {
+  const targetRef = useRef<HTMLDivElement>(null);
+
+  const { scrollYProgress } = useScroll({
+    target: targetRef,
+    offset: ["start start", "end end"],
+  });
+
+  // Smooth percentage-based translation: moves Card 1 -> Card 2 -> Card 3 fully into view
+  const x = useTransform(scrollYProgress, [0, 1], ["0%", "-68%"]);
+
   return (
     <section
+      ref={targetRef}
       id="services"
-      className="relative px-5 py-16 md:px-8 md:py-20 lg:px-12 overflow-hidden bg-white"
+      className="relative h-[230vh] bg-[#471612]"
     >
-      <motion.div 
-        initial={{ opacity: 0, y: 20 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true, margin: "-100px" }}
-        transition={{ duration: 0.6 }}
-        className="relative z-10 mb-16 max-w-3xl"
-      >
-        <p className="font-caveat text-2xl text-[var(--ink-faint)]">
-          Services
-        </p>
-        <h2 className="font-unbounded mt-2 text-[2.2rem] leading-[1.05] text-black sm:text-[3rem]">
-          Our Services
-        </h2>
-        <p className="mt-4 max-w-xl text-sm leading-7 text-[var(--ink-soft)] md:text-base">
-          We build websites and web-based systems that help businesses look
-          professional, attract customers, and grow online.
-        </p>
-      </motion.div>
+      <div className="sticky top-0 flex h-screen w-full flex-col justify-center overflow-hidden px-5 md:px-8 lg:px-12 py-4 md:py-6">
+        {/* SECTION HEADER */}
+        <div className="mx-auto w-full max-w-[1440px] mb-4 md:mb-6 shrink-0">
+          <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-3">
+            <div className="max-w-2xl">
+              <p className="font-caveat text-xl md:text-2xl text-white/80">
+                Services
+              </p>
+              <h2 className="font-unbounded mt-0.5 text-[1.9rem] leading-[1.1] text-white sm:text-[2.6rem] tracking-tight drop-shadow-sm">
+                Our Services
+              </h2>
+              <p className="mt-1.5 max-w-xl text-xs sm:text-sm leading-relaxed text-white/85 font-normal">
+                We build websites and web-based systems that help businesses look
+                professional, attract customers, and grow online.
+              </p>
+            </div>
 
-      {/* BENTO GRID WRAPPER */}
-      <div className="relative z-10 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-        {services.map((service, index) => {
-          const isWide = index === 0 || index === 2;
-          
-          // Asymmetric Bento configurations for desktop (3 columns layout)
-          const bentoClasses =
-            index === 0
-              ? "md:col-span-2 lg:col-span-2 min-h-[400px]"
-              : index === 1
-                ? "md:col-span-1 lg:col-span-1 lg:row-span-2 min-h-[480px] lg:min-h-full"
-                : "md:col-span-1 lg:col-span-2 min-h-[400px]";
+          </div>
+        </div>
 
-          return (
-            <motion.article
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: "-100px" }}
-              transition={{ duration: 0.6, delay: index * 0.1 }}
-              key={service.title}
-              className={`group relative flex overflow-hidden border border-black/5 bg-[#FAFAFA]/90 backdrop-blur-sm transition-all duration-500 hover:border-black/20 ${
-                isWide ? "flex-col md:flex-row" : "flex-col"
-              } ${bentoClasses}`}
-            >
-              {/* CONTENT AREA */}
-              <div className={`relative z-10 flex flex-col justify-between p-6 md:p-8 ${isWide ? "md:w-[55%]" : "h-auto"}`}>
-                <div>
-                  <h3 className="font-unbounded mt-4 max-w-md text-[1.4rem] leading-tight text-black md:text-[1.7rem]">
-                    {service.title}
-                  </h3>
+        {/* HORIZONTAL CARDS TRACK */}
+        <div className="relative w-full overflow-visible">
+          <motion.div
+            style={{ x }}
+            className="flex gap-6 md:gap-8 w-max items-stretch pr-16 md:pr-28"
+          >
+            {services.map((service, index) => {
+              return (
+                <article
+                  key={service.title}
+                  className="group relative flex flex-col md:flex-row overflow-hidden rounded-2xl border border-white/50 bg-[#FFFDFD]  transition-all duration-500 w-[88vw] sm:w-[640px] md:w-[740px] lg:w-[840px] xl:w-[900px] h-[550px] sm:h-[560px] shrink-0"
+                >
+                  {/* CONTENT AREA */}
+                  <div className="relative z-10 flex flex-col justify-between p-6 md:p-8 md:w-[36%] lg:w-[34%] shrink-0">
+                    <div>
+                      <h3 className="font-unbounded text-[1.3rem] md:text-[1.55rem] leading-tight text-neutral-900">
+                        {service.title}
+                      </h3>
 
-                  <p className="mt-4 max-w-xl text-[0.95rem] leading-relaxed text-[var(--ink-soft)]">
-                    {service.copy}
-                  </p>
-                </div>
+                      <p className="mt-3 text-[0.92rem] leading-relaxed text-neutral-600">
+                        {service.copy}
+                      </p>
+                    </div>
 
-                <div className="mt-8 flex flex-wrap gap-2">
-                  {service.tag.map((t) => (
-                    <span
-                      key={t}
-                      className="font-caveat text-[1.1rem] px-3 py-1 bg-black/[0.03] text-black/80 rounded-full"
-                    >
-                      {t}
-                    </span>
-                  ))}
-                </div>
-              </div>
+                    <div className="mt-6 flex flex-wrap gap-2">
+                      {service.tag.map((t) => (
+                        <span
+                          key={t}
+                          className="font-caveat text-[1.1rem] px-3 py-1 bg-red-50/70 border border-red-100 text-red-950 rounded-full transition-colors hover:bg-red-100/80"
+                        >
+                          {t}
+                        </span>
+                      ))}
+                    </div>
+                  </div>
 
-              {/* IMAGE AREA */}
-              <div className={`relative ${isWide ? "md:w-[45%]" : "flex-1"} min-h-[240px] bg-[#fdfcfb] overflow-hidden border-t ${isWide ? 'md:border-t-0 md:border-l' : ''} border-black/5`}>
-                <Image
-                  src={service.image}
-                  alt={service.title}
-                  fill
-                  sizes="(max-w-780px) 100vw, 50vw"
-                  className="object-cover object-center transition-transform duration-[1.2s] ease-out group-hover:scale-[1.05]"
-                />
-              </div>
-            </motion.article>
-          );
-        })}
+                  {/* VISUAL / INTERACTIVE AREA */}
+                  <div className="relative flex-1 md:w-[64%] lg:w-[66%] h-full min-h-[320px] md:min-h-full border-t md:border-t-0 md:border-l border-neutral-200/60 overflow-hidden flex items-stretch bg-transparent">
+                    {index === 0 ? (
+                      <FloatingPills />
+                    ) : index === 1 ? (
+                      <WebsiteMaintenanceVisual />
+                    ) : (
+                      <div className="relative w-full h-full min-h-[300px] md:min-h-full p-4 md:p-8 flex items-center justify-center bg-gradient-to-br from-neutral-50/90 to-neutral-100/60">
+                        <div className="relative w-full h-full min-h-[260px] overflow-hidden rounded-xl border border-black/8 bg-white shadow-sm">
+                          <Image
+                            src={service.image}
+                            alt={service.title}
+                            fill
+                            sizes="(max-width: 768px) 100vw, 65vw"
+                            className="object-cover object-left-top transition-transform duration-[1.2s] ease-out group-hover:scale-[1.04]"
+                          />
+                        </div>
+                      </div>
+                    )}
+                  </div>
+                </article>
+              );
+            })}
+          </motion.div>
+        </div>
       </div>
     </section>
   );
