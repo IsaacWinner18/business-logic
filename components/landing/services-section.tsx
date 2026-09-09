@@ -84,8 +84,8 @@ export function ServicesSection() {
         {/* HORIZONTAL CARDS TRACK */}
         <div className="relative w-full overflow-visible">
           <motion.div
-            style={{ x }}
-            className="flex gap-6 md:gap-8 w-max items-stretch pr-16 md:pr-28"
+            style={{ x, willChange: "transform" }}
+            className="flex gap-6 md:gap-8 w-max items-stretch pr-16 md:pr-28 [transform:translateZ(0)]"
           >
             {services.map((service, index) => {
               return (

@@ -81,14 +81,13 @@ export function ProcessSection() {
         {/* CYAN-800 TONAL OVERLAY */}
         <div className="pointer-events-none absolute inset-0 z-0 bg-cyan-800/85" />
 
-        {/* SUBTLE PAPER-GRAINY CRISPY SVG TEXTURE */}
+        {/* SUBTLE ARCHITECTURAL GRAIN / GRID ACCENT */}
         <div
           aria-hidden="true"
-          className="pointer-events-none absolute inset-0 z-0 opacity-45 mix-blend-overlay"
+          className="pointer-events-none absolute inset-0 z-0 opacity-15"
           style={{
-            backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='paperGrain'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23paperGrain)'/%3E%3C/svg%3E")`,
-            backgroundRepeat: "repeat",
-            backgroundSize: "180px 180px",
+            backgroundImage: `radial-gradient(rgba(255, 255, 255, 0.4) 1px, transparent 1px)`,
+            backgroundSize: "24px 24px",
           }}
         />
 
@@ -108,22 +107,15 @@ export function ProcessSection() {
                     const cumulativeIdx =
                       headerWords.slice(0, wordIdx).join("").length + charIdx;
                     return (
-                      <motion.span
+                      <span
                         key={charIdx}
-                        className="inline-block"
-                        animate={{
-                          y: [-3, 3, -3],
-                          opacity: [0.9, 1, 0.9],
-                        }}
-                        transition={{
-                          duration: 3,
-                          repeat: Infinity,
-                          ease: "easeInOut",
-                          delay: cumulativeIdx * 0.05,
+                        className="inline-block animate-char-wave"
+                        style={{
+                          animationDelay: `-${cumulativeIdx * 0.14}s`,
                         }}
                       >
                         {char}
-                      </motion.span>
+                      </span>
                     );
                   })}
                 </span>

@@ -234,3 +234,20 @@ body {
     width: 1.5rem;
   }
 }
+
+@keyframes char-wave {
+  0%, 100% {
+    transform: translateY(-3px);
+    opacity: 0.9;
+  }
+  50% {
+    transform: translateY(3px);
+    opacity: 1;
+  }
+}
+
+.animate-char-wave {
+  animation: char-wave 3s ease-in-out infinite;
+  will-change: transform;
+}
+

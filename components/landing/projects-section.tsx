@@ -77,14 +77,15 @@ export function ProjectsSection() {
       id="projects"
       className="relative overflow-hidden px-5 py-16 md:px-8 md:py-20 lg:px-12 bg-cyan-800 text-white"
     >
-      {/* ANIMATING IRREGULAR SILHOUETTE - TOP RIGHT (MORPHS EVERY 2S, FILL CYAN 300) */}
+      {/* ANIMATING IRREGULAR SILHOUETTE - TOP RIGHT */}
       <div
         aria-hidden="true"
         className="pointer-events-none absolute -top-16 -right-16 sm:-top-24 sm:-right-24 md:-top-32 md:-right-32 w-80 h-80 sm:w-96 sm:h-96 md:w-[500px] md:h-[500px] lg:w-[620px] lg:h-[620px] z-0 select-none opacity-35 md:opacity-40"
       >
+        <div className="absolute inset-10 rounded-full bg-cyan-300/35 blur-[50px] pointer-events-none" />
         <svg
           viewBox="0 0 500 500"
-          className="w-full h-full filter drop-shadow-[0_0_45px_rgba(103,232,249,0.35)]"
+          className="relative w-full h-full will-change-transform"
           fill="none"
           xmlns="http://www.w3.org/2000/svg"
         >
@@ -107,14 +108,15 @@ export function ProjectsSection() {
         </svg>
       </div>
 
-      {/* ANIMATING IRREGULAR SILHOUETTE - BOTTOM LEFT (MORPHS EVERY 2S, FILL CYAN 300) */}
+      {/* ANIMATING IRREGULAR SILHOUETTE - BOTTOM LEFT */}
       <div
         aria-hidden="true"
         className="pointer-events-none absolute -bottom-20 -left-20 sm:-bottom-28 sm:-left-28 md:-bottom-36 md:-left-36 w-80 h-80 sm:w-96 sm:h-96 md:w-[520px] md:h-[520px] lg:w-[640px] lg:h-[640px] z-0 select-none opacity-35 md:opacity-40"
       >
+        <div className="absolute inset-10 rounded-full bg-cyan-300/35 blur-[50px] pointer-events-none" />
         <svg
           viewBox="0 0 500 500"
-          className="w-full h-full filter drop-shadow-[0_0_45px_rgba(103,232,249,0.35)]"
+          className="relative w-full h-full will-change-transform"
           fill="none"
           xmlns="http://www.w3.org/2000/svg"
         >

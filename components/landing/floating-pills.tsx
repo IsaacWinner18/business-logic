@@ -134,14 +134,18 @@ export function FloatingPills() {
     hasEnteredRef.current = new Array(PILL_CONFIGS.length).fill(false);
 
     // Matter modules
-    const { Engine, Runner, Bodies, Composite, Mouse, MouseConstraint, Events, Body } = Matter;
+    const { Engine, Runner, Bodies, Composite, Mouse, MouseConstraint, Events, Body, Sleeping } = Matter;
 
     const engine = Engine.create({
+      enableSleeping: true, // Allows resting pills to freeze completely, stopping micro-gravity oscillations
       gravity: {
         x: 0,
         y: 0, // Starts at 0 gravity; activates when scrolled into view
         scale: 0.001,
       },
+      positionIterations: 8,
+      velocityIterations: 6,
+      constraintIterations: 4,
     });
 
     const runner = Runner.create();
@@ -157,12 +161,13 @@ export function FloatingPills() {
     const wallThickness = 140;
     const wallHeight = 4000;
 
+    // Floor and walls have 0 restitution to prevent resting piles from infinitely micro-bouncing
     const floor = Bodies.rectangle(
       width / 2,
       height - floorPadding + wallThickness / 2,
       width * 4,
       wallThickness,
-      { isStatic: true, friction: 0.6, restitution: 0.25 }
+      { isStatic: true, friction: 0.15, restitution: 0 }
     );
 
     const leftWall = Bodies.rectangle(
@@ -170,7 +175,7 @@ export function FloatingPills() {
       height / 2,
       wallThickness,
       wallHeight,
-      { isStatic: true, friction: 0.5, restitution: 0.25 }
+      { isStatic: true, friction: 0.15, restitution: 0.05 }
     );
 
     const rightWall = Bodies.rectangle(
@@ -178,7 +183,7 @@ export function FloatingPills() {
       height / 2,
       wallThickness,
       wallHeight,
-      { isStatic: true, friction: 0.5, restitution: 0.25 }
+      { isStatic: true, friction: 0.15, restitution: 0.05 }
     );
 
     // Ceiling starts high up to allow pills to fall into view freely
@@ -209,13 +214,21 @@ export function FloatingPills() {
 
     PILL_CONFIGS.forEach((cfg, idx) => {
       const { colX, rowY, initialAngle } = getSpawnPosition(idx, width);
+      const capRadius = cfg.height / 2;
 
       const body = Bodies.rectangle(colX, rowY, cfg.width, cfg.height, {
-        chamfer: { radius: cfg.height / 2 }, // Capsule rounding
-        restitution: 0.38, // Lively bounce
-        friction: 0.4,
-        frictionAir: 0.02,
-        density: 0.002,
+        // Quality 4 creates 16 vertices per capsule (smooth curved ends without 2.9px micro-facets that cause SAT normal-chatter vibration)
+        chamfer: {
+          radius: [capRadius, capRadius, capRadius, capRadius],
+          quality: 4,
+        },
+        restitution: 0.1, // Soft, cushioned bounce without infinite spring vibration
+        friction: 0.1, // Smooth glide and roll
+        frictionStatic: 0.35, // Strong static friction locks resting pills so stacks stay stationary
+        frictionAir: 0.025, // Calms micro-flutter and settling oscillations
+        density: 0.0016,
+        slop: 0.08, // Relaxed penetration tolerance stops normal-force buzzing
+        sleepThreshold: 25, // Freeze bodies swiftly (~0.4s) when at rest
         angle: initialAngle,
       });
 
@@ -226,31 +239,53 @@ export function FloatingPills() {
 
     // Add interactive Mouse Constraint (drag, throw, toss pills)
     const mouse = Mouse.create(container);
-    // Remove mouse wheel scroll interference so user can scroll page smoothly
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    (mouse as any).element.removeEventListener(
-      "mousewheel",
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      (mouse as any).mousewheel
-    );
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    (mouse as any).element.removeEventListener(
-      "DOMMouseScroll",
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      (mouse as any).mousewheel
-    );
+    // Remove wheel event listeners so scrolling over the card is completely smooth and never blocked
+    const mouseInternal = mouse as unknown as {
+      element?: HTMLElement;
+      mousewheel?: (e: Event) => void;
+    };
+    if (mouseInternal.element && mouseInternal.mousewheel) {
+      mouseInternal.element.removeEventListener("wheel", mouseInternal.mousewheel);
+      mouseInternal.element.removeEventListener("mousewheel", mouseInternal.mousewheel);
+      mouseInternal.element.removeEventListener("DOMMouseScroll", mouseInternal.mousewheel);
+    }
 
     const mouseConstraint = MouseConstraint.create(engine, {
       mouse,
       constraint: {
-        stiffness: 0.2,
+        stiffness: 0.22, // Cushioned, smooth cursor following (prevents violent spring jitter)
+        damping: 0.12,
         render: { visible: false },
       },
     });
 
     Composite.add(engine.world, mouseConstraint);
 
-    // Sync DOM pill elements with Matter.js physical bodies and enforce strict viewport containment
+    // Wake all pills when user begins dragging so surrounding pills react fluidly
+    Events.on(mouseConstraint, "startdrag", () => {
+      pillBodies.forEach((b) => Sleeping.set(b, false));
+    });
+
+    // Wake sleeping pills immediately if touched by an active pill
+    Events.on(engine, "collisionStart", (event) => {
+      event.pairs.forEach((pair) => {
+        const { bodyA, bodyB } = pair;
+        if (bodyA.isSleeping && !bodyA.isStatic && !bodyB.isSleeping) {
+          Sleeping.set(bodyA, false);
+        } else if (bodyB.isSleeping && !bodyB.isStatic && !bodyA.isSleeping) {
+          Sleeping.set(bodyB, false);
+        }
+      });
+    });
+
+    // Last rendered positions to eliminate sub-pixel text/border shimmering on resting pills
+    const lastRendered = new Array(PILL_CONFIGS.length).fill(null).map(() => ({
+      x: -9999,
+      y: -9999,
+      angle: -9999,
+    }));
+
+    // Sync DOM pill elements with Matter.js physical bodies
     Events.on(engine, "afterUpdate", () => {
       const curW = currentWidthRef.current;
       const curH = currentHeightRef.current;
@@ -274,18 +309,20 @@ export function FloatingPills() {
           hasEnteredRef.current[idx] = true;
         }
 
-        if (posY > maxY) {
+        // Safety margin check: allow physics solver to handle natural boundary contacts, only intervene if escaping
+        const escapeMargin = 16;
+        if (posY > maxY + escapeMargin) {
           posY = maxY;
           needsCorrection = true;
-        } else if (hasEnteredRef.current[idx] && posY < minY) {
+        } else if (hasEnteredRef.current[idx] && posY < minY - escapeMargin) {
           posY = minY;
           needsCorrection = true;
         }
 
-        if (posX < minX) {
+        if (posX < minX - escapeMargin) {
           posX = minX;
           needsCorrection = true;
-        } else if (posX > maxX) {
+        } else if (posX > maxX + escapeMargin) {
           posX = maxX;
           needsCorrection = true;
         }
@@ -293,26 +330,52 @@ export function FloatingPills() {
         if (needsCorrection) {
           Body.setPosition(body, { x: posX, y: posY });
           Body.setVelocity(body, {
-            x: body.velocity.x * 0.6,
-            y: Math.min(0, body.velocity.y),
+            x: body.velocity.x * 0.5,
+            y: posY === maxY ? Math.min(0, body.velocity.y) : Math.max(0, body.velocity.y),
           });
         }
 
         const el = pillElementsRef.current[idx];
         if (el) {
-          const x = body.position.x - halfW;
-          const y = body.position.y - halfH;
-          el.style.transform = `translate3d(${x}px, ${y}px, 0px) rotate(${body.angle}rad)`;
+          const rawX = body.position.x - halfW;
+          const rawY = body.position.y - halfH;
+          const rawAngle = body.angle;
+
+          const last = lastRendered[idx];
+          const isStill = body.isSleeping || (body.speed < 0.04 && body.angularSpeed < 0.002);
+
+          // If the pill is resting/sleeping and motion is sub-pixel jitter (< 0.08px), skip DOM re-render
+          let shouldRender = true;
+          if (isStill && last.x !== -9999) {
+            const dx = Math.abs(rawX - last.x);
+            const dy = Math.abs(rawY - last.y);
+            const da = Math.abs(rawAngle - last.angle);
+            if (dx < 0.08 && dy < 0.08 && da < 0.003) {
+              shouldRender = false;
+            }
+          }
+
+          if (shouldRender) {
+            const roundedX = Math.round(rawX * 100) / 100;
+            const roundedY = Math.round(rawY * 100) / 100;
+            const roundedAngle = Math.round(rawAngle * 1000) / 1000;
+
+            last.x = roundedX;
+            last.y = roundedY;
+            last.angle = roundedAngle;
+
+            el.style.transform = `translate3d(${roundedX}px, ${roundedY}px, 0px) rotate(${roundedAngle}rad)`;
+          }
         }
 
-        // Adaptive orientation: prevent text from appearing upside down
+        // Adaptive orientation with hysteresis: prevent text from flipping back and forth near 90 deg
         const cos = Math.cos(body.angle);
         const wasFlipped = isFlippedRef.current[idx];
         let shouldFlip = wasFlipped;
 
-        if (!wasFlipped && cos < -0.15) {
+        if (!wasFlipped && cos < -0.3) {
           shouldFlip = true;
-        } else if (wasFlipped && cos > 0.15) {
+        } else if (wasFlipped && cos > 0.3) {
           shouldFlip = false;
         }
 
@@ -326,7 +389,20 @@ export function FloatingPills() {
       });
     });
 
-    Runner.run(runner, engine);
+    let isRunning = false;
+    const startRunner = () => {
+      if (!isRunning) {
+        Runner.run(runner, engine);
+        isRunning = true;
+      }
+    };
+
+    const stopRunner = () => {
+      if (isRunning) {
+        Runner.stop(runner);
+        isRunning = false;
+      }
+    };
 
     let hasTriggered = false;
     let ceilingTimeout: ReturnType<typeof setTimeout> | null = null;
@@ -345,8 +421,10 @@ export function FloatingPills() {
 
       // Staggered downward release for a natural waterfall cascade
       pillBodies.forEach((body, idx) => {
+        Sleeping.set(body, false);
         const row = Math.floor(idx / 3);
         setTimeout(() => {
+          Sleeping.set(body, false);
           Body.setVelocity(body, {
             x: ((idx % 3) - 1) * 0.6 + (Math.random() - 0.5) * 0.8,
             y: 2.2 + Math.random() * 1.5,
@@ -363,7 +441,7 @@ export function FloatingPills() {
       ceilingTimeout = setTimeout(() => {
         Body.setPosition(ceiling, {
           x: currentWidthRef.current / 2,
-          y: -wallThickness / 2,
+          y: -wallThickness / 2 - 16,
         });
       }, 2000);
     };
@@ -380,10 +458,17 @@ export function FloatingPills() {
       const curW = currentWidthRef.current;
       pillBodies.forEach((body, idx) => {
         const { colX, rowY, initialAngle } = getSpawnPosition(idx, curW);
+        Sleeping.set(body, false);
         Body.setPosition(body, { x: colX, y: rowY });
         Body.setVelocity(body, { x: 0, y: 0 });
         Body.setAngularVelocity(body, 0);
         Body.setAngle(body, initialAngle);
+
+        const el = pillElementsRef.current[idx];
+        if (el) {
+          const cfg = PILL_CONFIGS[idx];
+          el.style.transform = `translate3d(${colX - cfg.width / 2}px, ${rowY - cfg.height / 2}px, 0px) rotate(${initialAngle}rad)`;
+        }
       });
     };
 
@@ -392,10 +477,14 @@ export function FloatingPills() {
       (entries) => {
         entries.forEach((entry) => {
           if (entry.isIntersecting) {
+            startRunner();
             triggerFall();
-          } else if (entry.intersectionRatio === 0 && hasTriggered) {
-            // When completely scrolled out of view, reset so it falls again next time user scrolls here
-            resetPills();
+          } else {
+            stopRunner();
+            if (entry.intersectionRatio === 0 && hasTriggered) {
+              // When completely scrolled out of view, reset so it falls again next time user scrolls here
+              resetPills();
+            }
           }
         });
       },
@@ -456,6 +545,7 @@ export function FloatingPills() {
           if (moved) {
             Body.setPosition(body, { x: posX, y: posY });
             Body.setVelocity(body, { x: 0, y: 0 });
+            Sleeping.set(body, false);
           }
         });
       } else {
@@ -483,6 +573,10 @@ export function FloatingPills() {
       observer.disconnect();
       resizeObserver.disconnect();
       Runner.stop(runner);
+      Events.off(engine, "afterUpdate", undefined as unknown as (...args: unknown[]) => void);
+      Events.off(engine, "collisionStart", undefined as unknown as (...args: unknown[]) => void);
+      Events.off(mouseConstraint, "startdrag", undefined as unknown as (...args: unknown[]) => void);
+      Composite.clear(engine.world, false);
       Engine.clear(engine);
     };
   }, []);

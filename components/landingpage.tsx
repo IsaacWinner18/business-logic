@@ -10,6 +10,7 @@ import {
 } from "@/components/landing";
 import Image from "next/image";
 import Marquee from "react-fast-marquee";
+import { NoiseOverlay } from "@/components/ui/noise-overlay";
 
 const featuredBrands = [
   {
@@ -45,44 +46,50 @@ export default function LandingPage() {
   return (
     <main className="page-shell">
       <div className="relative mx-auto flex min-h-screen w-full max-w-[1440px] flex-col ">
+        {/* HERO SECTION: Crystal clean, zero grain overlay on video or headers */}
         <HeroSection />
-        <ServicesSection />
 
-        <section className="section-shell overflow-hidden px-5 py-8 md:px-8 bg-white">
-          <div className="w-full min-w-0">
-            <Marquee
-              autoFill
-              gradient
-              gradientColor="#f7f1e9"
-              gradientWidth={60}
-              speed={36}
-              pauseOnHover
-              className="overflow-hidden"
-            >
-              {featuredBrands.map((brand) => (
-                <div
-                  key={brand.name}
-                  className="mx-4 flex h-16 items-center justify-center border border-black/8 bg-white/70 px-6 sm:mx-5"
-                >
-                  <Image
-                    src={brand.src}
-                    alt={`${brand.name} logo`}
-                    width={brand.width}
-                    height={brand.height}
-                    className={`h-10 w-auto object-contain ${brand.className || "opacity-85"}`}
-                  />
-                </div>
-              ))}
-            </Marquee>
-          </div>
-        </section>
+        {/* CONTENT SECTIONS: Subtle architectural film grain applied below hero */}
+        <div className="relative">
+          <NoiseOverlay />
+          <ServicesSection />
 
-        <ProjectsSection />
-        <ProcessSection />
-        <TestimonialsSection />
-        <FaqSection />
-        <ContactSection />
-        <FooterCtaSection />
+          <section className="section-shell overflow-hidden px-5 py-8 md:px-8 bg-white">
+            <div className="w-full min-w-0">
+              <Marquee
+                autoFill
+                gradient
+                gradientColor="#f7f1e9"
+                gradientWidth={60}
+                speed={36}
+                pauseOnHover
+                className="overflow-hidden"
+              >
+                {featuredBrands.map((brand) => (
+                  <div
+                    key={brand.name}
+                    className="mx-4 flex h-16 items-center justify-center border border-black/8 bg-white/70 px-6 sm:mx-5"
+                  >
+                    <Image
+                      src={brand.src}
+                      alt={`${brand.name} logo`}
+                      width={brand.width}
+                      height={brand.height}
+                      className={`h-10 w-auto object-contain ${brand.className || "opacity-85"}`}
+                    />
+                  </div>
+                ))}
+              </Marquee>
+            </div>
+          </section>
+
+          <ProjectsSection />
+          <ProcessSection />
+          <TestimonialsSection />
+          <FaqSection />
+          <ContactSection />
+          <FooterCtaSection />
+        </div>
       </div>
     </main>
   );

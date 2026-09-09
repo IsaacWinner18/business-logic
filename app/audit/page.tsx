@@ -145,9 +145,11 @@ export default function AuditPage() {
     }, 180);
   };
 
-  // Keyboard navigation
+  // Keyboard navigation ref to avoid re-attaching window listener on every keystroke
+  const handleKeyDownRef = useRef<(e: KeyboardEvent) => void>(() => {});
+
   useEffect(() => {
-    const handleKeyDown = (e: KeyboardEvent) => {
+    handleKeyDownRef.current = (e: KeyboardEvent) => {
       if (status === "success" || status === "submitting") return;
 
       if (e.key === "Enter" && activeStep.type !== "choice") {
@@ -167,10 +169,16 @@ export default function AuditPage() {
         }
       }
     };
+  });
+
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      handleKeyDownRef.current(e);
+    };
 
     window.addEventListener("keydown", handleKeyDown);
     return () => window.removeEventListener("keydown", handleKeyDown);
-  }, [currentStep, formData, status]);
+  }, []);
 
   async function handleSubmit() {
     setStatus("submitting");

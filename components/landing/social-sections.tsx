@@ -61,9 +61,10 @@ export function TestimonialsSection() {
           className="pointer-events-none absolute inset-0 z-0 select-none"
         >
           {/* 1. TOP-LEFT IRREGULAR BLOB SILHOUETTE */}
-          <div className="absolute -top-24 -left-20 sm:-top-32 sm:-left-28 md:-top-44 md:-left-36 lg:-top-52 lg:-left-44 w-80 h-80 sm:w-[28rem] sm:h-[28rem] md:w-[36rem] md:h-[36rem] lg:w-[44rem] lg:h-[44rem] opacity-50 drop-shadow-[0_0_48px_rgba(125,226,209,0.45)]">
+          <div className="absolute -top-24 -left-20 sm:-top-32 sm:-left-28 md:-top-44 md:-left-36 lg:-top-52 lg:-left-44 w-80 h-80 sm:w-[28rem] sm:h-[28rem] md:w-[36rem] md:h-[36rem] lg:w-[44rem] lg:h-[44rem] opacity-50">
+            <div className="absolute inset-12 rounded-full bg-[#7DE2D1]/30 blur-[48px] pointer-events-none" />
             <motion.div
-              className="w-full h-full"
+              className="relative w-full h-full will-change-transform"
               animate={{
                 rotate: 360,
                 scale: [0.96, 1.05, 0.96],
@@ -93,9 +94,10 @@ export function TestimonialsSection() {
           </div>
 
           {/* 2. BOTTOM-RIGHT IRREGULAR BLOB SILHOUETTE */}
-          <div className="absolute -bottom-24 -right-20 sm:-bottom-32 sm:-right-28 md:-bottom-44 md:-right-36 lg:-bottom-52 lg:-right-44 w-80 h-80 sm:w-[28rem] sm:h-[28rem] md:w-[36rem] md:h-[36rem] lg:w-[44rem] lg:h-[44rem] opacity-50 drop-shadow-[0_0_48px_rgba(125,226,209,0.45)]">
+          <div className="absolute -bottom-24 -right-20 sm:-bottom-32 sm:-right-28 md:-bottom-44 md:-right-36 lg:-bottom-52 lg:-right-44 w-80 h-80 sm:w-[28rem] sm:h-[28rem] md:w-[36rem] md:h-[36rem] lg:w-[44rem] lg:h-[44rem] opacity-50">
+            <div className="absolute inset-12 rounded-full bg-[#7DE2D1]/30 blur-[48px] pointer-events-none" />
             <motion.div
-              className="w-full h-full"
+              className="relative w-full h-full will-change-transform"
               animate={{
                 rotate: -360,
                 scale: [1.04, 0.95, 1.04],
@@ -135,7 +137,7 @@ export function TestimonialsSection() {
               <div className="mx-auto w-full flex flex-col items-center bg-[#FAFAFA] border border-black/5 p-6 md:p-12 rounded-3xl relative shadow-sm">
                 <p className="text-6xl md:text-8xl leading-none text-black/5 absolute top-4 left-4 md:top-6 md:left-8 font-serif">&rdquo;</p>
                 <blockquote className="relative z-10 mt-4 md:mt-2 font-display text-[0.95rem] leading-relaxed text-black/90 md:text-[1.4rem] lg:text-[1.6rem] max-w-3xl">
-                  "{testimonial.quote}"
+                  &ldquo;{testimonial.quote}&rdquo;
                 </blockquote>
                 
                 <div className="mt-6 md:mt-8 flex flex-col md:flex-row items-center md:text-left gap-3 md:gap-5 border-t border-black/5 pt-6 w-full max-w-xl justify-center">

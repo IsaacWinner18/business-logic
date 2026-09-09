@@ -3,7 +3,6 @@ import localFont from "next/font/local";
 import { Caveat, Unbounded } from "next/font/google";
 import "./globals.css";
 import { SmoothScrollProvider } from "@/components/providers/smooth-scroll";
-import { NoiseOverlay } from "@/components/ui/noise-overlay";
 
 const nohemi = localFont({
   src: "../public/fonts/Nohemi-Bold.ttf",
@@ -63,7 +62,6 @@ export default function RootLayout({
     <html lang="en" className={`${nohemi.variable} ${caveat.variable} ${unbounded.variable} antialiased`}>
       <body className="min-h-screen">
         <SmoothScrollProvider>
-          <NoiseOverlay />
           {children}
         </SmoothScrollProvider>
       </body>

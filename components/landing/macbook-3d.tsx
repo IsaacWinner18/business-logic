@@ -1,15 +1,16 @@
 "use client";
 
-import React, { Suspense } from 'react';
+import React, { Suspense, useEffect, useRef, useState } from 'react';
 import { Canvas } from '@react-three/fiber';
-import { Html, OrbitControls, Float, ContactShadows, Environment, RoundedBox, useTexture } from '@react-three/drei';
-
+import { OrbitControls, Float, ContactShadows, Environment, RoundedBox, useTexture } from '@react-three/drei';
 import * as THREE from 'three';
 
 function MinimalLaptop({ imageSrc }: { imageSrc: string }) {
-  const texture = useTexture(imageSrc);
-  // Ensure colors match the original image
-  texture.colorSpace = THREE.SRGBColorSpace;
+  const texture = useTexture(imageSrc, (loaded) => {
+    if (loaded && !Array.isArray(loaded) && "colorSpace" in loaded) {
+      (loaded as THREE.Texture).colorSpace = THREE.SRGBColorSpace;
+    }
+  });
 
   return (
     <>
@@ -49,15 +50,41 @@ function MinimalLaptop({ imageSrc }: { imageSrc: string }) {
 }
 
 export function Macbook3D({ imageSrc }: { imageSrc: string }) {
+  const containerRef = useRef<HTMLDivElement>(null);
+  const [isInView, setIsInView] = useState(false);
+
+  useEffect(() => {
+    const el = containerRef.current;
+    if (!el) return;
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        setIsInView(entry.isIntersecting);
+      },
+      { rootMargin: "150px" } // Pre-load slightly before scrolling into view
+    );
+
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, []);
+
   return (
-    <div className="w-full h-full min-h-[300px] cursor-grab active:cursor-grabbing touch-pan-x touch-pan-y">
-      <Canvas camera={{ position: [0, 0, 4.2], fov: 50 }}>
+    <div
+      ref={containerRef}
+      className="w-full h-full min-h-[300px] cursor-grab active:cursor-grabbing touch-pan-x touch-pan-y"
+    >
+      <Canvas
+        camera={{ position: [0, 0, 4.2], fov: 50 }}
+        frameloop={isInView ? "always" : "never"}
+        dpr={[1, 1.5]}
+        gl={{ powerPreference: "high-performance", antialias: true }}
+      >
         <Environment preset="city" />
         <Suspense fallback={null}>
           <MinimalLaptop imageSrc={imageSrc} />
+          {/* Soft shadow directly underneath - baked to texture once laptop is loaded */}
+          <ContactShadows position-y={-1.4} opacity={0.4} scale={5} blur={2.4} frames={1} />
         </Suspense>
-        {/* Soft shadow directly underneath */}
-        <ContactShadows position-y={-1.4} opacity={0.4} scale={5} blur={2.4} />
       </Canvas>
     </div>
   );

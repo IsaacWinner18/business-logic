@@ -192,7 +192,29 @@ export function WebsiteMaintenanceVisual() {
       }
     }, containerRef);
 
-    return () => ctx.revert();
+    // Pause all GSAP animations when not visible in viewport
+    const container = containerRef.current;
+    let observer: IntersectionObserver | null = null;
+    if (container) {
+      observer = new IntersectionObserver(
+        ([entry]) => {
+          if (entry.isIntersecting) {
+            // eslint-disable-next-line @typescript-eslint/no-explicit-any
+            ctx.data.forEach((anim: any) => anim.play && anim.play());
+          } else {
+            // eslint-disable-next-line @typescript-eslint/no-explicit-any
+            ctx.data.forEach((anim: any) => anim.pause && anim.pause());
+          }
+        },
+        { rootMargin: "100px" }
+      );
+      observer.observe(container);
+    }
+
+    return () => {
+      observer?.disconnect();
+      ctx.revert();
+    };
   }, []);
 
   return (
