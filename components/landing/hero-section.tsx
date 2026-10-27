@@ -28,7 +28,7 @@ export function HeroSection() {
   }
 
   return (
-    <section className="relative overflow-hidden px-4 pt-5 lg:px-8  h-screen">
+    <section className="relative overflow-hidden px-4 pt-5 md:px-8 lg:px-12 h-screen w-full">
       <video
         autoPlay
         loop
@@ -46,7 +46,7 @@ export function HeroSection() {
       <div className="absolute inset-0 z-0 bg-black/40" />
 
       {/* HEADER LAYER */}
-      <header className="relative z-20 flex flex-col gap-6 border-b border-gray-300/20 pb-5 lg:flex-row lg:items-center lg:justify-between">
+      <header className="relative z-20 mx-auto flex w-full max-w-7xl flex-col gap-6 border-b border-gray-300/20 pb-5 lg:flex-row lg:items-center lg:justify-between">
         <div className="flex items-center justify-between gap-4">
           <div className="flex items-center gap-3">
             <div className="grid h-9 w-9 place-items-center border border-black/10 bg-white/90 text-[10px] font-semibold text-black md:h-11 md:w-11 md:text-sm">
@@ -167,7 +167,7 @@ export function HeroSection() {
       </aside>
 
       {/* CONTENT LAYER */}
-      <div className="relative z-10 grid lg:min-h-[620px] lg:grid-cols-2 top-16 md:top-0">
+      <div className="relative z-10 mx-auto grid w-full max-w-7xl lg:min-h-[620px] lg:grid-cols-2 top-16 md:top-0">
         <div className="flex items-center py-14 lg:py-20">
           <div className="max-w-[38rem]">
             <p className="text-[10px] uppercase tracking-[0.28em] text-gray-200">

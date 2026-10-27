@@ -1,11 +1,9 @@
 "use client";
 
-import { SectionHeading } from "@/components/landing/shared";
-import { ArrowUpRight, ChevronLeft, ChevronRight } from "lucide-react";
+import { ArrowUpRight } from "lucide-react";
 import { motion } from "framer-motion";
 import Link from "next/link";
-import { Macbook3D } from "./macbook-3d";
-import { useRef } from "react";
+import Image from "next/image";
 
 // Top-right irregular silhouette paths (morphs every 2s)
 const TOP_RIGHT_PATHS = [
@@ -23,54 +21,101 @@ const BOTTOM_LEFT_PATHS = [
   "M 495 250 C 474 355, 453 276, 360 360 C 267 444, 342 462, 250 470 C 158 478, 210 465, 119 381 C 28 297, 21 360, 10 250 C -1 140, 0 150, 91 91 C 182 32, 127 98, 250 95 C 374 92, 323 25, 416 84 C 509 143, 516 145, 495 250 Z",
 ];
 
-const projects = [
+interface ProjectItem {
+  brand: string;
+  logo: string | null;
+  invertLogo?: boolean;
+  url: string;
+  category: string;
+  headline: string;
+  title: string;
+  description: string;
+  metric: string;
+  image: string;
+}
+
+const projects: ProjectItem[] = [
   {
-    title: "Dben Real Estates",
+    brand: "TINO RIDES",
+    logo: "/tino_rides_logo.png",
+    invertLogo: false,
+    url: "tino-rides.vercel.app",
+    category: "Automotive & Luxury Travel · Fleet & Chauffeur Platform",
+    headline: "Premier luxury car rental. Instant online booking.",
+    title: "Premier Luxury Car Rental & VIP Fleet Booking Platform",
+    description:
+      "A luxury car rental and chauffeur platform where clients can view vehicles, see clear daily rates, and book online in minutes.",
+    metric: "Luxury Fleet Platform",
+    image: "/tino-rides-nano-banana.jpg",
+  },
+  {
+    brand: "B'Bonds Heavy Haul",
+    logo: "/bbonds_logo.png",
+    invertLogo: false,
+    url: "bbondddd.vercel.app",
+    category: "Logistics & Supply Chain · Heavy Haul Transport",
+    headline: "Heavy haul logistics. Move what matters across Nigeria.",
+    title: "High-Capacity Heavy Haul Logistics & Fleet Operations",
+    description:
+      "A heavy haul and logistics website that lets industrial clients request transport, track shipments, and move cargo across Nigeria.",
+    metric: "Heavy Haul Logistics",
+    image: "/bbonds-nano-banana.jpg",
+  },
+  {
+    brand: "Dben Real Estates",
+    logo: "/dben_logo.webp",
+    invertLogo: true,
+    url: "dbenrealestates.com",
     category: "Real Estate · Scaling Architecture",
+    headline: "Bespoke property system. Live in three weeks.",
+    title: "Scaling Architecture for Luxury Property Discovery",
+    description:
+      "A luxury real estate website with fast property search, clean photo galleries, and direct WhatsApp inquiries for serious buyers.",
     metric: "Bespoke property system",
-    image:
-      "https://res.cloudinary.com/dcvlszzoy/image/upload/v1780229406/Screenshot_2026-05-31_130940_y1tuf3.png",
+    image: "/dben-nano-banana.jpg",
   },
   {
-    title: "Earnstak",
-    category: "Creator Economy · Commerce & Link Hub",
+    brand: "Earnstak",
+    logo: "/earnstak_logo.webp",
+    invertLogo: true,
+    url: "earnstak.com",
+    category: "Creator Economy · Commerce Hub",
+    headline: "One link. Full storefront. Sell anything directly.",
+    title: "All-in-One Audience Monetization & Link Platform",
+    description:
+      "An all-in-one platform for creators and marketers to sell digital products on their own page, sell event tickets, and accept fan tips and gifts.",
     metric: "All-in-One Platform",
-    image:
-      "https://res.cloudinary.com/dcvlszzoy/image/upload/v1783940517/Screenshot_2026-07-13_115221_vpr9lr.png",
+    image: "/earnstak-nano-banana.jpg",
   },
   {
-    title: "Exampreps",
-    category: "EdTech · Built From Scratch & PWA",
-    metric: "Installable PWA & CBT",
-    image:
-      "https://res.cloudinary.com/dcvlszzoy/image/upload/v1783873796/Screenshot_2026-07-12_172934_qxzilr.png",
-  },
-  {
-    title: "Buychow Ng Group",
-    category: "Foodtech · Performance Architecture",
-    metric: "60% faster load time",
-    image:
-      "https://res.cloudinary.com/dcvlszzoy/image/upload/v1778334695/Screenshot_2026-05-09_144304_n36rfa.png",
-  },
-  {
-    title: "Santorini",
-    category: "Hospitality · Hotel Booking",
+    brand: "Santorini",
+    logo: "/santorini-main-logo.png",
+    invertLogo: true,
+    url: "santorini-resort.com",
+    category: "Hospitality · Direct Booking",
+    headline: "Boutique hotel booking. Zero third-party fees.",
+    title: "Hotel Website & Direct Room Reservation System",
+    description:
+      "A modern hotel website with a direct reservation system, letting guests browse rooms and book their stay without third-party fees.",
     metric: "Direct booking engine",
-    image:
-      "https://res.cloudinary.com/dcvlszzoy/image/upload/v1783874011/Screenshot_2026-07-12_173311_dqd6ee.png",
+    image: "/santorini-nano-banana.jpg",
+  },
+  {
+    brand: "Farmergiant",
+    logo: "/farmergiant_logo.png",
+    invertLogo: false,
+    url: "farmergiant.com",
+    category: "Agrotech · Equipment E-Commerce",
+    headline: "Poultry & farm equipment. Direct online ordering.",
+    title: "E-Commerce Store for Poultry Equipment & Farm Supplies",
+    description:
+      "An e-commerce store for poultry equipment and agricultural supplies, making it simple for commercial farmers to browse and order online.",
+    metric: "E-Commerce Catalog",
+    image: "/farmergiant-nano-banana.jpg",
   },
 ];
 
 export function ProjectsSection() {
-  const scrollRef = useRef<HTMLDivElement>(null);
-
-  const scroll = (direction: "left" | "right") => {
-    if (scrollRef.current) {
-      const { clientWidth } = scrollRef.current;
-      const scrollAmount = direction === "left" ? -clientWidth * 0.8 : clientWidth * 0.8;
-      scrollRef.current.scrollBy({ left: scrollAmount, behavior: "smooth" });
-    }
-  };
 
   return (
     <section
@@ -140,79 +185,95 @@ export function ProjectsSection() {
       </div>
 
       {/* FOREGROUND CONTENT */}
-      <div className="relative z-10 flex flex-col md:flex-row md:items-end justify-between gap-6">
-        <SectionHeading
-          badge="The track record"
-          title="Proven Results"
-          description="Selected engagements where clarity, premium positioning, and stronger conversion mechanics changed the conversation."
-          centered={false}
-          dark={true}
-          badgeClassName="text-white/90"
-          titleClassName="text-white"
-          descriptionClassName="text-white/90"
-        />
-        <div className="flex items-center gap-3 md:gap-4 flex-wrap">
-          <div className="flex items-center gap-2">
-            <button
-              onClick={() => scroll("left")}
-              className="flex h-11 w-11 md:h-12 md:w-12 items-center justify-center rounded-full border border-white/20 bg-white/10 text-white backdrop-blur-sm transition-all hover:bg-white/20 hover:border-white/30 active:scale-95"
-              aria-label="Scroll left"
-            >
-              <ChevronLeft size={20} className="text-white" />
-            </button>
-            <button
-              onClick={() => scroll("right")}
-              className="flex h-11 w-11 md:h-12 md:w-12 items-center justify-center rounded-full border border-white/20 bg-white/10 text-white backdrop-blur-sm transition-all hover:bg-white/20 hover:border-white/30 active:scale-95"
-              aria-label="Scroll right"
-            >
-              <ChevronRight size={20} className="text-white" />
-            </button>
-          </div>
-          <Link 
-            href="/case-studies"
-            className="group inline-flex h-11 md:h-12 items-center gap-2 rounded-full border border-white/20 bg-orange-600 px-5 md:px-6 font-unbounded text-sm text-white transition-all hover:border-white/40 hover:bg-orange-500 shadow-md"
-          >
-            <span className="hidden md:inline text-white">See all case studies</span>
-            <span className="md:hidden text-white">See all</span>
-            <ArrowUpRight className="transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5 text-white" size={16} />
-          </Link>
+      <div className="relative z-10 mx-auto flex w-full max-w-7xl flex-col md:flex-row md:items-end justify-between gap-6">
+        <div className="max-w-2xl">
+          <h2 className="font-unbounded text-[2.2rem] sm:text-[2.8rem] md:text-[3.5rem] leading-[1.02] font-bold text-white tracking-tight">
+            Proven Results
+          </h2>
+          <p className="mt-2.5 max-w-xl text-sm sm:text-base leading-relaxed text-white/90 font-normal">
+            Real businesses. Measurable outcomes. Explore the work behind the numbers..
+          </p>
         </div>
+        <Link 
+          href="/case-studies"
+          className="hidden md:inline-flex rounded-none bg-orange-600 hover:bg-orange-500 px-6 py-3.5 font-unbounded text-xs font-semibold uppercase tracking-[0.22em] text-white transition-all shadow-md active:scale-95 items-center gap-2 shrink-0"
+        >
+          <span>Explore More Projects</span>
+          <ArrowUpRight size={16} />
+        </Link>
       </div>
 
-      <div 
-        ref={scrollRef}
-        className="relative z-10 mt-10 flex overflow-x-auto snap-x snap-mandatory gap-6 pb-8 hide-scrollbar"
-      >
+      {/* 6 PROJECTS GRID */}
+      <div className="relative z-10 mx-auto mt-12 grid w-full max-w-7xl grid-cols-1 md:grid-cols-2 gap-8 lg:gap-12">
         {projects.map((project, index) => (
           <motion.article 
-            initial={{ opacity: 0, scale: 0.96 }}
-            whileInView={{ opacity: 1, scale: 1 }}
-            viewport={{ once: true, margin: "-100px" }}
-            transition={{ duration: 0.7, delay: index * 0.15 }}
-            key={project.title}
-            className="snap-start min-w-[85vw] md:min-w-[45vw] lg:min-w-[40vw] flex-shrink-0"
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-80px" }}
+            transition={{ duration: 0.6, delay: (index % 2) * 0.12 }}
+            key={project.brand}
+            className="group flex flex-col"
           >
-            <div className="editorial-card overflow-hidden group rounded-xl">
-              <div className="relative aspect-[16/10] bg-[#e9dfd4] overflow-hidden group-hover:bg-[#e0d4c8] transition-colors duration-[1s]">
-                <Macbook3D imageSrc={project.image} />
-                <div className="absolute bottom-4 right-4 bg-black/60 backdrop-blur-md px-4 py-1.5 rounded-full font-caveat text-[1.2rem] text-white shadow-sm border border-white/15">
-                  {project.metric}
-                </div>
+            <Link href="/case-studies" className="block focus:outline-none">
+              {/* IMAGE CONTAINER (CLEAN 4:3 COMPACT RATIO) */}
+              <div className="relative w-full aspect-[4/3] overflow-hidden rounded-xl bg-[#080a0f] shadow-[0_16px_40px_rgba(0,0,0,0.35)] transition-all duration-500 group-hover:shadow-[0_22px_50px_rgba(0,0,0,0.5)]">
+                <Image
+                  src={project.image}
+                  alt={project.title}
+                  fill
+                  sizes="(max-width: 768px) 100vw, 50vw"
+                  className="object-cover object-center transition-transform duration-700 ease-out group-hover:scale-[1.03]"
+                />
               </div>
-            </div>
-            <div className="mt-6 flex items-start justify-between gap-4">
-              <div>
-                <h3 className="font-unbounded text-[1.7rem] leading-tight text-white">
+
+              {/* CARD INFO: LOGO + BRAND, TITLE, DESCRIPTION */}
+              <div className="mt-5 flex flex-col gap-2">
+                {/* COMPANY LOGO & NAME (NO TAG / EYEBROW) */}
+                <div className="flex items-center gap-2">
+                  {project.logo ? (
+                    <div className="relative flex h-3.5 w-auto items-center shrink-0">
+                      <img
+                        src={project.logo}
+                        alt={`${project.brand} logo`}
+                        className={`h-3.5 w-auto max-h-3.5 object-contain ${
+                          project.invertLogo ? "brightness-0 invert opacity-90" : "rounded-full"
+                        }`}
+                      />
+                    </div>
+                  ) : (
+                    <div className="grid h-3.5 w-3.5 place-items-center bg-cyan-400/20 text-[8px] font-mono font-bold text-cyan-300 shrink-0">
+                      {project.brand.substring(0, 2).toUpperCase()}
+                    </div>
+                  )}
+                  <span className="font-unbounded text-xs font-bold uppercase tracking-wider text-white">
+                    {project.brand}
+                  </span>
+                </div>
+
+                {/* TITLE */}
+                <h3 className="font-unbounded mt-1 text-lg sm:text-xl font-bold text-white tracking-tight leading-snug group-hover:text-cyan-200 transition-colors duration-300">
                   {project.title}
                 </h3>
-                <p className="font-caveat mt-2 text-[1.4rem] text-white/85">
-                  {project.category}
+
+                {/* DESCRIPTION */}
+                <p className="text-xs sm:text-sm md:text-[0.92rem] leading-relaxed text-white/70 font-normal">
+                  {project.description}
                 </p>
               </div>
-              <ArrowUpRight className="mt-2 text-cyan-300 flex-shrink-0 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" size={18} />
-            </div>
+            </Link>
           </motion.article>
         ))}
+      </div>
+
+      {/* NON-ROUNDED EXPLORE MORE PROJECTS BUTTON */}
+      <div className="relative z-10 mt-14 sm:mt-16 flex justify-center w-full">
+        <Link
+          href="/case-studies"
+          className="rounded-none bg-orange-600 hover:bg-orange-500 px-8 py-4 font-unbounded text-xs font-semibold uppercase tracking-[0.22em] text-white transition-all shadow-md active:scale-95 inline-flex items-center gap-3"
+        >
+          <span>Explore More Projects</span>
+          <ArrowUpRight size={16} />
+        </Link>
       </div>
     </section>
   );

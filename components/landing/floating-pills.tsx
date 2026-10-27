@@ -134,7 +134,7 @@ export function FloatingPills() {
     hasEnteredRef.current = new Array(PILL_CONFIGS.length).fill(false);
 
     // Matter modules
-    const { Engine, Runner, Bodies, Composite, Mouse, MouseConstraint, Events, Body, Sleeping } = Matter;
+    const { Engine, Runner, Bodies, Composite, Events, Body, Sleeping } = Matter;
 
     const engine = Engine.create({
       enableSleeping: true, // Allows resting pills to freeze completely, stopping micro-gravity oscillations
@@ -237,34 +237,6 @@ export function FloatingPills() {
 
     Composite.add(engine.world, pillBodies);
 
-    // Add interactive Mouse Constraint (drag, throw, toss pills)
-    const mouse = Mouse.create(container);
-    // Remove wheel event listeners so scrolling over the card is completely smooth and never blocked
-    const mouseInternal = mouse as unknown as {
-      element?: HTMLElement;
-      mousewheel?: (e: Event) => void;
-    };
-    if (mouseInternal.element && mouseInternal.mousewheel) {
-      mouseInternal.element.removeEventListener("wheel", mouseInternal.mousewheel);
-      mouseInternal.element.removeEventListener("mousewheel", mouseInternal.mousewheel);
-      mouseInternal.element.removeEventListener("DOMMouseScroll", mouseInternal.mousewheel);
-    }
-
-    const mouseConstraint = MouseConstraint.create(engine, {
-      mouse,
-      constraint: {
-        stiffness: 0.22, // Cushioned, smooth cursor following (prevents violent spring jitter)
-        damping: 0.12,
-        render: { visible: false },
-      },
-    });
-
-    Composite.add(engine.world, mouseConstraint);
-
-    // Wake all pills when user begins dragging so surrounding pills react fluidly
-    Events.on(mouseConstraint, "startdrag", () => {
-      pillBodies.forEach((b) => Sleeping.set(b, false));
-    });
 
     // Wake sleeping pills immediately if touched by an active pill
     Events.on(engine, "collisionStart", (event) => {
@@ -575,7 +547,6 @@ export function FloatingPills() {
       Runner.stop(runner);
       Events.off(engine, "afterUpdate", undefined as unknown as (...args: unknown[]) => void);
       Events.off(engine, "collisionStart", undefined as unknown as (...args: unknown[]) => void);
-      Events.off(mouseConstraint, "startdrag", undefined as unknown as (...args: unknown[]) => void);
       Composite.clear(engine.world, false);
       Engine.clear(engine);
     };
@@ -584,7 +555,7 @@ export function FloatingPills() {
   return (
     <div
       ref={containerRef}
-      className="relative w-full h-full min-h-0 overflow-hidden select-none touch-none cursor-grab active:cursor-grabbing bg-transparent"
+      className="relative w-full h-full min-h-0 overflow-hidden select-none pointer-events-none bg-transparent"
     >
       {/* Physics Simulated Pills */}
       {PILL_CONFIGS.map((cfg, idx) => {
@@ -602,7 +573,7 @@ export function FloatingPills() {
               transform: "translate3d(0, -600px, 0)",
               willChange: "transform",
             }}
-            className="absolute top-0 left-0 rounded-full shadow-[0_12px_24px_-4px_rgba(0,0,0,0.28),0_4px_8px_-2px_rgba(0,0,0,0.18)] cursor-grab active:cursor-grabbing select-none"
+            className="absolute top-0 left-0 rounded-full shadow-[0_12px_24px_-4px_rgba(0,0,0,0.28),0_4px_8px_-2px_rgba(0,0,0,0.18)] select-none pointer-events-none"
           >
             {/* Pill Capsule Body */}
             <div

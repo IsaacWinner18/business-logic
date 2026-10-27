@@ -2,6 +2,8 @@
 
 import Image from "next/image";
 import { motion } from "framer-motion";
+import { useRef, useState } from "react";
+import { ChevronLeft, ChevronRight } from "lucide-react";
 
 const blobTopLeftPaths = [
   "M 160,25 C 235,15 295,70 285,145 C 275,220 225,275 150,280 C 75,285 20,230 25,155 C 30,80 85,35 160,25 Z",
@@ -21,38 +23,78 @@ const testimonials = [
   {
     id: 1,
     quote:
-      "I honestly didn't expect this level of quality. The website made our business look far more established, and we've been getting more calls and inquiries ever since it went live.",
-    name: "Ojo Feranmi",
-    role: "CEO, Fedi Solutions Group",
-    image:
-      "https://res.cloudinary.com/dcvlszzoy/image/upload/v1778334695/Screenshot_2026-05-09_144304_n36rfa.png",
+      "Before we had this site, my team was answering the same questions all day on WhatsApp—prices, stock availability, bank details. Now customers go through the catalog, see the specs, and reach out ready to pay. It cut down our back-and-forth by half.",
+    name: "Tunde Adeyemi",
+    image: "/testimonials/tunde-adeyemi.jpg",
   },
   {
     id: 2,
     quote:
-      "Our old website wasn't bringing in sales. After the redesign, customers started placing orders almost immediately. The whole shopping experience just feels more trustworthy now.",
-    name: "Ben Doha",
-    role: "Founder, TechFlow",
-    image:
-      "https://res.cloudinary.com/dcvlszzoy/image/upload/v1780229406/Screenshot_2026-05-31_130940_y1tuf3.png",
+      "We were losing almost 20% on every single booking to third-party aggregator sites. Having our own booking website where guests can view room availability and pay directly in Naira has completely transformed our revenue.",
+    name: "Chidinma Nwosu",
+    image: "/testimonials/chidinma-nwosu.jpg",
   },
   {
     id: 3,
     quote:
-      "Working with the team was surprisingly easy. They listened to what we wanted, kept us updated throughout the project, and delivered a website we're genuinely proud to share with clients.",
-    name: "David Obim",
-    role: "Operations Director, Prime Estates",
-    image:
-      "https://res.cloudinary.com/dcvlszzoy/image/upload/v1778334695/Screenshot_2026-05-09_144304_n36rfa.png",
+      "When dealing with corporate clients, an Instagram page is not enough. They ask for your website before approving vendor registrations or invoice payments. Having a fast, polished site gave corporate clients the confidence to work with us.",
+    name: "Ojo Feranmi",
+    image: "/testimonials/ojo-feranmi.jpg",
+  },
+  {
+    id: 4,
+    quote:
+      "Our previous store was slow and kept crashing when customers checked out on mobile networks. The new website loads in seconds, looks sharp, and people now complete their orders directly without calling us for manual account transfers.",
+    name: "Amina Bello",
+    image: "/testimonials/amina-bello.jpg",
   },
 ];
 
 export function TestimonialsSection() {
+  const scrollRef = useRef<HTMLDivElement>(null);
+  const [activeIndex, setActiveIndex] = useState(0);
+
+  const scrollToIndex = (index: number) => {
+    if (!scrollRef.current) return;
+    const container = scrollRef.current;
+    const cardWidth = container.offsetWidth;
+    container.scrollTo({
+      left: cardWidth * index,
+      behavior: "smooth",
+    });
+    setActiveIndex(index);
+  };
+
+  const handleScroll = () => {
+    if (!scrollRef.current) return;
+    const container = scrollRef.current;
+    const cardWidth = container.offsetWidth;
+    if (cardWidth > 0) {
+      const newIndex = Math.round(container.scrollLeft / cardWidth);
+      if (newIndex !== activeIndex && newIndex >= 0 && newIndex < testimonials.length) {
+        setActiveIndex(newIndex);
+      }
+    }
+  };
+
   return (
     <section
       id="testimonials"
       className="relative px-5 py-20 md:px-8 md:py-28 lg:py-32 overflow-hidden bg-[#8338EC]"
     >
+      {/* SECTION HEADER */}
+      <div className="relative z-10 mx-auto max-w-3xl text-center mb-10 sm:mb-12">
+        <div className="inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/10 px-3.5 py-1 mb-3 backdrop-blur-md">
+          <span className="h-1.5 w-1.5 rounded-full bg-[#7DE2D1]" />
+          <span className="font-caveat text-lg text-white">
+            Client Stories
+          </span>
+        </div>
+        <h2 className="font-unbounded text-[2rem] sm:text-[2.6rem] md:text-[3.2rem] leading-[1.06] font-bold text-white tracking-tight">
+          What Business Owners Say
+        </h2>
+      </div>
+
       {/* COORDINATED CARD WRAPPER WITH 2 IRREGULAR BLOB SILHOUETTES */}
       <div className="relative w-full max-w-5xl mx-auto">
         {/* IRREGULAR ANIMATED BLOB SILHOUETTES FILLED #7DE2D1 */}
@@ -128,30 +170,47 @@ export function TestimonialsSection() {
         </div>
 
         {/* TESTIMONIALS CAROUSEL CARD */}
-        <div className="relative z-10 flex overflow-x-auto snap-x snap-mandatory pb-10 hide-scrollbar w-full cursor-grab active:cursor-grabbing">
+        <div 
+          ref={scrollRef}
+          onScroll={handleScroll}
+          style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}
+          className="relative z-10 flex overflow-x-auto snap-x snap-mandatory pb-4 hide-scrollbar no-scrollbar [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden w-full cursor-grab active:cursor-grabbing scroll-smooth"
+        >
           {testimonials.map((testimonial) => (
             <div 
               key={testimonial.id} 
               className="snap-center w-full min-w-full flex-shrink-0 text-center px-2 md:px-4"
             >
-              <div className="mx-auto w-full flex flex-col items-center bg-[#FAFAFA] border border-black/5 p-6 md:p-12 rounded-3xl relative shadow-sm">
-                <p className="text-6xl md:text-8xl leading-none text-black/5 absolute top-4 left-4 md:top-6 md:left-8 font-serif">&rdquo;</p>
-                <blockquote className="relative z-10 mt-4 md:mt-2 font-display text-[0.95rem] leading-relaxed text-black/90 md:text-[1.4rem] lg:text-[1.6rem] max-w-3xl">
+              <div className="mx-auto w-full flex flex-col items-center bg-[#FAFAFA] border border-black/5 p-6 sm:p-10 md:p-14 rounded-3xl relative shadow-lg">
+                <span 
+                  aria-hidden="true" 
+                  className="text-6xl sm:text-7xl md:text-8xl leading-none text-black/5 absolute top-3 left-4 sm:top-5 sm:left-8 font-serif select-none pointer-events-none"
+                >
+                  &rdquo;
+                </span>
+                
+                <blockquote className="relative z-10 mt-3 md:mt-2 text-base sm:text-lg md:text-xl lg:text-2xl leading-relaxed text-black/90 max-w-3xl font-medium tracking-normal">
                   &ldquo;{testimonial.quote}&rdquo;
                 </blockquote>
                 
-                <div className="mt-6 md:mt-8 flex flex-col md:flex-row items-center md:text-left gap-3 md:gap-5 border-t border-black/5 pt-6 w-full max-w-xl justify-center">
-                  <div className="relative w-12 h-12 md:w-16 md:h-16 rounded-full overflow-hidden border border-black/10 flex-shrink-0">
+                <div className="mt-6 sm:mt-8 flex flex-col sm:flex-row items-center sm:text-left gap-3 sm:gap-4 border-t border-black/10 pt-5 w-full max-w-md justify-center">
+                  <div className="relative w-14 h-14 sm:w-16 sm:h-16 rounded-full overflow-hidden border-2 border-white shadow-md flex-shrink-0 bg-neutral-200">
                     <Image 
                       src={testimonial.image}
                       alt={testimonial.name}
                       fill
-                      className="object-cover grayscale"
+                      sizes="(max-width: 768px) 56px, 64px"
+                      className="object-cover object-top"
                     />
                   </div>
-                  <div className="text-[9px] md:text-[11px] uppercase tracking-[0.15em] text-[var(--ink-faint)]">
-                    <p className="font-bold text-black/90">{testimonial.name}</p>
-                    <p className="mt-1 opacity-70">{testimonial.role}</p>
+                  <div className="text-center sm:text-left">
+                    <p className="font-unbounded text-base sm:text-lg font-bold text-black/90 tracking-tight">
+                      {testimonial.name}
+                    </p>
+                    <p className="text-xs text-neutral-500 font-medium mt-0.5 flex items-center justify-center sm:justify-start gap-1.5">
+                      <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 inline-block" />
+                      Verified Client
+                    </p>
                   </div>
                 </div>
               </div>
@@ -159,11 +218,39 @@ export function TestimonialsSection() {
           ))}
         </div>
         
-        {/* Swipe Indicator */}
-        <div className="relative z-10 flex justify-center mt-2 gap-2 pointer-events-none">
-          {testimonials.map((_, i) => (
-            <div key={i} className="w-2 h-2 rounded-full bg-[#7DE2D1]/40" />
-          ))}
+        {/* INTERACTIVE CONTROLS: PREV / PAGINATION PILLS / NEXT */}
+        <div className="relative z-10 flex items-center justify-center gap-4 mt-6">
+          <button
+            type="button"
+            onClick={() => scrollToIndex((activeIndex - 1 + testimonials.length) % testimonials.length)}
+            aria-label="Previous testimonial"
+            className="flex items-center justify-center w-10 h-10 rounded-full border border-white/25 bg-white/10 text-white backdrop-blur-md transition-all hover:bg-white/20 active:scale-95 cursor-pointer"
+          >
+            <ChevronLeft className="w-5 h-5" />
+          </button>
+          
+          <div className="flex items-center gap-2">
+            {testimonials.map((_, i) => (
+              <button
+                key={i}
+                type="button"
+                onClick={() => scrollToIndex(i)}
+                aria-label={`Go to testimonial ${i + 1}`}
+                className={`h-2.5 rounded-full transition-all duration-300 cursor-pointer ${
+                  activeIndex === i ? "w-8 bg-[#7DE2D1]" : "w-2.5 bg-white/35 hover:bg-white/60"
+                }`}
+              />
+            ))}
+          </div>
+
+          <button
+            type="button"
+            onClick={() => scrollToIndex((activeIndex + 1) % testimonials.length)}
+            aria-label="Next testimonial"
+            className="flex items-center justify-center w-10 h-10 rounded-full border border-white/25 bg-white/10 text-white backdrop-blur-md transition-all hover:bg-white/20 active:scale-95 cursor-pointer"
+          >
+            <ChevronRight className="w-5 h-5" />
+          </button>
         </div>
       </div>
     </section>

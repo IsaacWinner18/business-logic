@@ -34,7 +34,7 @@ export function ContactSection() {
           transition={{ delay: 0.1 }}
           className="font-display mt-6 text-[2.8rem] leading-[1.05] text-white md:text-[4.5rem]"
         >
-          Ready to Scale Your Revenue?
+          Let's build something
         </motion.h2>
         
         <motion.p 
@@ -44,7 +44,7 @@ export function ContactSection() {
           transition={{ delay: 0.2 }}
           className="mt-8 text-lg leading-relaxed text-white/70 max-w-2xl"
         >
-          We don&apos;t just build websites. We build scalable digital ecosystems that attract, convert, and retain high-value customers. Tell us what your business needs and we will recommend the right approach.
+          We don&apos;t just build websites. We build scalable digital ecosystems that attract, convert, and retain high-value customers. Tell us what your business needs.
         </motion.p>
 
         <motion.div 

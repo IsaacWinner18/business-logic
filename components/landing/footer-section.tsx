@@ -2,8 +2,8 @@ import Link from "next/link";
 
 export function FooterCtaSection() {
   return (
-    <footer className="section-shell px-5 py-8 md:px-8">
-      <div className="flex flex-col gap-6 md:flex-row md:items-end md:justify-between">
+    <footer className="section-shell px-5 py-8 md:px-8 lg:px-12 w-full">
+      <div className="mx-auto flex w-full max-w-7xl flex-col gap-6 md:flex-row md:items-end md:justify-between">
         <div>
           <div className="flex items-center gap-3">
             <div className="grid h-9 w-9 place-items-center border border-black/10 bg-white/90 text-[10px] font-semibold text-black">

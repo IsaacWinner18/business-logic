@@ -11,257 +11,82 @@ interface CaseStudy {
   tagline: string;
   title: string;
   image: string;
-  metrics: { value: string; label: string }[];
-  overview: string;
-  problem: string;
-  solution: { title: string; description: string }[];
+  description: string;
 }
 
 const caseStudies: CaseStudy[] = [
   {
     id: "01",
-    brand: "Dben Real Estates",
-    tagline: "Real Estate · Web Platform & Lead Architecture",
-    title: "Scaling Architecture for High-End Real Estate Discovery",
-    image:
-      "https://res.cloudinary.com/dcvlszzoy/image/upload/v1780229406/Screenshot_2026-05-31_130940_y1tuf3.png",
-    metrics: [
-      { value: "Bespoke UI", label: "LUXURY PROPERTY SYSTEM" },
-      { value: "Fast Filter", label: "INSTANT PROPERTY SEARCH" },
-      { value: "Direct Flow", label: "WHATSAPP & AGENT INQUIRY" },
-      { value: "Mobile UX", label: "HIGH-CONVERTING LAYOUT" },
-    ],
-    overview:
-      "Dben Real Estates partnered with us to modernize their digital presence. Their original site failed to reflect the architectural elegance and premium caliber of their property portfolio, leading to low user engagement in a competitive real estate market.",
-    problem:
-      "Prospective property buyers struggled with a cluttered, slow search experience lacking clear photography, location context, and straightforward inquiry paths. High-value clients were slipping through the cracks due to friction in reaching out to agents.",
-    solution: [
-      {
-        title: "Architectural Visual Identity",
-        description:
-          "Created an editorial, high-end web aesthetic with full-bleed property galleries and subtle micro-interactions that communicate trust and luxury.",
-      },
-      {
-        title: "Instant Property Search & Filter",
-        description:
-          "Engineered responsive filtering by location, price range, and property category, allowing buyers to pinpoint available listings within seconds.",
-      },
-      {
-        title: "Frictionless Inquiry Triggers",
-        description:
-          "Integrated direct WhatsApp and viewing scheduling actions on property detail pages, making inquiries immediate and effortless.",
-      },
-    ],
+    brand: "TINO RIDES",
+    tagline: "Automotive & Luxury Travel · Fleet & Chauffeur Platform",
+    title: "Premier Luxury Car Rental & VIP Fleet Booking Platform",
+    image: "/tino-rides-nano-banana.jpg",
+    description:
+      "A luxury car rental and chauffeur platform where clients can view vehicles, see clear daily rates, and book online in minutes.",
   },
   {
     id: "02",
-    brand: "Buychow Ng Group",
-    tagline: "Foodtech · Performance Engineering & UX Overhaul",
-    title: "High-Performance Architecture for an On-Demand Food Platform",
-    image:
-      "https://res.cloudinary.com/dcvlszzoy/image/upload/v1778334695/Screenshot_2026-05-09_144304_n36rfa.png",
-    metrics: [
-      { value: "60% Faster", label: "PAGE LOAD ACCELERATION" },
-      { value: "3 Steps", label: "STREAMLINED CHECKOUT" },
-      { value: "Peak-Ready", label: "HIGH TRAFFIC RESILIENCE" },
-      { value: "Mobile-First", label: "ORDERING EXPERIENCE" },
-    ],
-    overview:
-      "Buychow Ng Group is a regional foodtech platform connecting hungry diners with top-tier restaurants. As order volume grew, their legacy platform faced performance bottlenecks and high checkout abandonment on mobile devices.",
-    problem:
-      "Users experienced frustrating load times during peak lunch and dinner rushes. The checkout process was spread across multiple disconnected screens, creating drop-off and support friction.",
-    solution: [
-      {
-        title: "Performance Optimization",
-        description:
-          "Re-engineered the front-end rendering pipeline and component architecture, delivering a 60% faster page load time even on congested connections.",
-      },
-      {
-        title: "Simplified 3-Step Checkout",
-        description:
-          "Redesigned the ordering flow down to three intuitive steps, eliminating unnecessary form fields and reducing cart drop-off.",
-      },
-      {
-        title: "Mobile-First Redesign",
-        description:
-          "Optimized the entire platform for mobile interaction, with thumb-friendly controls, quick dish modifiers, and seamless order tracking.",
-      },
-    ],
+    brand: "B'Bonds Heavy Haul",
+    tagline: "Logistics & Supply Chain · Heavy Haul Transport",
+    title: "High-Capacity Heavy Haul Logistics & Fleet Operations",
+    image: "/bbonds-nano-banana.jpg",
+    description:
+      "A heavy haul and logistics website that lets industrial clients request transport, track shipments, and move cargo across Nigeria.",
   },
   {
     id: "03",
-    brand: "Exampreps",
-    tagline: "EdTech · Full-Stack Platform & PWA Built From Scratch",
-    title: "Built from Scratch: High-Performance CBT Platform & Installable PWA",
-    image:
-      "https://res.cloudinary.com/dcvlszzoy/image/upload/v1783873796/Screenshot_2026-07-12_172934_qxzilr.png",
-    metrics: [
-      { value: "From Scratch", label: "FULL-STACK PLATFORM" },
-      { value: "Installable PWA", label: "DOWNLOADABLE APP" },
-      { value: "CBT Engine", label: "TIMED EXAM SIMULATION" },
-      { value: "JAMB · WAEC", label: "NATIONAL CURRICULUM" },
-    ],
-    overview:
-      "We designed and built Exampreps completely from scratch as a modern computer-based testing (CBT) and exam preparation platform for students sitting for JAMB, WAEC, NECO, and other major national examinations. Built with clean UI and zero bloat, Exampreps also functions as an installable Progressive Web App (PWA) that students can download directly to their phones or laptops for an instant, app-like practice experience without going through an app store.",
-    problem:
-      "Most online exam prep tools in the region are dated, bloated with aggressive ads, and sluggish on budget mobile devices. Native mobile app downloads are often inaccessible to students with restricted device storage or limited mobile data. Furthermore, students rarely have access to authentic CBT interfaces that replicate computerized examination conditions.",
-    solution: [
-      {
-        title: "Downloadable Progressive Web App (PWA)",
-        description:
-          "Engineered Exampreps as a lightweight, installable Progressive Web App that students can download straight to their home screen or desktop with a single tap, offering native app performance with minimal storage consumption.",
-      },
-      {
-        title: "Custom CBT Testing Simulator",
-        description:
-          "Engineered an authentic timed computer-based testing engine with real-time countdowns, question palettes, flagging for review, and instant performance breakdowns with detailed answer explanations.",
-      },
-      {
-        title: "Distraction-Free Student UI & Low-Data Optimization",
-        description:
-          "Designed an intuitive, student-centric interface with clear typography, high contrast, and smart asset caching so lesson materials, past questions, and video guides load smoothly even on limited mobile data connections.",
-      },
-    ],
+    brand: "Dben Real Estates",
+    tagline: "Real Estate · Luxury Property Platform",
+    title: "Scaling Architecture for Luxury Property Discovery",
+    image: "/dben-nano-banana.jpg",
+    description:
+      "A luxury real estate website with fast property search, clean photo galleries, and direct WhatsApp inquiries for serious buyers.",
   },
   {
     id: "04",
-    brand: "FeemTech",
-    tagline: "Enterprise Software · Full-Stack Platform Built From Scratch",
-    title: "Built from Scratch: Enterprise Web Platform & Digital Authority",
-    image:
-      "https://res.cloudinary.com/dcvlszzoy/image/upload/v1783873692/Screenshot_2026-07-12_164904_wpahph.png",
-    metrics: [
-      { value: "From Scratch", label: "CUSTOM-BUILT SYSTEM" },
-      { value: "Bespoke UI", label: "ENTERPRISE DESIGN SYSTEM" },
-      { value: "Sub-Second", label: "PAGE LOAD VELOCITY" },
-      { value: "Direct Flow", label: "QUALIFIED B2B FUNNEL" },
-    ],
-    overview:
-      "We architected and built FeemTech entirely from scratch as a modern, high-performance corporate platform for an enterprise software solutions provider. Instead of adapting a rigid CMS or generic corporate template, we engineered a bespoke digital experience tailored to establish executive trust, present complex technical offerings with total clarity, and drive qualified enterprise inquiries.",
-    problem:
-      "As FeemTech expanded into enterprise software delivery, they needed an authoritative web platform that reflected their deep technical capabilities. Off-the-shelf templates and CMS themes were either too bloated, inflexible for custom technical service presentations, or lacked the speed and polished micro-interactions required to impress technical leaders and corporate decision-makers.",
-    solution: [
-      {
-        title: "Ground-Up Architecture & Design System",
-        description:
-          "Engineered a clean, modular design system from scratch using modern web standards, featuring crisp typography, precision spacing, and seamless responsiveness across all screen sizes.",
-      },
-      {
-        title: "Interactive Technical Capability Showcases",
-        description:
-          "Built custom interactive modules and architecture breakdowns that clearly communicate complex software services, security practices, and deployment models without marketing fluff.",
-      },
-      {
-        title: "Optimized Performance & B2B Inquiry Flow",
-        description:
-          "Developed lightweight, sub-second page rendering and a friction-free technical discovery inquiry funnel that connects enterprise prospects directly with FeemTech engineering leads.",
-      },
-    ],
+    brand: "Buychow Ng Group",
+    tagline: "Foodtech · On-Demand Delivery",
+    title: "High-Performance Architecture for an On-Demand Food Platform",
+    image: "/buychow-nano-banana.jpg",
+    description:
+      "An on-demand food delivery platform rebuilt with a fast 3-step checkout, cutting load times and making ordering smooth during rush hours.",
   },
   {
     id: "05",
-    brand: "Farmergiant",
-    tagline: "Agrotech · E-Commerce Transformation & Product Catalog",
-    title: "E-Commerce Experience for Agricultural Machinery & Supplies",
+    brand: "FeemTech",
+    tagline: "E-Commerce · Cameras, Drones & Gear",
+    title: "E-Commerce Store for Professional Cameras & Drones",
     image:
-      "https://res.cloudinary.com/dcvlszzoy/image/upload/v1783875916/Screenshot_2026-07-12_180458_h6ojxe.png",
-    metrics: [
-      { value: "Catalog", label: "STRUCTURED EQUIPMENT DATA" },
-      { value: "Direct Flow", label: "ORDER & WHATSAPP CHECKOUT" },
-      { value: "Accessible", label: "SIMPLIFIED USER JOURNEY" },
-      { value: "99.9%", label: "HIGH AVAILABILITY" },
-    ],
-    overview:
-      "Farmergiant supplies high-grade agricultural equipment, incubators, and farm resources. They wanted to transition from manual, phone-heavy ordering to a clean e-commerce platform where commercial farmers can explore equipment, review specifications, and place orders directly.",
-    problem:
-      "Farmers and agribusiness owners were finding existing online systems overly convoluted. Technical specifications were confusingly laid out, and complex checkout forms led many to abandon orders and place phone inquiries instead.",
-    solution: [
-      {
-        title: "Simplified Agrotech E-Commerce",
-        description:
-          "Built a clean, straightforward purchasing experience tailored to the needs of agricultural business operators, with clear imagery and transparent specs.",
-      },
-      {
-        title: "Structured Equipment Catalogs",
-        description:
-          "Organized heavy machinery data into clear, comparative specifications (power, capacity, warranty), enabling confident purchasing decisions.",
-      },
-      {
-        title: "Flexible Checkout & Consultation",
-        description:
-          "Implemented dual checkout pathways—direct card payments for standard supplies and one-tap WhatsApp consultations for specialized equipment.",
-      },
-    ],
+      "https://res.cloudinary.com/dcvlszzoy/image/upload/v1783873692/Screenshot_2026-07-12_164904_wpahph.png",
+    description:
+      "An e-commerce store for creators and filmmakers to buy cameras, drones, spare parts, and production equipment with seamless checkout.",
   },
   {
     id: "06",
-    brand: "Earnstak",
-    tagline: "Creator Economy · Commerce & Audience Hub",
-    title: "All-in-One Audience Monetization & Link Platform for Creators",
-    image:
-      "https://res.cloudinary.com/dcvlszzoy/image/upload/v1783940517/Screenshot_2026-07-13_115221_vpr9lr.png",
-    metrics: [
-      { value: "All-in-One", label: "LINK HUB + STOREFRONT" },
-      { value: "In-Link", label: "ONE-CLICK CHECKOUT" },
-      { value: "Sub-100ms", label: "INTERACTION VELOCITY" },
-      { value: "Real-Time", label: "CREATOR ANALYTICS" },
-    ],
-    overview:
-      "Earnstak is an all-in-one creator commerce platform designed to unite everything creators do with their audience into a single high-converting link. It replaces fragmented link-in-bio tools, standalone digital stores, and disjointed payment links with a unified, polished digital storefront.",
-    problem:
-      "Modern creators were forced to juggle four or five disconnected tools—a link aggregator, a separate digital download store, payment gateways, and mailing lists. This fragmented stack created brand disconnect, slow mobile redirects, and severe drop-off during checkout.",
-    solution: [
-      {
-        title: "Unified Creator Storefront",
-        description:
-          "Crafted a visually striking, customizable interface where creators can showcase exclusive content, digital downloads, courses, and custom links in one fluid hub.",
-      },
-      {
-        title: "Frictionless In-Link Checkout",
-        description:
-          "Built a streamlined checkout architecture that allows fans to purchase digital assets directly inside the link view with instant delivery and zero clunky redirects.",
-      },
-      {
-        title: "Real-Time Creator Insights",
-        description:
-          "Implemented intuitive creator dashboards providing immediate visibility into link click-throughs, sales conversion, top-performing items, and audience engagement.",
-      },
-    ],
+    brand: "Farmergiant",
+    tagline: "Agrotech · Equipment E-Commerce",
+    title: "E-Commerce Store for Poultry Equipment & Farm Supplies",
+    image: "/farmergiant-nano-banana.jpg",
+    description:
+      "An e-commerce store for poultry equipment and agricultural supplies, making it simple for commercial farmers to browse and order online.",
   },
   {
     id: "07",
+    brand: "Earnstak",
+    tagline: "Creator Economy · Commerce Hub",
+    title: "All-in-One Audience Monetization & Link Platform for Creators",
+    image: "/earnstak-nano-banana.jpg",
+    description:
+      "An all-in-one platform for creators and marketers to sell digital products on their own page, sell event tickets, and accept fan tips and gifts.",
+  },
+  {
+    id: "08",
     brand: "Santorini",
-    tagline: "Luxury Hospitality · Direct Booking & Brand Experience",
-    title: "Elevating the Digital Experience for Luxury Boutique Hospitality",
-    image:
-      "https://res.cloudinary.com/dcvlszzoy/image/upload/v1783874011/Screenshot_2026-07-12_173311_dqd6ee.png",
-    metrics: [
-      { value: "Direct Flow", label: "COMMISSION-FREE BOOKING" },
-      { value: "Editorial", label: "IMMERSIVE VISUAL DESIGN" },
-      { value: "Fluid", label: "MICRO-INTERACTIONS" },
-      { value: "Mobile UX", label: "PERFECTED RESERVATIONS" },
-    ],
-    overview:
-      "Santorini is an exclusive luxury boutique hotel offering intimate, high-end hospitality experiences. They wanted their web presence to reflect the tranquility and understated elegance of their physical destination while driving direct guest bookings.",
-    problem:
-      "Their previous digital presence relied heavily on third-party aggregator channels that charged high commissions and diluted the exclusive brand identity. The booking journey felt impersonal and generic.",
-    solution: [
-      {
-        title: "Immersive Visual Narrative",
-        description:
-          "Centered the design around atmospheric, full-width photography and bespoke typography that transports visitors into the hotel's relaxing ambiance.",
-      },
-      {
-        title: "Custom Direct Booking Flow",
-        description:
-          "Engineered a seamless, on-site reservation flow that allows guests to select suites, dates, and amenities directly without third-party redirection.",
-      },
-      {
-        title: "Tailored Concierge Micro-Interactions",
-        description:
-          "Added subtle, tactile motion design and bespoke experience add-ons (spa, dining, transfers) to enhance the feeling of luxury throughout the reservation.",
-      },
-    ],
+    tagline: "Hospitality · Hotel Website & Direct Booking",
+    title: "Hotel Website & Direct Room Reservation System",
+    image: "/santorini-nano-banana.jpg",
+    description:
+      "A modern hotel website with a direct reservation system, letting guests browse rooms and book their stay without third-party fees.",
   },
 ];
 
@@ -313,109 +138,38 @@ export default function CaseStudiesPage() {
           </p>
         </section>
 
-        {/* CASE STUDIES LIST */}
-        <div className="flex flex-col gap-32 pb-32">
+        {/* CASE STUDIES LIST - TWO PER ROW, NO BORDER LINES, NO TAG/EYEBROW, REDUCED SIZE, JUST NAME & DESCRIPTION */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-x-10 gap-y-16 pb-28">
           {caseStudies.map((study) => (
             <motion.article
               key={study.id}
-              initial={{ opacity: 0, y: 35 }}
+              initial={{ opacity: 0, y: 25 }}
               whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: "-80px" }}
-              transition={{ duration: 0.7 }}
-              className="flex flex-col gap-10 border-t border-black/10 pt-16"
+              viewport={{ once: true, margin: "-50px" }}
+              transition={{ duration: 0.5 }}
+              className="flex flex-col gap-4 group"
             >
-              {/* HEADER */}
-              <div className="flex flex-col gap-2">
-                <div className="flex flex-wrap items-center gap-3">
-                  <span className="text-[11px] uppercase tracking-[0.18em] text-orange-600 font-bold bg-orange-50 px-2.5 py-1 rounded-md border border-orange-200/60">
-                    CASE STUDY · {study.id}
-                  </span>
-                  <span className="text-xs uppercase tracking-wider text-[var(--ink-soft)] font-medium">
-                    {study.tagline}
-                  </span>
-                </div>
-                <div className="flex items-baseline gap-4 mt-2">
-                  <span className="font-unbounded text-4xl md:text-6xl text-[var(--accent)] opacity-20 select-none">
-                    {study.id}
-                  </span>
-                  <h2 className="font-unbounded text-3xl md:text-5xl text-black">
-                    {study.brand}
-                  </h2>
-                </div>
-              </div>
-
-              {/* SCREENSHOT */}
-              <div className="relative w-full aspect-[16/10] md:aspect-[21/9] bg-[#f4f4f4] overflow-hidden rounded-xl border border-black/5 group shadow-sm">
+              {/* SCREENSHOT - 4:3 COMPACT RATIO */}
+              <div className="relative w-full aspect-[4/3] bg-[#080a0f] overflow-hidden rounded-xl shadow-sm">
                 <Image
                   src={study.image}
-                  alt={`${study.brand} platform screenshot`}
+                  alt={`${study.brand} screenshot`}
                   fill
-                  sizes="(max-width: 768px) 100vw, (max-width: 1200px) 90vw, 1040px"
+                  sizes="(max-width: 768px) 100vw, 50vw"
                   priority={study.id === "01"}
                   unoptimized
-                  className="object-cover object-top transition-transform duration-[1.5s] ease-out group-hover:scale-[1.02]"
+                  className="object-cover object-center transition-transform duration-700 ease-out group-hover:scale-[1.02]"
                 />
               </div>
 
-              {/* METRICS & DELIVERABLES GRID */}
-              <div className="grid grid-cols-2 md:grid-cols-4 gap-6 py-6 border-y border-black/5 bg-[#FAFAFA] px-6 md:px-8 rounded-xl">
-                {study.metrics.map((metric, idx) => (
-                  <div key={idx} className="flex flex-col gap-1">
-                    <span className="font-unbounded text-lg md:text-xl text-black font-semibold">
-                      {metric.value}
-                    </span>
-                    <span className="text-[11px] uppercase tracking-wider text-[var(--ink-soft)] font-semibold leading-tight">
-                      {metric.label}
-                    </span>
-                  </div>
-                ))}
-              </div>
-
-              {/* STORY CONTENT */}
-              <div className="grid md:grid-cols-[1fr_2fr] gap-10 lg:gap-20">
-                <div className="flex flex-col gap-4">
-                  <h3 className="font-unbounded text-xl md:text-2xl leading-snug text-black">
-                    {study.title}
-                  </h3>
-                </div>
-
-                <div className="flex flex-col gap-10">
-                  <div className="flex flex-col gap-3">
-                    <h4 className="text-[11px] uppercase tracking-widest font-bold text-black">
-                      Overview
-                    </h4>
-                    <p className="text-base md:text-lg leading-relaxed text-[var(--ink-soft)]">
-                      {study.overview}
-                    </p>
-                  </div>
-
-                  <div className="flex flex-col gap-3">
-                    <h4 className="text-[11px] uppercase tracking-widest font-bold text-black">
-                      The Challenge
-                    </h4>
-                    <p className="text-base md:text-lg leading-relaxed text-[var(--ink-soft)]">
-                      {study.problem}
-                    </p>
-                  </div>
-
-                  <div className="flex flex-col gap-5">
-                    <h4 className="text-[11px] uppercase tracking-widest font-bold text-black">
-                      What We Built
-                    </h4>
-                    <ul className="flex flex-col gap-5">
-                      {study.solution.map((item, idx) => (
-                        <li key={idx} className="flex flex-col gap-1">
-                          <strong className="text-black font-semibold text-base md:text-lg">
-                            {item.title}
-                          </strong>
-                          <span className="text-[var(--ink-soft)] leading-relaxed text-sm md:text-base">
-                            {item.description}
-                          </span>
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-                </div>
+              {/* JUST NAME & DESCRIPTION (NO TAG/EYEBROW, NO BORDER LINE) */}
+              <div className="flex flex-col gap-1.5">
+                <h2 className="font-unbounded text-xl sm:text-2xl text-black font-bold tracking-tight">
+                  {study.brand}
+                </h2>
+                <p className="text-sm md:text-[0.95rem] leading-relaxed text-[var(--ink-soft)] font-normal">
+                  {study.description}
+                </p>
               </div>
             </motion.article>
           ))}

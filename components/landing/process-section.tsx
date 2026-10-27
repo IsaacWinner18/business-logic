@@ -1,43 +1,13 @@
 "use client";
 
-import { SectionHeading } from "@/components/landing/shared";
 import Image from "next/image";
 import { motion } from "framer-motion";
-import {
-  ModernDesignVisual,
-  FastCommunicationVisual,
-  MobileFirstVisual,
-  ResultsFocusedVisual,
-} from "./process-card-visuals";
 import {
   SpirographVar1,
   SpirographVar2,
   SpirographVar3,
   SpirographVar4,
 } from "./process-spirographs";
-
-const positioningPoints = [
-  {
-    title: "Modern Design",
-    copy: "We create clean websites that immediately improve your brand image.",
-    Visual: ModernDesignVisual,
-  },
-  {
-    title: "Fast Communication",
-    copy: "No disappearing. No endless delays. Clear updates throughout the project.",
-    Visual: FastCommunicationVisual,
-  },
-  {
-    title: "Mobile First",
-    copy: "Most users browse with phones. Your website will be optimized for mobile users first.",
-    Visual: MobileFirstVisual,
-  },
-  {
-    title: "Results Focused",
-    copy: "We build with business goals in mind - not just aesthetics.",
-    Visual: ResultsFocusedVisual,
-  },
-];
 
 const processSteps = [
   {
@@ -66,241 +36,255 @@ const processSteps = [
   },
 ];
 
-const headerWords = ["Why", "Businesses", "Choose", "Us"];
-
 export function ProcessSection() {
-  const leftPoints = positioningPoints.slice(0, 2);
-  const rightPoints = positioningPoints.slice(2, 4);
-
   return (
     <>
       <section
         id="positioning"
-        className="relative overflow-hidden px-5 pt-12 pb-20 md:px-8 md:pt-16 md:pb-24 lg:px-12 lg:pt-18 lg:pb-28 bg-cyan-400"
+        className="relative [clip-path:inset(0)] px-5 pt-16 pb-20 md:px-8 md:pt-20 md:pb-28 lg:px-12 lg:pt-24 lg:pb-32 bg-[#07090c] text-white"
       >
-        {/* CYAN-800 TONAL OVERLAY */}
-        <div className="pointer-events-none absolute inset-0 z-0 bg-cyan-800/85" />
+        {/* FIXED GLOBE BACKGROUND (CLIPPED TO SECTION BOUNDS) */}
+        <div
+          aria-hidden="true"
+          className="pointer-events-none fixed inset-0 z-0 flex items-center justify-center overflow-hidden"
+        >
+          <Image
+            src="/globe-bg.png"
+            alt="Why Businesses Choose Us background"
+            fill
+            priority
+            sizes="100vw"
+            className="object-cover object-bottom select-none pointer-events-none opacity-40"
+          />
+          {/* Atmospheric vignette & blend */}
+          <div className="absolute inset-0 bg-[#07090c]/40" />
+          <div className="absolute inset-0 bg-gradient-to-t from-[#07090c] via-transparent to-[#07090c]/80" />
+        </div>
 
         {/* SUBTLE ARCHITECTURAL GRAIN / GRID ACCENT */}
         <div
           aria-hidden="true"
-          className="pointer-events-none absolute inset-0 z-0 opacity-15"
+          className="pointer-events-none absolute inset-0 z-0 opacity-10"
           style={{
             backgroundImage: `radial-gradient(rgba(255, 255, 255, 0.4) 1px, transparent 1px)`,
             backgroundSize: "24px 24px",
           }}
         />
 
-        {/* SEMANTIC HEADING FOR ACCESSIBILITY & SEO */}
-        <h2 className="sr-only">Why Businesses Choose Us</h2>
-
-        {/* ANIMATED BACKGROUND HEADING (STRETCHED WITH PARABOLIC/UMBRELLA ARC) */}
-        <div
-          aria-hidden="true"
-          className="pointer-events-none select-none absolute inset-x-0 top-6 sm:top-8 md:top-10 flex flex-col items-center justify-center overflow-hidden z-0 px-4"
-        >
-          <div className="text-center font-unbounded font-black uppercase tracking-[0.16em] sm:tracking-[0.22em] md:tracking-[0.28em] text-white select-none scale-x-[1.03] origin-center">
-            <div className="flex flex-wrap items-center justify-center gap-x-3 sm:gap-x-5 md:gap-x-7 text-2xl sm:text-3xl md:text-4xl lg:text-[2.75rem] xl:text-[3.25rem] leading-tight">
-              {headerWords.map((word, wordIdx) => (
-                <span key={wordIdx} className="inline-flex whitespace-nowrap">
-                  {Array.from(word).map((char, charIdx) => {
-                    const cumulativeIdx =
-                      headerWords.slice(0, wordIdx).join("").length + charIdx;
-                    return (
-                      <span
-                        key={charIdx}
-                        className="inline-block animate-char-wave"
-                        style={{
-                          animationDelay: `-${cumulativeIdx * 0.14}s`,
-                        }}
-                      >
-                        {char}
-                      </span>
-                    );
-                  })}
-                </span>
-              ))}
+        {/* SECTION HEADER - MATURE, CLEAN, CONFIDENT (NO WAVY ANIMATIONS) */}
+        <div className="relative z-10 mx-auto max-w-7xl mb-10 sm:mb-14">
+          <div className="max-w-2xl">
+            <div className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/[0.04] px-3.5 py-1.5 mb-3 backdrop-blur-md">
+              <span className="h-1.5 w-1.5 rounded-full bg-cyan-400" />
+              <span className="font-caveat text-lg text-white/90">
+                Why Us
+              </span>
             </div>
-          </div>
-
-          {/* SUBTLE PARABOLIC / UMBRELLA CURVED ARC UNDER THE TEXT */}
-          <div className="flex justify-center mt-3 sm:mt-3.5 opacity-85">
-            <svg
-              viewBox="0 0 600 32"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
-              className="w-[300px] sm:w-[460px] md:w-[580px] lg:w-[680px] xl:w-[740px] h-auto stroke-white"
-            >
-              {/* Terminal datum dots */}
-              <circle cx="30" cy="24" r="1.5" fill="white" opacity="0.6" />
-              <circle cx="570" cy="24" r="1.5" fill="white" opacity="0.6" />
-
-              {/* Primary parabolic / umbrella arch */}
-              <path
-                d="M 35 24 Q 300 4 565 24"
-                stroke="currentColor"
-                strokeWidth="1.5"
-                strokeLinecap="round"
-                opacity="0.9"
-              />
-
-              {/* Secondary harmonic dashed echo */}
-              <path
-                d="M 75 25 Q 300 10 525 25"
-                stroke="currentColor"
-                strokeWidth="0.8"
-                strokeDasharray="4 4"
-                strokeLinecap="round"
-                opacity="0.4"
-              />
-
-              {/* Subtle umbrella radial guide spokes */}
-              <line x1="300" y1="4" x2="300" y2="12" stroke="currentColor" strokeWidth="0.8" opacity="0.5" />
-              <line x1="210" y1="8" x2="210" y2="15" stroke="currentColor" strokeWidth="0.6" strokeDasharray="2 2" opacity="0.3" />
-              <line x1="390" y1="8" x2="390" y2="15" stroke="currentColor" strokeWidth="0.6" strokeDasharray="2 2" opacity="0.3" />
-
-              {/* Apex anchor dot */}
-              <circle cx="300" cy="4" r="2" fill="white" opacity="0.95" />
-            </svg>
+            <h2 className="font-unbounded text-[2.2rem] sm:text-[2.8rem] md:text-[3.5rem] leading-[1.04] font-bold text-white tracking-tight">
+              Why Businesses Choose Us
+            </h2>
+            <p className="mt-3 max-w-xl text-sm sm:text-base leading-relaxed text-white/80 font-normal">
+              We build fast, modern websites that make your business look credible and help you win real clients.
+            </p>
           </div>
         </div>
 
-        {/* 3-COLUMN CONTENT GRID: LEFT 2 POINTS | CENTER IMAGE | RIGHT 2 POINTS */}
-        <div className="relative z-10 mx-auto max-w-7xl mt-12 sm:mt-14 md:mt-16 lg:mt-20">
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 lg:gap-10 xl:gap-12 items-center">
-            {/* LEFT COLUMN: 2 POINTS */}
+        {/* BENTO GRID: 4 CARDS (2-ROW ASYMMETRIC BENTO LAYOUT WITH ROUNDED EDGES) */}
+        <div className="relative z-10 mx-auto max-w-7xl">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 sm:gap-8 items-stretch">
+            {/* 1. MODERN DESIGN (WIDE BENTO CARD - 7 COLS) */}
             <motion.div
-              initial={{ opacity: 0, x: -30 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true, margin: "-80px" }}
-              transition={{ duration: 0.7 }}
-              className="flex flex-col gap-6 lg:gap-8 order-2 lg:order-1"
+              initial={{ opacity: 0, y: 25 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: "-60px" }}
+              transition={{ duration: 0.6 }}
+              className="group relative overflow-hidden rounded-2xl sm:rounded-3xl border border-white/15 bg-gradient-to-b from-white/[0.07] to-white/[0.02] backdrop-blur-xl p-6 sm:p-8 flex flex-col justify-between lg:col-span-7 transition-all duration-300 hover:border-white/30"
             >
-              {leftPoints.map((point) => (
-                <div
-                  key={point.title}
-                  className="group relative overflow-hidden border border-white/20 bg-black/15 p-6 md:p-8 transition-colors duration-300 hover:border-white/50 hover:bg-black/25"
-                >
-                  {/* SUBTLE ARCHITECTURAL DRAFTING GRID */}
-                  <div
-                    aria-hidden="true"
-                    className="pointer-events-none absolute inset-0 opacity-[0.05] transition-opacity duration-500 group-hover:opacity-[0.10]"
-                    style={{
-                      backgroundImage: `linear-gradient(to right, rgba(255,255,255,0.2) 1px, transparent 1px), linear-gradient(to bottom, rgba(255,255,255,0.2) 1px, transparent 1px)`,
-                      backgroundSize: "24px 24px",
-                      maskImage: "radial-gradient(ellipse at 85% 15%, black 20%, transparent 80%)",
-                      WebkitMaskImage: "radial-gradient(ellipse at 85% 15%, black 20%, transparent 80%)",
-                    }}
-                  />
-
-                  {/* BESPOKE MATHEMATICAL / ARCHITECTURAL DRAFTING SCHEMATIC */}
-                  <div className="pointer-events-none absolute inset-0 opacity-70 transition-opacity duration-500 group-hover:opacity-100">
-                    <point.Visual />
+              <div>
+                <div className="flex items-center justify-between mb-4">
+                  <div className="flex items-center gap-2">
+                    <span className="w-2 h-2 rounded-full bg-cyan-400 group-hover:scale-125 transition-transform" />
+                    <span className="text-[11px] font-mono uppercase tracking-widest text-cyan-300 font-semibold">
+                      First Impressions
+                    </span>
                   </div>
-
-                  <div className="relative z-10 mb-4">
-                    <div className="w-2 h-2 rounded-full bg-cyan-300/70 group-hover:bg-white transition-colors" />
-                  </div>
-
-                  <h3 className="relative z-10 font-unbounded text-xl md:text-2xl font-bold text-white tracking-tight leading-tight">
-                    {point.title}
-                  </h3>
-                  <p className="relative z-10 mt-3 text-sm md:text-[0.95rem] leading-relaxed text-white/80 font-normal">
-                    {point.copy}
-                  </p>
-
-                  {/* Decorative technical corners */}
-                  <div className="absolute top-0 left-0 w-2 h-2 border-t border-l border-white/40 opacity-0 group-hover:opacity-100 transition-opacity" />
-                  <div className="absolute bottom-0 right-0 w-2 h-2 border-b border-r border-white/40 opacity-0 group-hover:opacity-100 transition-opacity" />
                 </div>
-              ))}
-            </motion.div>
-
-            {/* CENTER COLUMN: PORTRAIT IMAGE */}
-            <motion.div
-              initial={{ opacity: 0, scale: 0.95 }}
-              whileInView={{ opacity: 1, scale: 1 }}
-              viewport={{ once: true, margin: "-80px" }}
-              transition={{ duration: 0.8 }}
-              className="relative mx-auto w-full max-w-[22rem] sm:max-w-[25rem] lg:max-w-[24rem] xl:max-w-[26rem] order-1 lg:order-2"
-            >
-              <div className="relative p-3 group border border-white/20 bg-black/15">
-                <div className="relative aspect-[4/4.8] bg-[#d9d1c8] overflow-hidden">
-                  <Image
-                    src="/Isaac Winner 2.png"
-                    alt="Business consultant portrait"
-                    fill
-                    sizes="(max-width: 1024px) 100vw, 26rem"
-                    className="object-cover grayscale transition-transform duration-[1.5s] group-hover:scale-105"
-                  />
-                </div>
-              </div>
-
-              <div className="absolute -bottom-5 left-1/2 -translate-x-1/2 sm:left-4 sm:translate-x-0 max-w-[15rem] bg-[var(--accent)] p-5 md:p-6 text-white border border-white/20">
-                <p className="font-unbounded text-3xl font-bold text-white">4+</p>
-                <p className="font-caveat mt-2 text-[1.3rem] leading-5 text-white/95">
-                  Years of combined digital strategy and execution across the market
+                <h3 className="font-unbounded text-xl sm:text-2xl font-bold text-white tracking-tight">
+                  Modern Design
+                </h3>
+                <p className="mt-2 text-sm sm:text-[0.95rem] text-white/80 leading-relaxed font-normal max-w-xl">
+                  A clean, well-crafted website makes clients take your business seriously before they even get on a call with you.
                 </p>
               </div>
+
+              {/* UI COMPONENT ASSET: Hand Presenting Modern Dashboard Cards */}
+              <div className="relative mt-6 sm:mt-8 w-full aspect-[16/10] sm:aspect-[2/1] overflow-hidden rounded-xl bg-black/30 border border-white/5 flex items-center justify-center p-2">
+                <Image
+                  src="/why-us/Hand Presenting Modern Dashboard Cards.png"
+                  alt="Modern Design UI Dashboard Showcase"
+                  fill
+                  sizes="(max-width: 1024px) 100vw, 58vw"
+                  className="object-contain object-center transition-transform duration-700 ease-out group-hover:scale-[1.04]"
+                />
+              </div>
             </motion.div>
 
-            {/* RIGHT COLUMN: 2 POINTS */}
+            {/* 2. FOUNDER & LEAD ENGINEER (COMPACT PROFILE CARD - 5 COLS, NOT TOO LONG) */}
             <motion.div
-              initial={{ opacity: 0, x: 30 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true, margin: "-80px" }}
-              transition={{ duration: 0.7 }}
-              className="flex flex-col gap-6 lg:gap-8 order-3"
+              initial={{ opacity: 0, y: 25 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: "-60px" }}
+              transition={{ duration: 0.6, delay: 0.1 }}
+              className="group relative overflow-hidden rounded-2xl sm:rounded-3xl border border-white/15 bg-gradient-to-b from-white/[0.07] to-white/[0.02] backdrop-blur-xl p-6 sm:p-8 flex flex-col justify-between lg:col-span-5 transition-all duration-300 hover:border-white/30"
             >
-              {rightPoints.map((point) => (
-                <div
-                  key={point.title}
-                  className="group relative overflow-hidden border border-white/20 bg-black/15 p-6 md:p-8 transition-colors duration-300 hover:border-white/50 hover:bg-black/25"
-                >
-                  {/* SUBTLE ARCHITECTURAL DRAFTING GRID */}
-                  <div
-                    aria-hidden="true"
-                    className="pointer-events-none absolute inset-0 opacity-[0.05] transition-opacity duration-500 group-hover:opacity-[0.10]"
-                    style={{
-                      backgroundImage: `linear-gradient(to right, rgba(255,255,255,0.2) 1px, transparent 1px), linear-gradient(to bottom, rgba(255,255,255,0.2) 1px, transparent 1px)`,
-                      backgroundSize: "24px 24px",
-                      maskImage: "radial-gradient(ellipse at 85% 15%, black 20%, transparent 80%)",
-                      WebkitMaskImage: "radial-gradient(ellipse at 85% 15%, black 20%, transparent 80%)",
-                    }}
-                  />
-
-                  {/* BESPOKE MATHEMATICAL / ARCHITECTURAL DRAFTING SCHEMATIC */}
-                  <div className="pointer-events-none absolute inset-0 opacity-70 transition-opacity duration-500 group-hover:opacity-100">
-                    <point.Visual />
+              <div>
+                <div className="flex items-center justify-between mb-4">
+                  <div className="flex items-center gap-2">
+                    <span className="w-2 h-2 rounded-full bg-orange-400 group-hover:scale-125 transition-transform" />
+                    <span className="text-[11px] font-mono uppercase tracking-widest text-orange-300 font-semibold">
+                      No Middlemen
+                    </span>
                   </div>
-
-                  <div className="relative z-10 mb-4">
-                    <div className="w-2 h-2 rounded-full bg-cyan-300/70 group-hover:bg-white transition-colors" />
-                  </div>
-
-                  <h3 className="relative z-10 font-unbounded text-xl md:text-2xl font-bold text-white tracking-tight leading-tight">
-                    {point.title}
-                  </h3>
-                  <p className="relative z-10 mt-3 text-sm md:text-[0.95rem] leading-relaxed text-white/80 font-normal">
-                    {point.copy}
-                  </p>
-
-                  {/* Decorative technical corners */}
-                  <div className="absolute top-0 left-0 w-2 h-2 border-t border-l border-white/40 opacity-0 group-hover:opacity-100 transition-opacity" />
-                  <div className="absolute bottom-0 right-0 w-2 h-2 border-b border-r border-white/40 opacity-0 group-hover:opacity-100 transition-opacity" />
                 </div>
-              ))}
+                <h3 className="font-unbounded text-xl sm:text-2xl font-bold text-white tracking-tight">
+                  Direct Collaboration
+                </h3>
+                <p className="mt-2 text-sm sm:text-[0.95rem] text-white/80 leading-relaxed font-normal">
+                  You work directly with the developer building your site. No account managers, no phone tag, no waiting days for simple answers.
+                </p>
+              </div>
+
+              {/* COMPACT PROFILE BADGE (TIGHT, SLEEK, NOT LONG) */}
+              <div className="mt-6 flex flex-col gap-3">
+                <div className="flex items-center gap-4 rounded-xl border border-white/10 bg-black/40 p-4 sm:p-5 backdrop-blur-md">
+                  <div className="relative h-20 w-20 sm:h-22 sm:w-22 shrink-0 overflow-hidden rounded-xl border border-white/15 bg-[#12151c]">
+                    <Image
+                      src="/Isaac Winner 2.png"
+                      alt="Isaac Winner - Founder & Lead Engineer"
+                      fill
+                      sizes="90px"
+                      className="object-cover object-top grayscale transition-transform duration-500 group-hover:scale-105"
+                    />
+                  </div>
+                  <div className="flex flex-col min-w-0">
+                    <div className="flex items-baseline gap-2">
+                      <span className="font-unbounded text-2xl sm:text-3xl font-bold text-white">4+</span>
+                      <span className="text-[11px] uppercase tracking-wider text-cyan-300 font-semibold">Years Experience</span>
+                    </div>
+                    <p className="mt-1 text-xs text-white/70 leading-snug">
+                      Building custom websites and web applications.
+                    </p>
+                    <div className="mt-2 flex items-center gap-2">
+                      <span className="h-1.5 w-1.5 rounded-full bg-emerald-400 animate-pulse" />
+                      <span className="text-[11px] font-mono uppercase tracking-wider text-white/80 truncate">
+                        Isaac Winner · Lead Engineer
+                      </span>
+                    </div>
+                  </div>
+                </div>
+
+                <div className="grid grid-cols-2 gap-3 text-center">
+                  <div className="rounded-xl border border-white/10 bg-white/[0.03] p-3">
+                    <span className="font-unbounded text-lg font-bold text-white">100%</span>
+                    <p className="text-[11px] text-white/60 mt-0.5">Delivery Rate</p>
+                  </div>
+                  <div className="rounded-xl border border-white/10 bg-white/[0.03] p-3">
+                    <span className="font-unbounded text-lg font-bold text-white">Direct</span>
+                    <p className="text-[11px] text-white/60 mt-0.5">WhatsApp & Slack</p>
+                  </div>
+                </div>
+              </div>
+            </motion.div>
+
+            {/* 3. MOBILE FIRST (COMPACT BENTO CARD - 5 COLS) */}
+            <motion.div
+              initial={{ opacity: 0, y: 25 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: "-60px" }}
+              transition={{ duration: 0.6, delay: 0.15 }}
+              className="group relative overflow-hidden rounded-2xl sm:rounded-3xl border border-white/15 bg-gradient-to-b from-white/[0.07] to-white/[0.02] backdrop-blur-xl p-6 sm:p-8 flex flex-col justify-between lg:col-span-5 transition-all duration-300 hover:border-white/30"
+            >
+              <div>
+                <div className="flex items-center justify-between mb-4">
+                  <div className="flex items-center gap-2">
+                    <span className="w-2 h-2 rounded-full bg-cyan-400 group-hover:scale-125 transition-transform" />
+                    <span className="text-[11px] font-mono uppercase tracking-widest text-cyan-300 font-semibold">
+                      Mobile Optimized
+                    </span>
+                  </div>
+                </div>
+                <h3 className="font-unbounded text-xl sm:text-2xl font-bold text-white tracking-tight">
+                  Mobile First
+                </h3>
+                <p className="mt-2 text-sm sm:text-[0.95rem] text-white/80 leading-relaxed font-normal">
+                  Over 80% of your visitors browse on phones. We ensure every page loads fast, looks sharp, and feels effortless to navigate on mobile.
+                </p>
+              </div>
+
+              {/* UI COMPONENT ASSET: Shoply Fashion App Showcase */}
+              <div className="relative mt-6 sm:mt-8 w-full aspect-[16/10] sm:aspect-[2/1] overflow-hidden rounded-xl bg-black/30 border border-white/5 flex items-center justify-center p-2">
+                <Image
+                  src="/why-us/Shoply Fashion App Showcase.png"
+                  alt="Mobile First responsive layout showcase"
+                  fill
+                  sizes="(max-width: 1024px) 100vw, 42vw"
+                  className="object-contain object-center transition-transform duration-700 ease-out group-hover:scale-[1.04]"
+                />
+              </div>
+            </motion.div>
+
+            {/* 4. FAST COMMUNICATION (WIDE BENTO CARD - 7 COLS) */}
+            <motion.div
+              initial={{ opacity: 0, y: 25 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: "-60px" }}
+              transition={{ duration: 0.6, delay: 0.2 }}
+              className="group relative overflow-hidden rounded-2xl sm:rounded-3xl border border-white/15 bg-gradient-to-b from-white/[0.07] to-white/[0.02] backdrop-blur-xl p-6 sm:p-8 flex flex-col justify-between lg:col-span-7 transition-all duration-300 hover:border-white/30"
+            >
+              <div>
+                <div className="flex items-center justify-between mb-4">
+                  <div className="flex items-center gap-2">
+                    <span className="w-2 h-2 rounded-full bg-cyan-400 group-hover:scale-125 transition-transform" />
+                    <span className="text-[11px] font-mono uppercase tracking-widest text-cyan-300 font-semibold">
+                      Clear Updates
+                    </span>
+                  </div>
+                </div>
+                <h3 className="font-unbounded text-xl sm:text-2xl font-bold text-white tracking-tight">
+                  Fast Communication
+                </h3>
+                <p className="mt-2 text-sm sm:text-[0.95rem] text-white/80 leading-relaxed font-normal max-w-xl">
+                  You will never have to chase us down for progress. We share regular updates on WhatsApp or Slack so you always know what is happening.
+                </p>
+              </div>
+
+              {/* UI COMPONENT ASSET: Fast Communication UI Cards */}
+              <div className="relative mt-6 sm:mt-8 w-full aspect-[16/10] sm:aspect-[2/1] overflow-hidden rounded-xl bg-black/30 border border-white/5 flex items-center justify-center p-2">
+                <Image
+                  src="/why-us/Fast Communication UI Cards.png"
+                  alt="Fast Communication and real-time updates"
+                  fill
+                  sizes="(max-width: 1024px) 100vw, 58vw"
+                  className="object-contain object-center transition-transform duration-700 ease-out group-hover:scale-[1.04]"
+                />
+              </div>
             </motion.div>
           </div>
         </div>
       </section>
 
       <section className="px-5 py-12 md:px-8 md:py-16 lg:px-12 bg-white">
-        <SectionHeading
-          badge="Execution"
-          title="Engineering the Process"
-          description="A precise, zero-fluff methodology that moves your project from concept to deployment."
-        />
+        <div className="mx-auto max-w-3xl text-center">
+          <p className="font-caveat text-xl sm:text-2xl text-[var(--ink-faint)]">
+            Execution
+          </p>
+          <h2 className="font-unbounded mt-1 text-[2rem] sm:text-[2.75rem] md:text-[3.25rem] leading-[1.04] font-bold text-black tracking-tight">
+            How We Work
+          </h2>
+          <p className="mx-auto mt-3 max-w-xl text-sm sm:text-base leading-relaxed text-[var(--ink-soft)] font-normal">
+            A clear, step-by-step process to get your website built and launched without headaches.
+          </p>
+        </div>
 
         <div className="mt-12 w-full max-w-7xl mx-auto border border-black/20 overflow-hidden">
           {/* PROCESS CONTENT GRID - CONNECTED CARDS SEPARATED BY VERTICAL LINES */}

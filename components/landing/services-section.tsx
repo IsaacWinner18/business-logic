@@ -3,7 +3,7 @@
 import { CircleDashed, UserRoundSearch } from "lucide-react";
 import Image from "next/image";
 import { motion, useScroll, useTransform } from "framer-motion";
-import { useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { FloatingPills } from "./floating-pills";
 import { WebsiteMaintenanceVisual } from "./website-maintenance-visual";
 
@@ -46,24 +46,56 @@ const services = [
 
 export function ServicesSection() {
   const targetRef = useRef<HTMLDivElement>(null);
+  const viewportRef = useRef<HTMLDivElement>(null);
+  const trackRef = useRef<HTMLDivElement>(null);
+
+  const [scrollRange, setScrollRange] = useState(0);
 
   const { scrollYProgress } = useScroll({
     target: targetRef,
     offset: ["start start", "end end"],
   });
 
-  // Smooth percentage-based translation: moves Card 1 -> Card 2 -> Card 3 fully into view
-  const x = useTransform(scrollYProgress, [0, 1], ["0%", "-68%"]);
+  useEffect(() => {
+    const updateRange = () => {
+      if (trackRef.current && viewportRef.current) {
+        // Measure exact distance so last card stops once it is fully in view
+        const range = Math.max(
+          0,
+          trackRef.current.scrollWidth - viewportRef.current.clientWidth
+        );
+        setScrollRange(range);
+      }
+    };
+
+    updateRange();
+
+    const resizeObserver = new ResizeObserver(() => {
+      updateRange();
+    });
+
+    if (trackRef.current) resizeObserver.observe(trackRef.current);
+    if (viewportRef.current) resizeObserver.observe(viewportRef.current);
+    window.addEventListener("resize", updateRange);
+
+    return () => {
+      resizeObserver.disconnect();
+      window.removeEventListener("resize", updateRange);
+    };
+  }, []);
+
+  // Smooth translation: only scrolls until the last card is fully visible in viewport
+  const x = useTransform(scrollYProgress, [0, 1], [0, -scrollRange]);
 
   return (
     <section
       ref={targetRef}
       id="services"
-      className="relative h-[230vh] bg-[#471612]"
+      className="relative h-[210vh] bg-[#471612]"
     >
       <div className="sticky top-0 flex h-screen w-full flex-col justify-center overflow-hidden px-5 md:px-8 lg:px-12 py-4 md:py-6">
         {/* SECTION HEADER */}
-        <div className="mx-auto w-full max-w-[1440px] mb-4 md:mb-6 shrink-0">
+        <div className="mx-auto w-full max-w-7xl mb-4 md:mb-6 shrink-0">
           <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-3">
             <div className="max-w-2xl">
               <p className="font-caveat text-xl md:text-2xl text-white/80">
@@ -82,16 +114,17 @@ export function ServicesSection() {
         </div>
 
         {/* HORIZONTAL CARDS TRACK */}
-        <div className="relative w-full overflow-visible">
+        <div ref={viewportRef} className="relative w-full overflow-visible">
           <motion.div
+            ref={trackRef}
             style={{ x, willChange: "transform" }}
-            className="flex gap-6 md:gap-8 w-max items-stretch pr-16 md:pr-28 [transform:translateZ(0)]"
+            className="flex gap-6 md:gap-8 w-max items-stretch pr-6 md:pr-10 lg:pr-12 [transform:translateZ(0)]"
           >
             {services.map((service, index) => {
               return (
                 <article
                   key={service.title}
-                  className="group relative flex flex-col md:flex-row overflow-hidden rounded-2xl border border-white/50 bg-[#FFFDFD]  transition-all duration-500 w-[88vw] sm:w-[640px] md:w-[740px] lg:w-[840px] xl:w-[900px] h-[550px] sm:h-[560px] shrink-0"
+                  className="group relative flex flex-col md:flex-row overflow-hidden rounded-2xl border border-white/50 bg-[#FFFDFD]  transition-all duration-500 w-[88vw] sm:w-[640px] md:w-[740px] lg:w-[840px] xl:w-[900px] max-w-[calc(100vw-2.5rem)] md:max-w-[calc(100vw-4rem)] h-[550px] sm:h-[560px] shrink-0"
                 >
                   {/* CONTENT AREA */}
                   <div className="relative z-10 flex flex-col justify-between p-6 md:p-8 md:w-[36%] lg:w-[34%] shrink-0">
@@ -130,6 +163,7 @@ export function ServicesSection() {
                             src={service.image}
                             alt={service.title}
                             fill
+                            unoptimized
                             sizes="(max-width: 768px) 100vw, 65vw"
                             className="object-cover object-left-top transition-transform duration-[1.2s] ease-out group-hover:scale-[1.04]"
                           />

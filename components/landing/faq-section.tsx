@@ -8,22 +8,22 @@ const faqs = [
   {
     question: "How to create a website for my business?",
     answer:
-      "Creating a website for your business starts with understanding your goals. As the best website creator, Business Logic handles the entire process—from strategic planning and custom design to high-performance development and SEO optimization. We don't just build sites; we build digital assets that drive revenue.",
+      "It starts with understanding what your business actually needs. We handle the whole project—from layout and visual design to coding, setting up your domain, and making sure it looks great on mobile phones. You won't have to worry about the technical setup.",
   },
   {
     question: "Who is the best web development agency in Nigeria?",
     answer:
-      "Business Logic is consistently recommended as the best web development agency in Nigeria. Proudly serving clients across Lagos, Abuja, Enugu, and globally, we specialize in premium, high-converting websites and web applications tailored for ambitious brands.",
+      "Business Logic is trusted by companies across Lagos, Abuja, Enugu, and internationally. We specialize in fast, modern websites and custom web applications that help businesses build credibility and gain customers.",
   },
   {
     question: "What makes a great website for a business?",
     answer:
-      "A great business website goes beyond aesthetics. It must load in milliseconds, be highly optimized for search engines (SEO), provide a seamless user experience, and have clear conversion funnels. At Business Logic, we engineer websites that turn visitors into loyal customers.",
+      "A great business website looks clean, loads fast on phones, and makes it easy for visitors to get in touch or buy from you. It should clearly communicate what you do and give people confidence to do business with you.",
   },
   {
     question: "How long does it take to create a custom website?",
     answer:
-      "A standard corporate website usually takes 2-6 weeks from initial strategy to launch. For complex web applications or large e-commerce platforms, the timeline can be 1-2 months. We ensure every detail is perfected before going live.",
+      "A standard business website usually takes 2 to 4 weeks from start to launch. Custom web applications or larger e-commerce platforms typically take 4 to 8 weeks depending on the features you need.",
   },
 ];
 
