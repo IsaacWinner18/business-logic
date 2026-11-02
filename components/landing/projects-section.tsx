@@ -65,7 +65,7 @@ const projects: ProjectItem[] = [
     brand: "Dben Real Estates",
     logo: "/dben_logo.webp",
     invertLogo: true,
-    url: "dbenrealestates.com",
+    url: "https://dben-real-estate.vercel.app/",
     category: "Real Estate · Scaling Architecture",
     headline: "Bespoke property system. Live in three weeks.",
     title: "Scaling Architecture for Luxury Property Discovery",

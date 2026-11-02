@@ -249,10 +249,61 @@ export async function POST(req: Request) {
         ? { database_id: process.env.NOTION_DB_ID }
         : { data_source_id: await getNotionDataSourceId() };
 
-    const response = await notion.pages.create({
-      parent: parentParam,
-      properties,
-    });
+    let response: Awaited<ReturnType<typeof notion.pages.create>> | null = null;
+    let attempts = 0;
+    const maxAttempts = 6;
+
+    while (attempts < maxAttempts) {
+      try {
+        response = await notion.pages.create({
+          parent: parentParam,
+          properties,
+        });
+        break; // Successfully created
+      } catch (createErr) {
+        attempts++;
+        if (createErr instanceof Error) {
+          // Case 1: Property does not exist in this Notion database
+          const notExistsMatch = createErr.message.match(/^(.*?) is not a property that exists/);
+          if (notExistsMatch && notExistsMatch[1] && properties[notExistsMatch[1]]) {
+            delete properties[notExistsMatch[1]];
+            continue;
+          }
+
+          // Case 2: Specific property validation error
+          const propValMatch = createErr.message.match(/body\.properties\.([^\s.]+)/);
+          if (propValMatch && propValMatch[1] && properties[propValMatch[1]]) {
+            delete properties[propValMatch[1]];
+            continue;
+          }
+        }
+
+        // Case 3: Ultimate fallback on last attempt - preserve lead with minimum viable schema
+        if (attempts >= maxAttempts - 1) {
+          try {
+            const fallbackNotes = body.yourNotes || 
+              `Lead Phone: ${body.contactHandleOrNumber || "N/A"}\nBusiness: ${body.businessName || "N/A"}\nChannel: ${body.contactChannel || "N/A"}`;
+            
+            response = await notion.pages.create({
+              parent: parentParam,
+              properties: {
+                "Full name": title(body.fullName || body.businessName || "New Promo Lead"),
+                ...(properties["Your notes"] ? { "Your notes": properties["Your notes"] } : { "Your notes": richText(fallbackNotes) }),
+              },
+            });
+            break;
+          } catch {
+            throw createErr;
+          }
+        }
+
+        throw createErr;
+      }
+    }
+
+    if (!response) {
+      throw new Error("Failed to create Notion lead page after recovery attempts.");
+    }
 
     return NextResponse.json({
       ok: true,
