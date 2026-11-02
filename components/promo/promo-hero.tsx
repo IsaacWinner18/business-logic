@@ -13,7 +13,7 @@ export function PromoHero({ onOpenInquiry }: PromoHeroProps) {
     "https://wa.me/2348119188295?text=Hi%20Business%20Logic,%20I%20want%20to%20get%20the%20%E2%82%A6120,000%20Online%20Store%20promotional%20package%20for%20my%20business.";
 
   return (
-    <section className="relative w-full h-screen overflow-hidden bg-white text-[#171412] flex flex-col">
+    <section className="relative w-full overflow-hidden bg-white text-[#171412] flex flex-col">
       {/* BACKGROUND GRADIENT IMAGE */}
       <div className="absolute inset-0 z-0 pointer-events-none select-none">
         <Image
@@ -62,8 +62,8 @@ export function PromoHero({ onOpenInquiry }: PromoHeroProps) {
         </a>
       </header>
 
-      {/* HERO COPY (WITH INTENTIONAL TOP MARGIN FROM HEADER) */}
-      <div className="relative z-10 mx-auto flex max-w-4xl shrink-0 flex-col items-center px-4 text-center mt-20 sm:mt-8 md:mt-10">
+      {/* HERO COPY (WITH BALANCED TOP MARGIN FROM HEADER) */}
+      <div className="relative z-10 mx-auto flex max-w-4xl shrink-0 flex-col items-center px-4 text-center mt-6 sm:mt-8 md:mt-10">
         {/* HEADING */}
         <h1 className="font-display text-2xl sm:text-4xl md:text-5xl lg:text-[50px] font-bold tracking-tight text-[#0f172a] leading-[1.18] max-w-3xl">
           Get a Professional Online Store for Your{" "}
@@ -91,128 +91,128 @@ export function PromoHero({ onOpenInquiry }: PromoHeroProps) {
         </div>
       </div>
 
-      {/* MOCKUP POSITIONED DOWN AT BOTTOM OF VISIBLE H-SCREEN */}
-      <div className="relative z-10 w-full mt-auto flex justify-center items-end px-2 sm:px-4">
-          {/* PARABOLIC STRIP GRADIENT BEHIND THE MOCKUP (REACHES SCREEN EDGES ON ALL SCREENS) */}
-          <div className="absolute inset-x-[-3%] md:inset-x-[-2%] bottom-0 top-[-24%] pointer-events-none select-none z-0 flex items-end justify-center">
-            <svg
-              viewBox="0 0 1000 550"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
-              className="w-full h-full object-cover object-bottom"
-              preserveAspectRatio="none"
-            >
-              <defs>
-                {/* ACCENT 1 & 2: MULTI-SHADE PARABOLIC LINEAR GRADIENT */}
-                <linearGradient
-                  id="parabolicMainGrad"
-                  x1="0%"
-                  y1="100%"
-                  x2="100%"
-                  y2="100%"
-                >
-                  {/* ACCENT 1 SHADES: Deep Navy -> Royal Blue -> Electric Cyan */}
-                  <stop offset="0%" stopColor="#1E3A8A" stopOpacity="0.8" />
-                  <stop offset="20%" stopColor="#2563EB" stopOpacity="0.95" />
-                  <stop offset="42%" stopColor="#38BDF8" stopOpacity="1" />
-                  {/* CREST TRANSITION: Luminous Sky/Indigo Blend */}
-                  <stop offset="50%" stopColor="#60A5FA" stopOpacity="1" />
-                  {/* ACCENT 2 SHADES: Electric Violet -> Bright Purple -> Deep Indigo */}
-                  <stop offset="58%" stopColor="#818CF8" stopOpacity="1" />
-                  <stop offset="80%" stopColor="#7C3AED" stopOpacity="0.95" />
-                  <stop offset="100%" stopColor="#4338CA" stopOpacity="0.8" />
-                </linearGradient>
+      {/* MOCKUP SECTION - TERMINATES EXACTLY AT BOTTOM OF HERO */}
+      <div className="relative z-10 w-full mt-6 sm:mt-8 md:mt-10 flex justify-center px-2 sm:px-4">
+        {/* PARABOLIC STRIP GRADIENT BEHIND THE MOCKUP (REACHES SCREEN EDGES ON ALL SCREENS) */}
+        <div className="absolute inset-x-[-3%] md:inset-x-[-2%] bottom-0 top-[-24%] pointer-events-none select-none z-0 flex justify-center">
+          <svg
+            viewBox="0 0 1000 550"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+            className="w-full h-full object-cover"
+            preserveAspectRatio="none"
+          >
+            <defs>
+              {/* ACCENT 1 & 2: MULTI-SHADE PARABOLIC LINEAR GRADIENT */}
+              <linearGradient
+                id="parabolicMainGrad"
+                x1="0%"
+                y1="100%"
+                x2="100%"
+                y2="100%"
+              >
+                {/* ACCENT 1 SHADES: Deep Navy -> Royal Blue -> Electric Cyan */}
+                <stop offset="0%" stopColor="#1E3A8A" stopOpacity="0.8" />
+                <stop offset="20%" stopColor="#2563EB" stopOpacity="0.95" />
+                <stop offset="42%" stopColor="#38BDF8" stopOpacity="1" />
+                {/* CREST TRANSITION: Luminous Sky/Indigo Blend */}
+                <stop offset="50%" stopColor="#60A5FA" stopOpacity="1" />
+                {/* ACCENT 2 SHADES: Electric Violet -> Bright Purple -> Deep Indigo */}
+                <stop offset="58%" stopColor="#818CF8" stopOpacity="1" />
+                <stop offset="80%" stopColor="#7C3AED" stopOpacity="0.95" />
+                <stop offset="100%" stopColor="#4338CA" stopOpacity="0.8" />
+              </linearGradient>
 
-                {/* SECONDARY HIGHLIGHT STRIP: Lighter, more luminous shades */}
-                <linearGradient
-                  id="parabolicHighlightGrad"
-                  x1="0%"
-                  y1="100%"
-                  x2="100%"
-                  y2="100%"
-                >
-                  <stop offset="0%" stopColor="#0284C7" stopOpacity="0.6" />
-                  <stop offset="35%" stopColor="#67E8F9" stopOpacity="0.9" />
-                  <stop offset="50%" stopColor="#E0F2FE" stopOpacity="1" />
-                  <stop offset="65%" stopColor="#C084FC" stopOpacity="0.9" />
-                  <stop offset="100%" stopColor="#9333EA" stopOpacity="0.6" />
-                </linearGradient>
+              {/* SECONDARY HIGHLIGHT STRIP: Lighter, more luminous shades */}
+              <linearGradient
+                id="parabolicHighlightGrad"
+                x1="0%"
+                y1="100%"
+                x2="100%"
+                y2="100%"
+              >
+                <stop offset="0%" stopColor="#0284C7" stopOpacity="0.6" />
+                <stop offset="35%" stopColor="#67E8F9" stopOpacity="0.9" />
+                <stop offset="50%" stopColor="#E0F2FE" stopOpacity="1" />
+                <stop offset="65%" stopColor="#C084FC" stopOpacity="0.9" />
+                <stop offset="100%" stopColor="#9333EA" stopOpacity="0.6" />
+              </linearGradient>
 
-                {/* WIDE AMBIENT DIFFUSE BLUR */}
-                <filter
-                  id="parabolicBlurWide"
-                  x="-20%"
-                  y="-20%"
-                  width="140%"
-                  height="140%"
-                >
-                  <feGaussianBlur stdDeviation="38" result="blur" />
-                </filter>
+              {/* WIDE AMBIENT DIFFUSE BLUR */}
+              <filter
+                id="parabolicBlurWide"
+                x="-20%"
+                y="-20%"
+                width="140%"
+                height="140%"
+              >
+                <feGaussianBlur stdDeviation="38" result="blur" />
+              </filter>
 
-                {/* MEDIUM DIFFUSE BLUR */}
-                <filter
-                  id="parabolicBlurMid"
-                  x="-20%"
-                  y="-20%"
-                  width="140%"
-                  height="140%"
-                >
-                  <feGaussianBlur stdDeviation="16" result="blur" />
-                </filter>
-              </defs>
+              {/* MEDIUM DIFFUSE BLUR */}
+              <filter
+                id="parabolicBlurMid"
+                x="-20%"
+                y="-20%"
+                width="140%"
+                height="140%"
+              >
+                <feGaussianBlur stdDeviation="16" result="blur" />
+              </filter>
+            </defs>
 
-              {/* LAYER 1: AMBIENT DEEP GLOW HALO */}
-              <path
-                d="M -40 560 Q 500 -30 1040 560"
-                stroke="url(#parabolicMainGrad)"
-                strokeWidth="110"
-                strokeLinecap="round"
-                filter="url(#parabolicBlurWide)"
-                opacity="0.45"
-              />
-
-              {/* LAYER 2: SECONDARY SHADE PARABOLIC RIBBON */}
-              <path
-                d="M -20 560 Q 500 5 1020 560"
-                stroke="url(#parabolicHighlightGrad)"
-                strokeWidth="52"
-                strokeLinecap="round"
-                filter="url(#parabolicBlurMid)"
-                opacity="0.65"
-              />
-
-              {/* LAYER 3: CORE SATURATED PARABOLIC GRADIENT STRIP */}
-              <path
-                d="M 0 560 Q 500 35 1000 560"
-                stroke="url(#parabolicMainGrad)"
-                strokeWidth="24"
-                strokeLinecap="round"
-                opacity="0.92"
-              />
-
-              {/* LAYER 4: SPECULAR TOP FILAMENT (NEON LIGHT ACCENT) */}
-              <path
-                d="M 30 560 Q 500 55 970 560"
-                stroke="url(#parabolicHighlightGrad)"
-                strokeWidth="6"
-                strokeLinecap="round"
-                opacity="0.85"
-              />
-            </svg>
-          </div>
-
-          {/* MOCKUP IMAGE (SITS ON TOP OF THE PARABOLIC STRIP) */}
-          <div className="relative z-10 flex items-end justify-center w-full max-w-[360px] sm:max-w-2xl md:max-w-4xl">
-            <Image
-              src="/promo/store-mockup.webp"
-              alt="Professional Online Store Mockup - Laptop and Mobile Smartphone View"
-              width={969}
-              height={754}
-              priority
-              className="w-full h-auto max-h-[46vh] sm:max-h-[50vh] md:max-h-[54vh] object-contain object-bottom filter drop-shadow-[0_20px_35px_rgba(15,23,42,0.3)] translate-y-[2px]"
+            {/* LAYER 1: AMBIENT DEEP GLOW HALO */}
+            <path
+              d="M -40 560 Q 500 -30 1040 560"
+              stroke="url(#parabolicMainGrad)"
+              strokeWidth="110"
+              strokeLinecap="round"
+              filter="url(#parabolicBlurWide)"
+              opacity="0.45"
             />
-          </div>
+
+            {/* LAYER 2: SECONDARY SHADE PARABOLIC RIBBON */}
+            <path
+              d="M -20 560 Q 500 5 1020 560"
+              stroke="url(#parabolicHighlightGrad)"
+              strokeWidth="52"
+              strokeLinecap="round"
+              filter="url(#parabolicBlurMid)"
+              opacity="0.65"
+            />
+
+            {/* LAYER 3: CORE SATURATED PARABOLIC GRADIENT STRIP */}
+            <path
+              d="M 0 560 Q 500 35 1000 560"
+              stroke="url(#parabolicMainGrad)"
+              strokeWidth="24"
+              strokeLinecap="round"
+              opacity="0.92"
+            />
+
+            {/* LAYER 4: SPECULAR TOP FILAMENT (NEON LIGHT ACCENT) */}
+            <path
+              d="M 30 560 Q 500 55 970 560"
+              stroke="url(#parabolicHighlightGrad)"
+              strokeWidth="6"
+              strokeLinecap="round"
+              opacity="0.85"
+            />
+          </svg>
         </div>
+
+        {/* MOCKUP IMAGE (SITS ON TOP OF THE PARABOLIC STRIP) */}
+        <div className="relative z-10 flex justify-center w-full max-w-[360px] sm:max-w-2xl md:max-w-4xl">
+          <Image
+            src="/promo/store-mockup.webp"
+            alt="Professional Online Store Mockup - Laptop and Mobile Smartphone View"
+            width={969}
+            height={754}
+            priority
+            className="w-full h-auto block filter drop-shadow-[0_20px_35px_rgba(15,23,42,0.3)]"
+          />
+        </div>
+      </div>
     </section>
   );
 }
