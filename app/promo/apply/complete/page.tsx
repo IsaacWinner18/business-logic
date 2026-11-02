@@ -1,6 +1,6 @@
 "use client";
 
-import { Suspense, useEffect, useState } from "react";
+import { Suspense, useEffect } from "react";
 import { useSearchParams } from "next/navigation";
 import Image from "next/image";
 import Link from "next/link";
@@ -26,42 +26,16 @@ function CompleteContent() {
     }
   }
 
-  const [countdown, setCountdown] = useState(2);
-  const [progress, setProgress] = useState(0);
-
   useEffect(() => {
-    // Optionally fire Meta standard Lead event if pixel is present on client
+    // Fire Meta standard Lead event if pixel is present on client
     if (typeof window !== "undefined" && typeof (window as any).fbq === "function") {
       try {
         (window as any).fbq("track", "Lead");
-      } catch (err) {
+      } catch {
         // Silently ignore if blocked by adblocker
       }
     }
-
-    const duration = 2200; // 2.2s gives Meta Pixel ample time to send its beacon
-    const startTime = Date.now();
-
-    const interval = setInterval(() => {
-      const elapsed = Date.now() - startTime;
-      const remainingSeconds = Math.max(0, Math.ceil((duration - elapsed) / 1000));
-      const currentProgress = Math.min(100, (elapsed / duration) * 100);
-
-      setCountdown(remainingSeconds);
-      setProgress(currentProgress);
-
-      if (elapsed >= duration) {
-        clearInterval(interval);
-        window.location.href = destinationUrl;
-      }
-    }, 50);
-
-    return () => clearInterval(interval);
-  }, [destinationUrl]);
-
-  const handleManualClick = () => {
-    window.location.href = destinationUrl;
-  };
+  }, []);
 
   return (
     <main
@@ -119,36 +93,33 @@ function CompleteContent() {
           </h1>
           <p className="mt-2 text-sm sm:text-base text-[#4b5563] leading-relaxed max-w-md mx-auto">
             Your application for the <strong>₦120,000 Online Store package</strong>{" "}
-            has been received. We&apos;re connecting you directly to our team on
+            has been received. Click below to connect directly with our team on
             WhatsApp.
           </p>
 
-          {/* PROGRESS BAR & COUNTDOWN */}
-          <div className="mt-6 rounded-2xl bg-[#faf8f5] border border-black/5 p-4">
-            <div className="flex items-center justify-between text-xs font-semibold text-[#6b7280] mb-2">
-              <span className="flex items-center gap-1.5">
-                <span className="inline-block h-2 w-2 rounded-full bg-emerald-500 animate-ping" />
-                <span>Redirecting to WhatsApp</span>
-              </span>
-              <span className="font-mono text-emerald-600 font-bold">
-                {countdown > 0 ? `${countdown}s` : "Opening..."}
-              </span>
-            </div>
-
-            {/* Visual track */}
-            <div className="h-2 w-full rounded-full bg-black/10 overflow-hidden">
-              <div
-                className="h-full bg-gradient-to-r from-emerald-500 to-blue-600 transition-all duration-75 ease-out rounded-full"
-                style={{ width: `${progress}%` }}
-              />
+          {/* NEXT STEP ACTION CARD */}
+          <div className="mt-6 rounded-2xl bg-[#faf8f5] border border-black/5 p-4 text-left">
+            <div className="flex items-center gap-3">
+              <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-emerald-500/10 text-emerald-600">
+                <MessageCircle className="h-5 w-5" />
+              </div>
+              <div>
+                <h3 className="text-xs font-bold uppercase tracking-wider text-[#111827]">
+                  Final Step: WhatsApp Chat
+                </h3>
+                <p className="text-xs text-[#6b7280] mt-0.5">
+                  Click below to open your chat with our team and review your store details.
+                </p>
+              </div>
             </div>
           </div>
 
           {/* INSTANT CTA BUTTON */}
           <div className="mt-6">
-            <button
-              type="button"
-              onClick={handleManualClick}
+            <a
+              href={destinationUrl}
+              target="_blank"
+              rel="noopener noreferrer"
               className="group w-full inline-flex items-center justify-center gap-2.5 rounded-full bg-emerald-600 hover:bg-emerald-700 px-6 py-3.5 sm:py-4 text-sm font-bold uppercase tracking-wider text-white shadow-xl shadow-emerald-600/30 transition-all hover:scale-[1.02] active:scale-95 cursor-pointer"
             >
               <Image
@@ -158,9 +129,9 @@ function CompleteContent() {
                 height={18}
                 className="w-4 h-4 sm:w-5 sm:h-5 brightness-0 invert"
               />
-              <span>Continue to WhatsApp Now</span>
+              <span>Continue to WhatsApp</span>
               <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
-            </button>
+            </a>
           </div>
 
           {/* TRUST / SECURITY NOTE */}
@@ -197,4 +168,3 @@ export default function PromoApplyCompletePage() {
     </Suspense>
   );
 }
-
