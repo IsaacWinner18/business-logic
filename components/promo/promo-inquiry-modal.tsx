@@ -24,8 +24,9 @@ export function PromoInquiryModal({ isOpen, onClose }: PromoInquiryModalProps) {
     const text = `Hi Business Logic, I want to get the ₦120,000 Online Store Promotional Package!\n\n*Business Name:* ${businessName || "Not provided"}\n*What I Sell:* ${productType || "Not provided"}\n*Phone / WhatsApp:* ${phone || "Not provided"}${instagram ? `\n*Instagram:* ${instagram}` : ""}`;
 
     const encoded = encodeURIComponent(text);
-    window.open(`https://wa.me/2348119188295?text=${encoded}`, "_blank");
+    const targetUrl = `https://wa.me/2348119188295?text=${encoded}`;
     onClose();
+    window.location.href = `/promo/apply/complete?target=${encodeURIComponent(targetUrl)}`;
   };
 
   const directWhatsappUrl =

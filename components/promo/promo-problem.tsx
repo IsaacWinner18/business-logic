@@ -114,7 +114,6 @@ export function PromoProblem() {
                   fill
                   className="object-cover object-center"
                   sizes="(max-width: 768px) 100vw, 50vw"
-                  priority
                 />
               </div>
 
@@ -171,7 +170,6 @@ export function PromoProblem() {
               fill
               className="object-cover object-top"
               sizes="(max-width: 1200px) 100vw, 1200px"
-              priority
             />
             {/* CLEAN FADE GRADIENT AT THE END TO TRANSITION INTO TEXT */}
             <div className="absolute inset-x-0 bottom-0 h-44 sm:h-64 bg-gradient-to-t from-white via-white/85 to-transparent pointer-events-none" />

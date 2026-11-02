@@ -204,10 +204,10 @@ export function PromoHero({ onOpenInquiry }: PromoHeroProps) {
           {/* MOCKUP IMAGE (SITS ON TOP OF THE PARABOLIC STRIP) */}
           <div className="relative z-10 flex items-end justify-center w-full max-w-[360px] sm:max-w-2xl md:max-w-4xl">
             <Image
-              src="/promo/store-mockup.png"
+              src="/promo/store-mockup.webp"
               alt="Professional Online Store Mockup - Laptop and Mobile Smartphone View"
               width={969}
-              height={825}
+              height={754}
               priority
               className="w-full h-auto max-h-[46vh] sm:max-h-[50vh] md:max-h-[54vh] object-contain object-bottom filter drop-shadow-[0_20px_35px_rgba(15,23,42,0.3)] translate-y-[2px]"
             />

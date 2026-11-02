@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import { CheckCircle2, ArrowRight, Volume2, VolumeX, Play, Pause, Sparkles } from "lucide-react";
 import { poppins, inter } from "@/lib/font";
@@ -8,7 +8,29 @@ import { poppins, inter } from "@/lib/font";
 export function PromoPositioning() {
   const videoRef = useRef<HTMLVideoElement>(null);
   const [isMuted, setIsMuted] = useState(true);
-  const [isPlaying, setIsPlaying] = useState(true);
+  const [isPlaying, setIsPlaying] = useState(false);
+
+  useEffect(() => {
+    const video = videoRef.current;
+    if (!video) return;
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            video.play().then(() => setIsPlaying(true)).catch(() => {});
+          } else {
+            video.pause();
+            setIsPlaying(false);
+          }
+        });
+      },
+      { threshold: 0.25 }
+    );
+
+    observer.observe(video);
+    return () => observer.disconnect();
+  }, []);
 
   const handlePlayAndUnmute = () => {
     if (!videoRef.current) return;
@@ -96,10 +118,11 @@ export function PromoPositioning() {
                 {/* Creative Video */}
                 <video
                   ref={videoRef}
-                  autoPlay
                   loop
                   muted={isMuted}
                   playsInline
+                  preload="none"
+                  poster="/promo/creative-poster.jpg"
                   className="w-full h-full object-cover cursor-pointer"
                   onClick={togglePlay}
                   onPlay={() => setIsPlaying(true)}
@@ -107,10 +130,6 @@ export function PromoPositioning() {
                 >
                   <source
                     src="/promo/business-logic-creative.mp4"
-                    type="video/mp4"
-                  />
-                  <source
-                    src="/promo/Business%20logic%20e-com%20ads%20creative.mp4"
                     type="video/mp4"
                   />
                   Your browser does not support the video tag.

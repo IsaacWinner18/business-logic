@@ -157,11 +157,12 @@ export default function PromoApplyPage() {
       // Non-blocking fallback
     });
 
-    // Smooth redirection allowing visual feedback and robust network dispatch
+    // Smooth navigation to the /promo/apply/complete conversion page
+    const completeUrl = `/promo/apply/complete?target=${encodeURIComponent(targetUrl)}`;
     if (typeof window !== "undefined") {
       setTimeout(() => {
-        window.location.href = targetUrl;
-      }, 600);
+        window.location.href = completeUrl;
+      }, 500);
     }
   };
 

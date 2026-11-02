@@ -52,7 +52,7 @@ const promoProjects: ProjectItem[] = [
   },
   {
     brand: "B'Bonds Heavy Haul",
-    logo: "/bbonds_logo.png",
+    logo: "/bbonds_logo.webp",
     invertLogo: false,
     url: "https://bbondddd.vercel.app",
     category: "Logistics & Transport · Industrial Fleet",

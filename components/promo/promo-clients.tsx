@@ -39,9 +39,9 @@ const clientBubbles: ClientBubble[] = [
   },
   {
     name: "B'Bonds Heavy Haul",
-    logo: "/bbonds_logo.png",
-    width: 1024,
-    height: 1024,
+    logo: "/bbonds_logo.webp",
+    width: 512,
+    height: 512,
     className: "h-8 sm:h-9 w-auto object-contain",
     sizeClass: "w-28 h-28 sm:w-32 sm:h-32",
     positionClass: "top-80 left-3 sm:left-5",
