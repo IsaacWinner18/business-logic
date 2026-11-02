@@ -104,6 +104,7 @@ export function PromoProjects() {
                         src={project.logo}
                         alt={`${project.brand} logo`}
                         fill
+                        sizes="56px"
                         className={`object-contain ${
                           project.invertLogo ? "invert" : ""
                         }`}

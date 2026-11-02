@@ -95,15 +95,39 @@ export function PromoFinalCta({ onOpenInquiry }: PromoFinalCtaProps) {
             &ldquo;We Turn Ideas to Business.&rdquo;
           </p>
 
-          <div className="mt-1 flex flex-wrap items-center justify-center gap-4 text-xs font-medium text-black/60">
+          {/* LEGAL & CONTACT LINKS */}
+          <div className="mt-2 flex flex-wrap items-center justify-center gap-x-5 gap-y-2 text-xs font-semibold text-black/75">
+            <Link
+              href="/privacy"
+              className="underline underline-offset-2 hover:text-black transition-colors"
+            >
+              Privacy Policy
+            </Link>
+            <span>•</span>
+            <Link
+              href="/terms"
+              className="underline underline-offset-2 hover:text-black transition-colors"
+            >
+              Terms of Service
+            </Link>
+            <span>•</span>
             <a
               href="tel:+2348119188295"
               className="hover:text-black transition-colors"
             >
               +234 811 918 8295
             </a>
-            <span>•</span>
-            <span>&copy; {new Date().getFullYear()} Business Logic. All rights reserved.</span>
+          </div>
+
+          <p className="mt-2 text-xs text-black/60">
+            &copy; {new Date().getFullYear()} Business Logic Agency. All rights reserved.
+          </p>
+
+          {/* META / FACEBOOK ADVERTISING DISCLAIMER */}
+          <div className="mt-6 pt-5 border-t border-black/10 max-w-2xl text-center">
+            <p className="text-[11px] leading-relaxed text-black/55">
+              <strong>Disclaimer:</strong> This site is not a part of the Facebook website or Meta Platforms, Inc. Additionally, this site is NOT endorsed by Meta Platforms, Inc. in any way. FACEBOOK is a trademark of META PLATFORMS, Inc.
+            </p>
           </div>
         </div>
       </div>

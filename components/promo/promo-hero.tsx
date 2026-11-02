@@ -13,7 +13,7 @@ export function PromoHero({ onOpenInquiry }: PromoHeroProps) {
     "https://wa.me/2348119188295?text=Hi%20Business%20Logic,%20I%20want%20to%20get%20the%20%E2%82%A6120,000%20Online%20Store%20promotional%20package%20for%20my%20business.";
 
   return (
-    <section className="relative w-full h-screen overflow-hidden bg-white text-[#171412] flex flex-col justify-between">
+    <section className="relative w-full h-screen overflow-hidden bg-white text-[#171412] flex flex-col">
       {/* BACKGROUND GRADIENT IMAGE */}
       <div className="absolute inset-0 z-0 pointer-events-none select-none">
         <Image
@@ -29,7 +29,7 @@ export function PromoHero({ onOpenInquiry }: PromoHeroProps) {
       </div>
 
       {/* COMPACT TOP HEADER */}
-      <header className="relative z-20 mx-auto flex w-full max-w-7xl shrink-0 items-center justify-between px-4 pt-3 pb-2 sm:px-6 sm:pt-4 sm:pb-3 md:px-8">
+      <header className="relative z-20 mx-auto flex w-full max-w-7xl shrink-0 items-center justify-between px-4 pt-3.5 pb-2 sm:px-6 sm:pt-4 sm:pb-3 md:px-8">
         <div className="flex items-center gap-2.5">
           <Image
             src="/logo.png"
@@ -62,39 +62,37 @@ export function PromoHero({ onOpenInquiry }: PromoHeroProps) {
         </a>
       </header>
 
-      {/* MAIN HERO CONTENT - FLEX COL WITH GAP */}
-      <div className="relative z-10 flex-1 min-h-0 flex flex-col items-center justify-between gap-4 w-full">
-        {/* HERO COPY (HEADING, DESC, CTA) */}
-        <div className="mx-auto flex max-w-4xl shrink-0 flex-col items-center px-4 text-center">
-          {/* HEADING */}
-          <h1 className="font-display text-2xl sm:text-4xl md:text-5xl lg:text-[50px] font-bold tracking-tight text-[#0f172a] leading-[1.18] max-w-3xl">
-            Get a Professional Online Store for Your{" "}
-            <span className="relative inline-block -rotate-2 px-2.5 sm:px-3 py-0.5 rounded-lg sm:rounded-xl bg-blue-600 text-white shadow-md shadow-blue-600/25 transition-transform hover:rotate-0">
-              Business
-            </span>
-            .
-          </h1>
+      {/* HERO COPY (WITH INTENTIONAL TOP MARGIN FROM HEADER) */}
+      <div className="relative z-10 mx-auto flex max-w-4xl shrink-0 flex-col items-center px-4 text-center mt-20 sm:mt-8 md:mt-10">
+        {/* HEADING */}
+        <h1 className="font-display text-2xl sm:text-4xl md:text-5xl lg:text-[50px] font-bold tracking-tight text-[#0f172a] leading-[1.18] max-w-3xl">
+          Get a Professional Online Store for Your{" "}
+          <span className="relative inline-block -rotate-2 px-2.5 sm:px-3 py-0.5 rounded-lg sm:rounded-xl bg-blue-600 text-white shadow-md shadow-blue-600/25 transition-transform hover:rotate-0">
+            Business
+          </span>
+          .
+        </h1>
 
-          {/* DESCRIPTION */}
-          <p className="mt-2 sm:mt-2.5 max-w-xl text-xs sm:text-sm md:text-base text-[#475569] leading-relaxed">
-            Get your business online with a complete product catalogue, shopping
-            cart and customer ordering experience.
-          </p>
+        {/* DESCRIPTION */}
+        <p className="mt-2 sm:mt-2.5 max-w-xl text-xs sm:text-sm md:text-base text-[#475569] leading-relaxed">
+          Get your business online with a complete product catalogue, shopping
+          cart and customer ordering experience.
+        </p>
 
-          {/* CTA BUTTON */}
-          <div className="mt-3 sm:mt-4 flex flex-col sm:flex-row items-center gap-3">
-            <Link
-              href="/promo/apply"
-              className="group inline-flex items-center justify-center gap-2 rounded-full bg-blue-600 hover:bg-blue-700 px-6 sm:px-7 py-2.5 sm:py-3 text-xs sm:text-sm font-bold uppercase tracking-wider text-white shadow-xl shadow-blue-600/30 transition-all hover:scale-105 active:scale-95"
-            >
-              <span>Get My Website</span>
-              <ArrowUpRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
-            </Link>
-          </div>
+        {/* CTA BUTTON */}
+        <div className="mt-3.5 sm:mt-4 flex flex-col sm:flex-row items-center gap-3">
+          <Link
+            href="/promo/apply"
+            className="group inline-flex items-center justify-center gap-2 rounded-full bg-blue-600 hover:bg-blue-700 px-6 sm:px-7 py-2.5 sm:py-3 text-xs sm:text-sm font-bold uppercase tracking-wider text-white shadow-xl shadow-blue-600/30 transition-all hover:scale-105 active:scale-95"
+          >
+            <span>Get My Website</span>
+            <ArrowUpRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+          </Link>
         </div>
+      </div>
 
-        {/* MOCKUP ROOTED TO BOTTOM WITH PARABOLIC STRIP GRADIENT */}
-        <div className="relative w-full flex-1 min-h-0 flex items-end justify-center px-2 sm:px-4 md:px-6">
+      {/* MOCKUP POSITIONED DOWN AT BOTTOM OF VISIBLE H-SCREEN */}
+      <div className="relative z-10 w-full mt-auto flex justify-center items-end px-2 sm:px-4">
           {/* PARABOLIC STRIP GRADIENT BEHIND THE MOCKUP (REACHES SCREEN EDGES ON ALL SCREENS) */}
           <div className="absolute inset-x-[-3%] md:inset-x-[-2%] bottom-0 top-[-24%] pointer-events-none select-none z-0 flex items-end justify-center">
             <svg
@@ -204,18 +202,17 @@ export function PromoHero({ onOpenInquiry }: PromoHeroProps) {
           </div>
 
           {/* MOCKUP IMAGE (SITS ON TOP OF THE PARABOLIC STRIP) */}
-          <div className="relative z-10 flex items-end justify-center h-full w-full max-w-4xl">
+          <div className="relative z-10 flex items-end justify-center w-full max-w-[360px] sm:max-w-2xl md:max-w-4xl">
             <Image
               src="/promo/store-mockup.png"
               alt="Professional Online Store Mockup - Laptop and Mobile Smartphone View"
               width={969}
               height={825}
               priority
-              className="h-auto max-h-full w-auto max-w-full object-contain object-bottom filter drop-shadow-[0_20px_35px_rgba(15,23,42,0.3)] translate-y-[2px]"
+              className="w-full h-auto max-h-[46vh] sm:max-h-[50vh] md:max-h-[54vh] object-contain object-bottom filter drop-shadow-[0_20px_35px_rgba(15,23,42,0.3)] translate-y-[2px]"
             />
           </div>
         </div>
-      </div>
     </section>
   );
 }

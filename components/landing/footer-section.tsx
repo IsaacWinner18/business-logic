@@ -20,8 +20,8 @@ export function FooterCtaSection() {
           <Link href="#services">Services</Link>
           <Link href="#projects">Projects</Link>
           <Link href="/audit" className="text-orange-600 font-semibold hover:text-orange-500 transition-colors">Free Audit</Link>
-          <Link href="/">Privacy</Link>
-          <Link href="/">Terms</Link>
+          <Link href="/privacy">Privacy</Link>
+          <Link href="/terms">Terms</Link>
           <Link href="#contact">Contact</Link>
         </div>
       </div>
