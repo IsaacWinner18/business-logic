@@ -1,6 +1,7 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { trackMetaEvent } from "@/lib/fpixel";
 import { PromoHero } from "@/components/promo/promo-hero";
 import { PromoProblem } from "@/components/promo/promo-problem";
 import { PromoSolution } from "@/components/promo/promo-solution";
@@ -17,6 +18,15 @@ import { PromoStickyBar } from "@/components/promo/promo-sticky-bar";
 
 export function PromoView() {
   const [isInquiryOpen, setIsInquiryOpen] = useState(false);
+
+  useEffect(() => {
+    trackMetaEvent("ViewContent", {
+      content_name: "₦120,000 Online Store Promotional Package",
+      content_category: "Web Development / E-Commerce",
+      value: 120000,
+      currency: "NGN",
+    });
+  }, []);
 
   const openInquiry = () => setIsInquiryOpen(true);
   const closeInquiry = () => setIsInquiryOpen(false);

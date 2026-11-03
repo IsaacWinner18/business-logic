@@ -1,11 +1,12 @@
 "use client";
 
-import { Suspense, useEffect } from "react";
+import { Suspense, useEffect, useState } from "react";
 import { useSearchParams } from "next/navigation";
 import Image from "next/image";
 import Link from "next/link";
-import { CheckCircle2, ArrowRight, ShieldCheck, Sparkles, MessageCircle } from "lucide-react";
+import { CheckCircle2, ArrowRight, ShieldCheck } from "lucide-react";
 import { poppins, inter } from "@/lib/font";
+import { trackMetaEvent } from "@/lib/fpixel";
 
 const DEFAULT_WHATSAPP_URL =
   "https://wa.me/2348119188295?text=Hi%20Business%20Logic,%20I%20have%20completed%20my%20%E2%82%A6120,000%20Online%20Store%20promotional%20application.";
@@ -26,16 +27,44 @@ function CompleteContent() {
     }
   }
 
+  const [countdown, setCountdown] = useState(3);
+  const [progress, setProgress] = useState(0);
+
   useEffect(() => {
-    // Fire Meta standard Lead event if pixel is present on client
-    if (typeof window !== "undefined" && typeof (window as any).fbq === "function") {
-      try {
-        (window as any).fbq("track", "Lead");
-      } catch {
-        // Silently ignore if blocked by adblocker
+    // Fire Meta standard events when the application is successfully completed
+    trackMetaEvent("Lead", {
+      content_name: "₦120,000 Online Store Package Application",
+      currency: "NGN",
+      value: 120000,
+    });
+    trackMetaEvent("SubmitApplication", {
+      content_name: "₦120,000 Online Store Package Application",
+      currency: "NGN",
+      value: 120000,
+    });
+
+    const duration = 3000; // 3 seconds auto-redirect
+    const startTime = Date.now();
+
+    const interval = setInterval(() => {
+      const elapsed = Date.now() - startTime;
+      const remainingSeconds = Math.max(0, Math.ceil((duration - elapsed) / 1000));
+      const currentProgress = Math.min(100, (elapsed / duration) * 100);
+
+      setCountdown(remainingSeconds);
+      setProgress(currentProgress);
+
+      if (elapsed >= duration) {
+        clearInterval(interval);
+        trackMetaEvent("Contact", {
+          content_name: "WhatsApp Auto Redirect",
+        });
+        window.location.href = destinationUrl;
       }
-    }
-  }, []);
+    }, 50);
+
+    return () => clearInterval(interval);
+  }, [destinationUrl]);
 
   return (
     <main
@@ -79,39 +108,26 @@ function CompleteContent() {
             <CheckCircle2 className="h-10 w-10 text-emerald-600" />
           </div>
 
-          {/* BADGE */}
-          <div className="inline-flex items-center gap-1.5 rounded-full bg-emerald-50 border border-emerald-200/80 px-3.5 py-1 text-xs font-bold text-emerald-700 uppercase tracking-wider mb-3">
-            <Sparkles className="h-3.5 w-3.5 text-emerald-600" />
-            <span>Application Confirmed</span>
-          </div>
-
-          {/* HEADINGS */}
+          {/* HEADING */}
           <h1
             className={`${poppins.className} text-2xl sm:text-3xl font-bold tracking-tight text-[#111827] leading-snug`}
           >
             You&apos;re All Set!
           </h1>
-          <p className="mt-2 text-sm sm:text-base text-[#4b5563] leading-relaxed max-w-md mx-auto">
-            Your application for the <strong>₦120,000 Online Store package</strong>{" "}
-            has been received. Click below to connect directly with our team on
-            WhatsApp.
+          <p className="mt-2 text-sm sm:text-base text-[#4b5563] leading-relaxed max-w-sm mx-auto">
+            Opening WhatsApp in{" "}
+            <span className="font-semibold text-emerald-600 font-mono">
+              {countdown > 0 ? `${countdown}s` : "..."}
+            </span>
+            ...
           </p>
 
-          {/* NEXT STEP ACTION CARD */}
-          <div className="mt-6 rounded-2xl bg-[#faf8f5] border border-black/5 p-4 text-left">
-            <div className="flex items-center gap-3">
-              <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-emerald-500/10 text-emerald-600">
-                <MessageCircle className="h-5 w-5" />
-              </div>
-              <div>
-                <h3 className="text-xs font-bold uppercase tracking-wider text-[#111827]">
-                  Final Step: WhatsApp Chat
-                </h3>
-                <p className="text-xs text-[#6b7280] mt-0.5">
-                  Click below to open your chat with our team and review your store details.
-                </p>
-              </div>
-            </div>
+          {/* MINIMAL PROGRESS BAR */}
+          <div className="mt-4 mx-auto max-w-xs h-1.5 w-full rounded-full bg-black/5 overflow-hidden">
+            <div
+              className="h-full bg-gradient-to-r from-emerald-500 to-blue-600 transition-all duration-75 ease-out rounded-full"
+              style={{ width: `${progress}%` }}
+            />
           </div>
 
           {/* INSTANT CTA BUTTON */}
@@ -120,6 +136,11 @@ function CompleteContent() {
               href={destinationUrl}
               target="_blank"
               rel="noopener noreferrer"
+              onClick={() =>
+                trackMetaEvent("Contact", {
+                  content_name: "WhatsApp Consultation Click",
+                })
+              }
               className="group w-full inline-flex items-center justify-center gap-2.5 rounded-full bg-emerald-600 hover:bg-emerald-700 px-6 py-3.5 sm:py-4 text-sm font-bold uppercase tracking-wider text-white shadow-xl shadow-emerald-600/30 transition-all hover:scale-[1.02] active:scale-95 cursor-pointer"
             >
               <Image

@@ -63,10 +63,10 @@ export function PromoHero({ onOpenInquiry }: PromoHeroProps) {
       </header>
 
       {/* HERO COPY (WITH BALANCED TOP MARGIN FROM HEADER) */}
-      <div className="relative z-10 mx-auto flex max-w-4xl shrink-0 flex-col items-center px-4 text-center mt-6 sm:mt-8 md:mt-10">
+      <div className="relative z-10 mx-auto flex max-w-4xl shrink-0 flex-col items-center px-4 text-center mt-16 md:mt-10">
         {/* HEADING */}
         <h1 className="font-display text-2xl sm:text-4xl md:text-5xl lg:text-[50px] font-bold tracking-tight text-[#0f172a] leading-[1.18] max-w-3xl">
-          Get a Professional Online Store for Your{" "}
+          Get a Professional Website for Your{" "}
           <span className="relative inline-block -rotate-2 px-2.5 sm:px-3 py-0.5 rounded-lg sm:rounded-xl bg-blue-600 text-white shadow-md shadow-blue-600/25 transition-transform hover:rotate-0">
             Business
           </span>
@@ -92,7 +92,7 @@ export function PromoHero({ onOpenInquiry }: PromoHeroProps) {
       </div>
 
       {/* MOCKUP SECTION - TERMINATES EXACTLY AT BOTTOM OF HERO */}
-      <div className="relative z-10 w-full mt-6 sm:mt-8 md:mt-10 flex justify-center px-2 sm:px-4">
+      <div className="relative z-10 w-full mt-16 md:mt-10 flex justify-center px-2 sm:px-4">
         {/* PARABOLIC STRIP GRADIENT BEHIND THE MOCKUP (REACHES SCREEN EDGES ON ALL SCREENS) */}
         <div className="absolute inset-x-[-3%] md:inset-x-[-2%] bottom-0 top-[-24%] pointer-events-none select-none z-0 flex justify-center">
           <svg

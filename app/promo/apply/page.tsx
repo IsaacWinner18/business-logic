@@ -6,6 +6,7 @@ import { ArrowRight, ArrowLeft, Check } from "lucide-react";
 import Link from "next/link";
 import Image from "next/image";
 import { poppins, inter } from "@/lib/font";
+import { trackMetaEvent } from "@/lib/fpixel";
 
 interface StepConfig {
   id: string;
@@ -77,6 +78,14 @@ export default function PromoApplyPage() {
   const [isRedirecting, setIsRedirecting] = useState(false);
   const [redirectUrl, setRedirectUrl] = useState<string>("");
   const advanceTimeoutRef = useRef<NodeJS.Timeout | null>(null);
+
+  useEffect(() => {
+    trackMetaEvent("InitiateCheckout", {
+      content_name: "₦120,000 Online Store Application Form",
+      value: 120000,
+      currency: "NGN",
+    });
+  }, []);
 
   const currentStepConfig = steps[currentStep];
 
