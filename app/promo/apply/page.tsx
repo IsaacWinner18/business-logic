@@ -123,12 +123,17 @@ export default function PromoApplyPage() {
 
   const handleComplete = () => {
     const business = formData.businessName?.trim() || "my business";
-    const sell = formData.whatTheySell?.trim() || "my products";
+    const sell = formData.whatTheySell?.trim() || "products";
     const readiness = formData.readyToStart?.trim() || "ready to start immediately";
     const phone = formData.phone?.trim() || "";
 
-    // Formatted WhatsApp message without phone number
-    const message = `Hi, I am the CEO of *${business}*, I want a website for my *${sell}*, I am *${readiness}*.`;
+    // Format as "[product sold] business" (e.g. "Cloth business")
+    const productBusiness = sell.toLowerCase().endsWith("business")
+      ? sell
+      : `${sell} business`;
+
+    // Formatted WhatsApp message with "[product sold] business"
+    const message = `Hi, I am the CEO of *${business}*, I want a website for my *${productBusiness}*, I am *${readiness}*.`;
     const encoded = encodeURIComponent(message);
     const targetUrl = `https://wa.me/${WHATSAPP_PHONE_NUMBER}?text=${encoded}`;
 
@@ -159,7 +164,7 @@ export default function PromoApplyPage() {
         contactHandleOrNumber: phone,
         timelineOrUrgency: mapNotionTimeline(readiness),
         pipelineStatus: "New",
-        yourNotes: `[₦120,000 Online Store Promo]\nProducts sold: ${sell}\nReadiness: ${readiness}\nPackage: ₦120,000 E-Commerce Website`,
+        yourNotes: `[₦120,000 Online Store Promo]\nProducts sold: ${productBusiness}\nReadiness: ${readiness}\nPackage: ₦120,000 E-Commerce Website`,
       }),
       keepalive: true,
     }).catch(() => {
